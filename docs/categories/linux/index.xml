@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>linux - Category - 我的全新 Hugo 网站</title>
+        <link>http://localhost:1313/categories/linux/</link>
+        <description>linux - Category - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>linux 各种软件安装</title>
+    <link>http://localhost:1313/posts/linux/linux_installer/</link>
+    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://localhost:1313/posts/linux/linux_installer/</guid>
+    <description><![CDATA[这是摘要]]></description>
+</item>
+</channel>
+</rss>

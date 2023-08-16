@@ -1,0 +1,57 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>我的全新 Hugo 网站</title>
+        <link>http://localhost:1313/</link>
+        <description>This is my cool site</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</lastBuildDate>
+            <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>主题文档 - 内容</title>
+    <link>http://localhost:1313/posts/mysql/</link>
+    <pubDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</pubDate>
+    <author>Dillon</author>
+    <guid>http://localhost:1313/posts/mysql/</guid>
+    <description><![CDATA[<p>了解如何在 <strong>LoveIt</strong> 主题中快速, 直观地创建和组织内容.</p>]]></description>
+</item>
+<item>
+    <title>css3</title>
+    <link>http://localhost:1313/posts/css/css3/</link>
+    <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://localhost:1313/posts/css/css3/</guid>
+    <description><![CDATA[css3 详解]]></description>
+</item>
+<item>
+    <title>javascript 数据结构</title>
+    <link>http://localhost:1313/posts/javascript/js/</link>
+    <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://localhost:1313/posts/javascript/js/</guid>
+    <description><![CDATA[记录js的基本常用语法]]></description>
+</item>
+<item>
+    <title>window对象详解</title>
+    <link>http://localhost:1313/posts/javascript/js_window/</link>
+    <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://localhost:1313/posts/javascript/js_window/</guid>
+    <description><![CDATA[js window 对象 详解]]></description>
+</item>
+<item>
+    <title>linux 各种软件安装</title>
+    <link>http://localhost:1313/posts/linux/linux_installer/</link>
+    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://localhost:1313/posts/linux/linux_installer/</guid>
+    <description><![CDATA[这是摘要]]></description>
+</item>
+<item>
+    <title>本站编写文章 Markdown 基本语法</title>
+    <link>http://localhost:1313/posts/markdown/document_rule/</link>
+    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://localhost:1313/posts/markdown/document_rule/</guid>
+    <description><![CDATA[介绍文章编写规则]]></description>
+</item>
+</channel>
+</rss>
