@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>go语言设计与实现 - Turan</title><meta name="Description" content="有[featuredImagePreview]图片时，鼠标聚焦图片展示该文字"><meta property="og:title" content="go语言设计与实现" />
+<meta property="og:description" content="有[featuredImagePreview]图片时，鼠标聚焦图片展示该文字" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-16T15:06:34+08:00" />
+<meta property="article:modified_time" content="2023-08-16T15:06:34+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="go语言设计与实现"/>
+<meta name="twitter:description" content="有[featuredImagePreview]图片时，鼠标聚焦图片展示该文字"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" /><link rel="prev" href="http://example.org/posts/linux/linux/" /><link rel="next" href="http://example.org/posts/javascript/js_window/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "go语言设计与实现",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/golang\/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0\/"
+        },"genre": "posts","keywords": "golang","wordcount":  2714 ,
+        "url": "http:\/\/example.org\/posts\/golang\/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0\/","datePublished": "2023-08-16T15:06:34+08:00","dateModified": "2023-08-16T15:06:34+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": "有[featuredImagePreview]图片时，鼠标聚焦图片展示该文字"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">go语言设计与实现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/golang/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>golang</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-16">2023-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2714 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#第一章">第一章</a>
+      <ul>
+        <li><a href="#10调试go源代码">1.0、调试go源代码</a></li>
+        <li><a href="#11中间代码">1.1、中间代码</a>
+          <ul>
+            <li><a href="#小结">小结：</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#第二章------编译原理">第二章  ：    编译原理</a>
+      <ul>
+        <li><a href="#10-概述">1.0 概述</a></li>
+        <li><a href="#11-抽象语法树ast">1.1 抽象语法树(AST)</a></li>
+        <li><a href="#12-指令集">1.2 指令集</a></li>
+        <li><a href="#13-编译原理">1.3 编译原理</a>
+          <ul>
+            <li><a href="#a-词法与语法分析">a. 词法与语法分析</a></li>
+            <li><a href="#b类型检查">b.类型检查</a></li>
+            <li><a href="#c中间代码生成">c.中间代码生成</a></li>
+            <li><a href="#d机器码生成">d.机器码生成</a></li>
+          </ul>
+        </li>
+        <li><a href="#14-编译器入口">1.4 编译器入口</a></li>
+        <li><a href="#15-本章知识扩展">1.5 本章知识扩展</a></li>
+        <li><a href="#16-小结">1.6 小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#第三章数据结构">第三章：数据结构</a>
+      <ul>
+        <li><a href="#10-数组">1.0 数组</a></li>
+        <li><a href="#12-切片">1.2 切片</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li>url:https://draveness.me/golang/docs/part1-prerequisite/ch01-prepare/golang-debug/</li>
+</ul>
+<h2 id="第一章">第一章</h2>
+<h3 id="10调试go源代码">1.0、调试go源代码</h3>
+<ul>
+<li>在goroot目录下<code>./src/make.bash</code> 脚本会编译 Go 语言的二进制、工具链以及标准库和命令并将源代码和编译好的二进制文件移动到对应的位置上</li>
+</ul>
+<h3 id="11中间代码">1.1、中间代码</h3>
+<ol>
+<li>
+<p>将go文件编译成汇编语言</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">go build -gcflags -S main.go       //main.go指定编译的go文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<hr>
+<h4 id="小结">小结：</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">掌握调试和自定义 Go 语言二进制的方法可以帮助我们快速验证对 Go 语言内部实现的猜想，通过最简单粗暴的 println 函数可以调试 Go 语言的源码和标准库
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="第二章------编译原理">第二章  ：    编译原理</h2>
+<h3 id="10-概述">1.0 概述</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Go 语言是一门需要编译才能运行的编程语言，也就是说代码在运行之前需要通过编译器生成二进制机器码，包含二进制机器码的文件才能在目标机器上运行
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="11-抽象语法树ast">1.1 抽象语法树(AST)</h3>
+<ul>
+<li>介绍</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">抽象语法树（Abstract Syntax Tree、AST），是源代码语法的结构的一种抽象表示，它用树状的方式表示编程语言的语法结构1。抽象语法树中的每一个节点都表示源代码中的一个元素，每一棵子树都表示一个语法元素
+</span></span></code></pre></td></tr></table>
+</div>
+</div><a class="lightgallery" href="/images/golang/%e8%af%ad%e6%b3%95%e6%a0%91.jpg" title="/images/golang/语法树.jpg" data-thumbnail="/images/golang/语法树.jpg">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/golang/%e8%af%ad%e6%b3%95%e6%a0%91.jpg"
+            data-srcset="/images/golang/%e8%af%ad%e6%b3%95%e6%a0%91.jpg, /images/golang/%e8%af%ad%e6%b3%95%e6%a0%91.jpg 1.5x, /images/golang/%e8%af%ad%e6%b3%95%e6%a0%91.jpg 2x"
+            data-sizes="auto"
+            alt="/images/golang/语法树.jpg" />
+    </a>
+<ul>
+<li>简单表述</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">编译器在执行完语法分析之后会输出一个抽象语法树，这个抽象语法树会辅助编译器进行语义分析，我们可以用它来确定语法正确的程序是否存在一些类型不匹配的问题
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-指令集">1.2 指令集</h3>
+<ul>
+<li>介绍</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">x86 是目前比较常见的指令集，除了 x86 之外，还有 arm 等指令集，苹果最新 Macbook 的自研芯片就使用了 arm 指令集
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">复杂指令集计算机（CISC）和精简指令集计算机（RISC）是两种遵循不同设计理念的指令集，从名字我们就可以推测出这两种指令集的区别：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">复杂指令集：通过增加指令的类型减少需要执行的指令数；
+</span></span><span class="line"><span class="cl">精简指令集：使用更少的指令类型完成目标的计算任务
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-编译原理">1.3 编译原理</h3>
+<ul>
+<li>
+<p>编译器所在目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">#goroot/src/cmd/compile
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>编译器功能介绍</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">-编译器的前端承担着词法分析、语法分析、类型检查和中间代码生成几部分工作
+</span></span><span class="line"><span class="cl">-编译器后端负责目标代码的生成和优化，将中间代码翻译成目标机器能够运行的二进制机器码
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>编译过程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Go 的编译器在逻辑上可以被分成四个阶段：
+</span></span><span class="line"><span class="cl">	1，词法与语法分析
+</span></span><span class="line"><span class="cl">	2，类型检查 
+</span></span><span class="line"><span class="cl">	3，中间代码生成
+</span></span><span class="line"><span class="cl">	4，机器代码生成
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<a class="lightgallery" href="/images/golang/%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b.jpg" title="/images/golang/编译过程.jpg" data-thumbnail="/images/golang/编译过程.jpg">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/golang/%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b.jpg"
+            data-srcset="/images/golang/%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b.jpg, /images/golang/%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b.jpg 1.5x, /images/golang/%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b.jpg 2x"
+            data-sizes="auto"
+            alt="/images/golang/编译过程.jpg" />
+    </a>
+<h4 id="a-词法与语法分析">a. 词法与语法分析</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> 	词法分析：解析源代码文件，将文件中的字符串序列转换成 Token 序列
+</span></span><span class="line"><span class="cl"> 	语法分析: 把Token 序列转换成有意义的结构体，即语法树(AST)
+</span></span><span class="line"><span class="cl"> 		TSPS:语法分析时，出现语法错误时会引发err
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="b类型检查">b.类型检查</h4>
+<ul>
+<li>对语法树中定义和使用的类型进行检查:
+<ul>
+<li>静态类型检查</li>
+<li>动态类型检查：动态派发、向下转型、反射以及其他特性</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> 	以下的顺序分别验证和处理不同类型的节点:1.常量、类型和函数名及类型；
+</span></span><span class="line"><span class="cl">                                    2.变量的赋值和初始化；
+</span></span><span class="line"><span class="cl">                                    3.函数和闭包的主体；
+</span></span><span class="line"><span class="cl">                                    4.哈希键值对的类型；
+</span></span><span class="line"><span class="cl">                                    5.导入函数体；
+</span></span><span class="line"><span class="cl">                                    6.外部的声明；
+</span></span><span class="line"><span class="cl">        TIPS:
+</span></span><span class="line"><span class="cl">        	1.所有的类型错误和不匹配都会在这一个阶段被暴露出来，包括结构体对接口的实现
+</span></span><span class="line"><span class="cl">        	2.还会展开和改写一些内建的函数
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="c中间代码生成">c.中间代码生成</h4>
+<ul>
+<li>将输入的抽象语法树转换成中间代码</li>
+<li>编译器会在将源代码转换到机器码的过程中，先把源代码转换成一种中间的表示形式</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> 	将每个语法树对应的函数进行编译：调用 cmd/compile/internal/gc.compileFunctions 进行编译，转换成中间代码
+</span></span><span class="line"><span class="cl"> 		TIPS:这一阶段能够分析出代码中的无用变量和片段并对代码进行优化
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="d机器码生成">d.机器码生成</h4>
+<ul>
+<li>
+<p>机器码由CPU处理，需要根据不同的cpu使用不同的机器码生成器</p>
+</li>
+<li>
+<p>在<a href="https://github.com/golang/go/tree/master/src/cmd/compile/internal" target="_blank" rel="noopener noreffer "><code>src/cmd/compile/internal</code></a> 目录中包含了很多机器码生成相关的包</p>
+</li>
+<li>
+<p>其中包括 amd64、arm、arm64、mips、mips64、ppc64、s390x、x86 和 wasm</p>
+<ol>
+<li>wasm：常见的主流浏览器二进制指令格式</li>
+</ol>
+</li>
+</ul>
+<h3 id="14-编译器入口">1.4 编译器入口</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1.Go 语言的编译器入口在 src/cmd/compile/internal/gc/main.go 文件中
+</span></span><span class="line"><span class="cl">2.其中 600 多行的 cmd/compile/internal/gc.Main 就是 Go 语言编译器的主程序
+</span></span><span class="line"><span class="cl">3.该函数会先获取命令行传入的参数并更新编译选项和配置
+</span></span><span class="line"><span class="cl">4.随后会调用 cmd/compile/internal/gc.parseFiles 对输入的文件进行词法与语法分析得到对应的抽象语法树：
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="15-本章知识扩展">1.5 本章知识扩展</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1.抽象语法树 https://en.wikipedia.org/wiki/Abstract_syntax_tree 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.静态单赋值 https://en.wikipedia.org/wiki/Static_single_assignment_form 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3.编译器一般分为前端和后端，其中前端的主要工作是将源代码翻译成编程语言无关的中间表示，而后端主要负责目标代码的优化和生成。 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4.指令集架构是计算机的抽象模型，也被称作架构或者计算架架构 https://en.wikipedia.org/wiki/Instruction_set_architecture 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5.SourceFile 表示一个 Go 语言源文件，它由 package 定义、多个 import 语句以及顶层的声明组成 https://golang.org/ref/spec#Source_file_organization 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">6.关于 Go 语言文法的是不是 LALR(1) 的讨论 
+</span></span><span class="line"><span class="cl">https://groups.google.com/forum/#!msg/golang-nuts/jVjbH2-emMQ/UdZlSNhd3DwJ
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">7.LALR 的全称是 Look-Ahead LR，大多数的通用编程语言都会使用 LALR 的文法 https://en.wikipedia.org/wiki/LALR_parser 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">8.WebAssembly 是基于栈的虚拟机的二进制指令，简称 Wasm
+</span></span><span class="line"><span class="cl">https://webassembly.org/ 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">9.plugin: add Windows support #19282 
+</span></span><span class="line"><span class="cl">https://github.com/golang/go/issues/19282 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="16-小结">1.6 小结</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">编译过程：
+</span></span><span class="line"><span class="cl">	1.词法分析：将源文件的代码进行正则匹配分组；lex3 是用于生成词法分析器的工具
+</span></span><span class="line"><span class="cl">	2.语法分析：通过形式文法将字符分组转换成token序列，将每个函数得到输出成语法树
+</span></span><span class="line"><span class="cl">	3.类型检查：在语法书中进行类型检查包括静态类型检查和动态类型检查
+</span></span><span class="line"><span class="cl">	4.中间代码：根据传入cpu架构通过SSA将语法书转换成SSA特性的中间代码
+</span></span><span class="line"><span class="cl">	5.机器码生成：根据目标机器的指令架构将中间代码通过对应架构的汇编语言器生成机器码，最后生成可以执行的二进制文件。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="第三章数据结构">第三章：数据结构</h2>
+<h3 id="10-数组">1.0 数组</h3>
+<ul>
+<li>
+<p>特性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1.数组在内存中都是一连串的内存空间
+</span></span><span class="line"><span class="cl">2.数组是由相同类型元素的集合组成的数据结构
+</span></span><span class="line"><span class="cl">3.通过指向数组开头的指针、元素的数量以及元素类型占的空间大小表示数组
+</span></span><span class="line"><span class="cl">4.数组长度为固定长度
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>初始化</p>
+<p>方式一：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">arr1 := [3]int{1, 2, 3}
+</span></span><span class="line"><span class="cl">	底层机制：
+</span></span><span class="line"><span class="cl">		var arr [3]int
+</span></span><span class="line"><span class="cl">		arr1[0]=1
+</span></span><span class="line"><span class="cl">		arr1[1]=2
+</span></span><span class="line"><span class="cl">		arr1[2]=3
+</span></span><span class="line"><span class="cl">	小结：变量的类型在编译进行到类型检查阶段就会被提取出来，随后使用types.NewArray函数创建包含数组大小的结构体
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方式二：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">arr2 := [...]int{1, 2, 3}
+</span></span><span class="line"><span class="cl">	底层机制：通过遍历元素的方式来计算数组中元素的数量
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>访问和赋值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">访问错误：
+</span></span><span class="line"><span class="cl">	1.访问数组的索引是非整数时报错
+</span></span><span class="line"><span class="cl">	2.访问数组的索引是负数时报错
+</span></span><span class="line"><span class="cl">	3.访问数组的索引越界时报错
+</span></span><span class="line"><span class="cl">tips:如果使用变量去访问数组或者字符串时，编译器就无法提前发现错误，则出现的错误为运行错误;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">赋值：数组的操作在编译期间为直接读写内存
+</span></span><span class="line"><span class="cl">	arry1[i]=2
+</span></span><span class="line"><span class="cl">	arry2 =arry1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="12-切片">1.2 切片</h3>
+<ul>
+<li>
+<p>特性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1.动态数组，其长度并不固定，向切片中追加元素，在容量不足时自动扩容
+</span></span><span class="line"><span class="cl">2.声明方式:切片的长度是动态的，声明只需要指定切片中的元素类型
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>数据结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">SliceHeader</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Data</span> <span class="kt">uintptr</span>    <span class="c1">//数组的指针：指针传值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Len</span>  <span class="kt">int</span>		<span class="c1">//切片的长度：已存放元素数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Cap</span>  <span class="kt">int</span>		<span class="c1">//切片的容量：可存放元素容量		
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>切片初始化</p>
+<ul>
+<li>
+<p>方式一：将数值转换成切片或者获得一部分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">arr</span> <span class="p">=[</span><span class="mi">8</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">slice1</span> <span class="o">:=</span><span class="nx">arr</span><span class="p">[:]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">slice1</span> <span class="o">:=</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意事项：1，arr是数组，没有append方法；</p>
+<p>​		 		  2，slice1是切片，可以使用append方法，并且slice1会自动扩容</p>
+<p>​	  			 3，<strong>slice1只能使用append方法添加元素</strong></p>
+<p>​		   		4，slice1是指向arr的切片，修改slice1的值，arr中的值也会被修改</p>
+<p>​		   		5，arr的8是初始化数组长度，5元素后面的元素用0代替</p>
+<p>​				   6，slice1的cap满后会以两个cap的数量自动扩容</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>方式二：声明一个不定长数组</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">slice</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>方式三：使用make定义一个切片</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">slice</span> <span class="o">:=</span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-16</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" data-title="go语言设计与实现" data-hashtags="golang"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" data-hashtag="golang"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" data-title="go语言设计与实现"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" data-title="go语言设计与实现"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" data-title="go语言设计与实现"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/golang/">golang</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/linux/linux/" class="prev" rel="prev" title="linux - 基础命令"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>linux - 基础命令</a>
+            <a href="/posts/javascript/js_window/" class="next" rel="next" title="window对象详解">window对象详解<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

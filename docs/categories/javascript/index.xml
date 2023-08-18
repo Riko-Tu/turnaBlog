@@ -1,22 +1,23 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>javascript - Category - 我的全新 Hugo 网站</title>
-        <link>http://localhost:1313/categories/javascript/</link>
-        <description>javascript - Category - 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/javascript/" rel="self" type="application/rss+xml" /><item>
+        <title>javascript - Category - Turan</title>
+        <link>http://example.org/categories/javascript/</link>
+        <description>javascript - Category - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/javascript/" rel="self" type="application/rss+xml" /><item>
     <title>javascript 数据结构</title>
-    <link>http://localhost:1313/posts/javascript/js/</link>
+    <link>http://example.org/posts/javascript/js/</link>
     <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/posts/javascript/js/</guid>
+    <guid>http://example.org/posts/javascript/js/</guid>
     <description><![CDATA[记录js的基本常用语法]]></description>
 </item>
 <item>
     <title>window对象详解</title>
-    <link>http://localhost:1313/posts/javascript/js_window/</link>
+    <link>http://example.org/posts/javascript/js_window/</link>
     <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/posts/javascript/js_window/</guid>
+    <guid>http://example.org/posts/javascript/js_window/</guid>
     <description><![CDATA[js window 对象 详解]]></description>
 </item>
 </channel>

@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>linux - 基础命令 - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="linux - 基础命令" />
+<meta property="og:description" content="linux 一、 虚拟机 1. 概念 虚拟机概念 二、 目录结构 1. 根目录 1 * linux采用单根目录结构（不同于windos使用多根目录） 2. 二级目录 linux二级目录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/linux/linux/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-01T15:06:34+08:00" />
+<meta property="article:modified_time" content="2023-08-01T15:06:34+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="linux - 基础命令"/>
+<meta name="twitter:description" content="linux 一、 虚拟机 1. 概念 虚拟机概念 二、 目录结构 1. 根目录 1 * linux采用单根目录结构（不同于windos使用多根目录） 2. 二级目录 linux二级目录"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/linux/linux/" /><link rel="prev" href="http://example.org/posts/linux/linux_installer/" /><link rel="next" href="http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "linux - 基础命令",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/linux\/linux\/"
+        },"genre": "posts","keywords": "linux","wordcount":  3814 ,
+        "url": "http:\/\/example.org\/posts\/linux\/linux\/","datePublished": "2023-08-01T15:06:34+08:00","dateModified": "2023-08-01T15:06:34+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">linux - 基础命令</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-01">2023-08-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3814 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux">linux</a>
+      <ul>
+        <li><a href="#一-虚拟机">一、 虚拟机</a>
+          <ul>
+            <li><a href="#1-概念">1. 概念</a></li>
+          </ul>
+        </li>
+        <li><a href="#二-目录结构">二、 目录结构</a>
+          <ul>
+            <li><a href="#1-根目录">1. 根目录</a></li>
+            <li><a href="#2-二级目录">2. 二级目录</a></li>
+            <li><a href="#3-常用文件功能介绍">3. 常用文件功能介绍</a></li>
+          </ul>
+        </li>
+        <li><a href="#三-命令范式">三、 命令范式</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#1-文件操作">1. 文件操作</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#四用户和组">四、用户和组</a>
+          <ul>
+            <li><a href="#1-用户的分类">1. 用户的分类</a></li>
+            <li><a href="#2-配置文件简介">2. 配置文件简介</a></li>
+            <li><a href="#3-用户相关">3. 用户相关</a>
+              <ul>
+                <li></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#五-文件权限">五、 文件权限</a>
+          <ul>
+            <li><a href="#1-权限引入">1. 权限引入</a></li>
+            <li><a href="#2-文件的7种类型">2. 文件的7种类型</a></li>
+            <li><a href="#3-文件权限掩码">3. 文件权限掩码</a></li>
+            <li><a href="#4-权限相关">4. 权限相关</a>
+              <ul>
+                <li></li>
+              </ul>
+            </li>
+            <li><a href="#5-权限的类型">5. 权限的类型</a>
+              <ul>
+                <li><a href="#目录权限">目录权限</a></li>
+                <li><a href="#文件权限">文件权限</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#六-yum服务">六、 yum服务</a>
+          <ul>
+            <li><a href="#1-服务介绍">1. 服务介绍</a></li>
+            <li><a href="#2-yum源介绍">2、 yum源介绍</a></li>
+            <li><a href="#3-yum源配置文件">3. yum源配置文件</a></li>
+            <li><a href="#4-base网络源文件介绍">4. Base网络源文件介绍</a></li>
+            <li><a href="#5-yum常用命令">5. yum常用命令</a>
+              <ul>
+                <li><a href="#yum-repolist">yum repolist</a></li>
+                <li><a href="#yum-list">yum list</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#七--进程与服务">七 、 进程与服务</a>
+          <ul>
+            <li><a href="#1-程序与进程的区别">1. 程序与进程的区别</a></li>
+            <li><a href="#2-进程介绍">2. 进程介绍</a></li>
+            <li><a href="#3-进程的分类">3. 进程的分类</a></li>
+            <li><a href="#4-进程的状态">4. 进程的状态</a></li>
+            <li><a href="#5-服务的分类">5. 服务的分类</a></li>
+            <li><a href="#6-进程的管理">6. 进程的管理</a>
+              <ul>
+                <li><a href="#1-进程监控命令">1. 进程监控命令</a></li>
+                <li><a href="#2-进程控制命令">2. 进程控制命令</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-服务的管理">5. 服务的管理</a>
+              <ul>
+                <li><a href="#systemdctl">systemdctl</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#八-ssh服务">八、 ssh服务</a>
+          <ul>
+            <li><a href="#1-ssh介绍">1. ssh介绍</a></li>
+            <li><a href="#2-ssh版本">2. ssh版本</a></li>
+            <li><a href="#3-ssh远程登录">3. ssh远程登录</a></li>
+            <li><a href="#4-文件上传和下载">4. 文件上传和下载</a></li>
+          </ul>
+        </li>
+        <li><a href="#九-shell">九、 shell</a>
+          <ul>
+            <li><a href="#1-shell介绍">1. shell介绍</a></li>
+            <li><a href="#2-shell的类型">2. shell的类型</a></li>
+            <li><a href="#3-bash特性">3. bash特性</a>
+              <ul>
+                <li><a href="#别名">别名</a></li>
+                <li><a href="#通配符">通配符</a></li>
+              </ul>
+            </li>
+            <li><a href="#4-变量">4. 变量</a></li>
+            <li><a href="#5-脚本">5. 脚本</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="linux">linux</h2>
+<h3 id="一-虚拟机">一、 虚拟机</h3>
+<h4 id="1-概念">1. 概念</h4>
+<figure><a class="lightgallery" href="/images/linux/%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a6%82%e5%bf%b5.jpg" title="/images/linux/虚拟机概念.jpg" data-thumbnail="/images/linux/虚拟机概念.jpg" data-sub-html="<h2>虚拟机概念</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a6%82%e5%bf%b5.jpg"
+            data-srcset="/images/linux/%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a6%82%e5%bf%b5.jpg, /images/linux/%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a6%82%e5%bf%b5.jpg 1.5x, /images/linux/%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%a6%82%e5%bf%b5.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/虚拟机概念.jpg" />
+    </a><figcaption class="image-caption">虚拟机概念</figcaption>
+    </figure>
+<h3 id="二-目录结构">二、 目录结构</h3>
+<h4 id="1-根目录">1. 根目录</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">* linux采用单根目录结构（不同于windos使用多根目录）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-二级目录">2. 二级目录</h4>
+<figure><a class="lightgallery" href="/images/linux/linux%e4%ba%8c%e7%ba%a7%e7%9b%ae%e5%bd%95.jpg" title="/images/linux/linux二级目录.jpg" data-thumbnail="/images/linux/linux二级目录.jpg" data-sub-html="<h2>linux二级目录</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/linux%e4%ba%8c%e7%ba%a7%e7%9b%ae%e5%bd%95.jpg"
+            data-srcset="/images/linux/linux%e4%ba%8c%e7%ba%a7%e7%9b%ae%e5%bd%95.jpg, /images/linux/linux%e4%ba%8c%e7%ba%a7%e7%9b%ae%e5%bd%95.jpg 1.5x, /images/linux/linux%e4%ba%8c%e7%ba%a7%e7%9b%ae%e5%bd%95.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/linux二级目录.jpg" />
+    </a><figcaption class="image-caption">linux二级目录</figcaption>
+    </figure>
+<h4 id="3-常用文件功能介绍">3. 常用文件功能介绍</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">/etc/passwd       存储帐号的文件
+</span></span><span class="line"><span class="cl">/etc/shadow		  存储密码的文件
+</span></span><span class="line"><span class="cl">/etc/group		  存储用户组的文件
+</span></span><span class="line"><span class="cl">/etc/sudoers	  存放临时命令权限的用户与命令,在该文件100内添加用户和命令可使用sudo获取临时权限,该文件需用visudo编辑,使用whereis cmd 定位命令文件，并添加nopasswd： cmd
+</span></span><span class="line"><span class="cl">/etc/profile	   配置环境变量文件，设置好后使用. /etc/profile 来重新加载配置
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="三-命令范式">三、 命令范式</h3>
+<figure><a class="lightgallery" href="/images/linux/linux%e5%91%bd%e4%bb%a4%e8%8c%83%e5%bc%8f.jpg" title="/images/linux/linux命令范式.jpg" data-thumbnail="/images/linux/linux命令范式.jpg" data-sub-html="<h2>linux命令范式</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/linux%e5%91%bd%e4%bb%a4%e8%8c%83%e5%bc%8f.jpg"
+            data-srcset="/images/linux/linux%e5%91%bd%e4%bb%a4%e8%8c%83%e5%bc%8f.jpg, /images/linux/linux%e5%91%bd%e4%bb%a4%e8%8c%83%e5%bc%8f.jpg 1.5x, /images/linux/linux%e5%91%bd%e4%bb%a4%e8%8c%83%e5%bc%8f.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/linux命令范式.jpg" />
+    </a><figcaption class="image-caption">linux命令范式</figcaption>
+    </figure>
+<h5 id="1-文件操作">1. 文件操作</h5>
+<h6 id="ls">ls</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ls [选项]  [命令参数]
+</span></span><span class="line"><span class="cl">选项 :
+</span></span><span class="line"><span class="cl">    -a 显示所有文件及目录 (. 开头的隐藏文件也会列出)
+</span></span><span class="line"><span class="cl">    -l 除文件名称外，亦将文件型态、权限、拥有者、文件大小等资讯详细列出
+</span></span><span class="line"><span class="cl">    -lh 将文件大小转为kb单位
+</span></span><span class="line"><span class="cl">    -r 将文件以相反次序显示(原定依英文字母次序)
+</span></span><span class="line"><span class="cl">    -t 将文件依建立时间之先后次序列出
+</span></span><span class="line"><span class="cl">    -A 同 -a ，但不列出 &#34;.&#34; (目前目录) 及 &#34;..&#34; (父目录)
+</span></span><span class="line"><span class="cl">    -F 在列出的文件名称后加一符号；例如可执行档则加 &#34;*&#34;, 目录则加 &#34;/&#34;
+</span></span><span class="line"><span class="cl">    -R 若目录下有文件，则以下之文件亦皆依序列出	
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	ls -l s*    展示以s开头的文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="mkdir">mkdir</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">mkdir [选项] dirName
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-p 确保目录名称存在，不存在的就建一个
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	mkdir -p run/test       如run文件夹不存在，创建后再创建test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="touch">touch</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">touch [选项] 参数
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	可通过touch --help查看
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	touch testfile  创建一个没有格式的testfile文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="cat">cat</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">cat [选项] 文件路径
+</span></span><span class="line"><span class="cl">选项： 
+</span></span><span class="line"><span class="cl">	-n     将文本内容带行号输出
+</span></span><span class="line"><span class="cl">	-b     去除空格，带行号输出
+</span></span><span class="line"><span class="cl">	-E	    在每行结束处显示 $
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例： 
+</span></span><span class="line"><span class="cl">	cat -bE 文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="more">more</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">more [选项] 文件路径
+</span></span><span class="line"><span class="cl">选项： 
+</span></span><span class="line"><span class="cl">	-l 向前翻页，展示剩余行数百分比
+</span></span><span class="line"><span class="cl">	-p 不以卷动的方式显示每一页，而是先清除萤幕后再显示内容
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	more -p  文件路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="less">less</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">less [选项] 文件路径
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-m  显示剩余百分比
+</span></span><span class="line"><span class="cl">	-N  显示行号
+</span></span><span class="line"><span class="cl">	-g 	只显示第一个搜索的关键词   
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">less -mNg 文件路径
+</span></span><span class="line"><span class="cl">	输入：
+</span></span><span class="line"><span class="cl">		/字符串：向下搜索
+</span></span><span class="line"><span class="cl">		？字符串：向上搜索
+</span></span><span class="line"><span class="cl">		n 查看下一个关键字
+</span></span><span class="line"><span class="cl">		N 查看上一个关键字
+</span></span><span class="line"><span class="cl">		b 向上翻页
+</span></span><span class="line"><span class="cl">		d 向下翻页
+</span></span><span class="line"><span class="cl">		Q 退出查看
+</span></span><span class="line"><span class="cl">		u 向前翻半页
+</span></span><span class="line"><span class="cl">		F 读取写入文件的最新内容，ctrl+C停止
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="head">head</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">head [选项] 文件路径
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-q 隐藏文件名
+</span></span><span class="line"><span class="cl">	-v 显示文件名
+</span></span><span class="line"><span class="cl">	-c 显示字节数
+</span></span><span class="line"><span class="cl">	-n 显示的行数
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	head -c 20 文件路径        显示文件前20个字节数
+</span></span><span class="line"><span class="cl">	head -n 10 文件路径		   显示文件前10行文字
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="tail">tail</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">tail [选项]  文件路径
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-f 循环读取
+</span></span><span class="line"><span class="cl">	-n 显示文件的尾部行内容
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	tail -f 文件路径           默认显示文件最后10行，并实时读取文件内容
+</span></span><span class="line"><span class="cl">	tail -n 200 文件路径	   显示文件倒数200行内容 
+</span></span><span class="line"><span class="cl">    tail -n -100 文件路径	   显示行数从第100行开始到尾部行
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="cp">cp</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">cp [选项] source dest    ||    cp [选项] source directory
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-a  保留源文件所有属性
+</span></span><span class="line"><span class="cl">	-f  覆盖文件
+</span></span><span class="line"><span class="cl">	-p  将修改时间和访问权限页复制到新文件中
+</span></span><span class="line"><span class="cl">	-r  复制文件夹下的所有文件和目录
+</span></span><span class="line"><span class="cl">	-l  不复制文件，只生成链接文件
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	cp 源文件名  目的文件名         复制一个文件
+</span></span><span class="line"><span class="cl">	cp -f 源文件名 目的文件名       将源文件复制一份覆盖目的文件
+</span></span><span class="line"><span class="cl">	cp -r sourceDir destDir      复制目录下的所有文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="mv">mv</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">mv [选项] source dest    
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-u 源文件比目标文件新或者目标文件不存在时，才执行
+</span></span><span class="line"><span class="cl">	-i 覆盖时询问
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	mv source（文件） dest（文件）           将source名称改为dest
+</span></span><span class="line"><span class="cl">	mv source（文件） dest（目录）		     移动文件到目录中
+</span></span><span class="line"><span class="cl">	mv source（目录） dest（目录）           dest存在，则移动；不存在，则更名 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="rm">rm</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">rm [选项] 文件或目录路径
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-i 删除前逐一询问
+</span></span><span class="line"><span class="cl">	-f 直接删除
+</span></span><span class="line"><span class="cl">	-r 删除目录
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	rm 文件路径      删除文件
+</span></span><span class="line"><span class="cl">	rm -r 目录路径	 删除目录
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="rmdir">rmdir</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">rmdir [选项]  dirName
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-p 当子目录被删除后使它也成为空目录的话，则顺便一并删除
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	rmdir -p BBB/test   将test删除后，如果BBB变成空目录，则也删除
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="umask">umask</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">umask [选项] [掩码]
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-S  文字的方式来表示权限掩码
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	umask          展示当前用户的创建权限掩码；root默认为0022
+</span></span><span class="line"><span class="cl">	umask -S 000   将U,G,O的权限都改为777
+</span></span><span class="line"><span class="cl">	umask -S 222   将u,g,o的权限都改为555
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="四用户和组">四、用户和组</h3>
+<h4 id="1-用户的分类">1. 用户的分类</h4>
+<figure><a class="lightgallery" href="/images/linux/%e7%94%a8%e6%88%b7%e7%9a%84%e5%88%86%e7%b1%bb.jpg" title="/images/linux/用户的分类.jpg" data-thumbnail="/images/linux/用户的分类.jpg" data-sub-html="<h2>用户的分类</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e7%94%a8%e6%88%b7%e7%9a%84%e5%88%86%e7%b1%bb.jpg"
+            data-srcset="/images/linux/%e7%94%a8%e6%88%b7%e7%9a%84%e5%88%86%e7%b1%bb.jpg, /images/linux/%e7%94%a8%e6%88%b7%e7%9a%84%e5%88%86%e7%b1%bb.jpg 1.5x, /images/linux/%e7%94%a8%e6%88%b7%e7%9a%84%e5%88%86%e7%b1%bb.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/用户的分类.jpg" />
+    </a><figcaption class="image-caption">用户的分类</figcaption>
+    </figure>
+<h4 id="2-配置文件简介">2. 配置文件简介</h4>
+<figure><a class="lightgallery" href="/images/linux/%e7%94%a8%e6%88%b7%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg" title="/images/linux/用户配置文件.jpg" data-thumbnail="/images/linux/用户配置文件.jpg" data-sub-html="<h2>用户配置文件</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e7%94%a8%e6%88%b7%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg"
+            data-srcset="/images/linux/%e7%94%a8%e6%88%b7%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg, /images/linux/%e7%94%a8%e6%88%b7%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg 1.5x, /images/linux/%e7%94%a8%e6%88%b7%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/用户配置文件.jpg" />
+    </a><figcaption class="image-caption">用户配置文件</figcaption>
+    </figure>
+<h4 id="3-用户相关">3. 用户相关</h4>
+<h6 id="groupadd">groupadd</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">groupadd [选项] GroupId gName
+</span></span><span class="line"><span class="cl">	-g 指定新建工作组的 id
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	groupadd -g 344 normol    在/etc/group文件中增加一个组名为normol,id为344的key雨vaule
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="groupmod">groupmod</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">groupmod [选项] 原组名 新组名
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-g 设置群组识别码
+</span></span><span class="line"><span class="cl">	-n 设置群组名
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	groupmod -n test runoob      将runoob改名为test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="groupdel">groupdel</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">groupdel [群组名称]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	groupdel test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="useradd">useradd</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">useradd [选项] userName
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-c  加上备注文字；备注文字会保存在passwd的备注栏位中
+</span></span><span class="line"><span class="cl">	-d  指定用户登入时的起始目录
+</span></span><span class="line"><span class="cl">	-D 　变更预设值;只用使用-b ,-e ,f,-g,-s
+</span></span><span class="line"><span class="cl">	-e&lt;有效期限&gt; 　指定帐号的有效期限。参数应使用 YYYY-MM-DD 格式
+</span></span><span class="line"><span class="cl">	-f&lt;缓冲天数&gt; 　指定在密码过期后多少天即关闭该帐号。   -g 7
+</span></span><span class="line"><span class="cl">	-g&lt;群组&gt; 　指定用户所属的群组。
+</span></span><span class="line"><span class="cl">	-s&lt;shell&gt;　 　指定用户登入后所使用的shell
+</span></span><span class="line"><span class="cl">	-m 　自动建立用户的登入目录。
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	#创建的用户信心会保存在/etc/passwd中
+</span></span><span class="line"><span class="cl">	useradd -c turan -d /home/turan -g turanGroup turan 
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">    #添加一个不能登录的用户
+</span></span><span class="line"><span class="cl">	useradd -d /usr/local/apache -g apache -s /bin/false apache    
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	##建立用户指定id
+</span></span><span class="line"><span class="cl">	useradd turan -u 544
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="usermod">usermod</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">usermod [选项] userName
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-c&lt;备注&gt; 　修改用户帐号的备注文字。
+</span></span><span class="line"><span class="cl">	-d登入目录&gt; 　修改用户登入时的目录。
+</span></span><span class="line"><span class="cl">	-e&lt;有效期限&gt; 　修改帐号的有效期限。
+</span></span><span class="line"><span class="cl">	-f&lt;缓冲天数&gt; 　修改在密码过期后多少天即关闭该帐号。
+</span></span><span class="line"><span class="cl">	-g&lt;群组&gt; 　修改用户所属的群组。
+</span></span><span class="line"><span class="cl">	-G&lt;群组&gt; 　修改用户所属的附加群组。
+</span></span><span class="line"><span class="cl">	-l&lt;帐号名称&gt; 　修改用户帐号名称。
+</span></span><span class="line"><span class="cl">	-L 　锁定用户密码，使密码无效。
+</span></span><span class="line"><span class="cl">	-s&lt;shell&gt; 　修改用户登入后所使用的shell。
+</span></span><span class="line"><span class="cl">	-u&lt;uid&gt; 　修改用户ID。
+</span></span><span class="line"><span class="cl">	-U 　解除密码锁定。
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	usermod -u 300 turan    //修改turan Uid为300
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="userdel">userdel</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">userdel [选项] username
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-r 删除用户登入目录以及目录中所有文件。
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	##仅删除账号，不删除账号的数据
+</span></span><span class="line"><span class="cl">	userdel turan
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	##账号与数据一并删除
+</span></span><span class="line"><span class="cl">	userdel -r turan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="passwd">passwd</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">passwd [选项] userName
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-d 删除密码
+</span></span><span class="line"><span class="cl">	-l 停止账号的使用
+</span></span><span class="line"><span class="cl">	-S 显示密码信息(不展示密码)
+</span></span><span class="line"><span class="cl">	-u 启用被停止的账户
+</span></span><span class="line"><span class="cl">	-w 口令要到期提前警告的天数
+</span></span><span class="line"><span class="cl">	-x 指定口令最长存活期
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	passwd turan      //修改用户密码，之后输入两次密码
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	 //查看用户密码：用户名，密码状态（LK锁住,NP无密码,p可用），密码最后修改时间，失效前警告天数，密码失效时间(-1表示没有失效时间)
+</span></span><span class="line"><span class="cl">	passwd -S turan  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="五-文件权限">五、 文件权限</h3>
+<h4 id="1-权限引入">1. 权限引入</h4>
+<figure><a class="lightgallery" href="/images/linux/%e6%96%87%e4%bb%b6%e6%9d%83%e9%99%90%e5%bc%95%e5%85%a5.jpg" title="/images/linux/文件权限引入.jpg" data-thumbnail="/images/linux/文件权限引入.jpg" data-sub-html="<h2>文件权限引入</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e6%96%87%e4%bb%b6%e6%9d%83%e9%99%90%e5%bc%95%e5%85%a5.jpg"
+            data-srcset="/images/linux/%e6%96%87%e4%bb%b6%e6%9d%83%e9%99%90%e5%bc%95%e5%85%a5.jpg, /images/linux/%e6%96%87%e4%bb%b6%e6%9d%83%e9%99%90%e5%bc%95%e5%85%a5.jpg 1.5x, /images/linux/%e6%96%87%e4%bb%b6%e6%9d%83%e9%99%90%e5%bc%95%e5%85%a5.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/文件权限引入.jpg" />
+    </a><figcaption class="image-caption">文件权限引入</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/linux/20220114161250781.png" title="/images/linux/20220114161250781.png" data-thumbnail="/images/linux/20220114161250781.png" data-sub-html="<h2>文件权限引入</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/20220114161250781.png"
+            data-srcset="/images/linux/20220114161250781.png, /images/linux/20220114161250781.png 1.5x, /images/linux/20220114161250781.png 2x"
+            data-sizes="auto"
+            alt="/images/linux/20220114161250781.png" />
+    </a><figcaption class="image-caption">文件权限引入</figcaption>
+    </figure>
+<h4 id="2-文件的7种类型">2. 文件的7种类型</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> - 普通文件：纯文本文件(ASCII)；二进制文件(binary)；
+</span></span><span class="line"><span class="cl"> 		   数据格式的文件(data);各种压缩文件
+</span></span><span class="line"><span class="cl"> d 目录文件：
+</span></span><span class="line"><span class="cl"> c 字符设备文件：
+</span></span><span class="line"><span class="cl"> b 块设备文件：
+</span></span><span class="line"><span class="cl"> s 套接字：
+</span></span><span class="line"><span class="cl"> p 管道文件：
+</span></span><span class="line"><span class="cl"> l 链接文件：快捷方式
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3-文件权限掩码">3. 文件权限掩码</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">第一个rwx   表示创建者所有权限  r=4 w=2 x=1  
+</span></span><span class="line"><span class="cl">第二个rwx	 表示所属组所有权限
+</span></span><span class="line"><span class="cl">第三个rwx	 其他成员所有权限
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4-权限相关">4. 权限相关</h4>
+<h6 id="chown">chown</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">chown [选项] fileName
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-R 处理指定目录以及其子目录下的所有文件
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	chown root xiaotu      //将xiaotu文件或目录的所有者设置为root
+</span></span><span class="line"><span class="cl">	chown turan:turanGroup xiaotu  //更改xiaotu的所有者与群体使用者
+</span></span><span class="line"><span class="cl">	chown -R turan:turanGroup *   //将当前目录下的所有文件的所有者和群使用者修改
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="chgrp">chgrp</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">chgrp [选项] filename
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">   -v 修改群组所有
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	chgrp -v group filename      //更改文件的群组信息
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="chmod">chmod</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">chmod  [选项]   filename
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-R 递归更改目录内的所有文件
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	chmod +r file    //所有用户添加r权限
+</span></span><span class="line"><span class="cl">	chmod o+r file    //o用户增加file权限
+</span></span><span class="line"><span class="cl">	chmod u=rw,go= file  //u为rw权限,go没有任何权限
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="sudo">sudo</h6>
+<blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sudo userName cmd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	sudo useradd -g gid usrname      //临时普通用户使用useradd命令，配置临时命令，请查看二中的常用文件功能介绍
+</span></span><span class="line"><span class="cl">	
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<figure><a class="lightgallery" href="/images/linux/sudo%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b.jpg" title="/images/linux/sudo工作流程.jpg" data-thumbnail="/images/linux/sudo工作流程.jpg" data-sub-html="<h2>sudo工作流程</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/sudo%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b.jpg"
+            data-srcset="/images/linux/sudo%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b.jpg, /images/linux/sudo%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b.jpg 1.5x, /images/linux/sudo%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/sudo工作流程.jpg" />
+    </a><figcaption class="image-caption">sudo工作流程</figcaption>
+    </figure>
+<h4 id="5-权限的类型">5. 权限的类型</h4>
+<h5 id="目录权限">目录权限</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">r    读取牧区结构列表（可获取文件名）
+</span></span><span class="line"><span class="cl">w    更改目录结构列表（新增，删除，移动，复制）
+</span></span><span class="line"><span class="cl">x	 可cd进入该目录
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="文件权限">文件权限</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">r	 读取文件内容
+</span></span><span class="line"><span class="cl">w	 编辑文件内容
+</span></span><span class="line"><span class="cl">x	 可执行文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="六-yum服务">六、 yum服务</h3>
+<h4 id="1-服务介绍">1. 服务介绍</h4>
+<figure><a class="lightgallery" href="/images/linux/yum%e6%9c%8d%e5%8a%a1.jpg" title="/images/linux/yum服务.jpg" data-thumbnail="/images/linux/yum服务.jpg" data-sub-html="<h2>yum服务</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/yum%e6%9c%8d%e5%8a%a1.jpg"
+            data-srcset="/images/linux/yum%e6%9c%8d%e5%8a%a1.jpg, /images/linux/yum%e6%9c%8d%e5%8a%a1.jpg 1.5x, /images/linux/yum%e6%9c%8d%e5%8a%a1.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/yum服务.jpg" />
+    </a><figcaption class="image-caption">yum服务</figcaption>
+    </figure>
+<h4 id="2-yum源介绍">2、 yum源介绍</h4>
+<figure><a class="lightgallery" href="/images/linux/yum%e6%ba%90.jpg" title="/images/linux/yum源.jpg" data-thumbnail="/images/linux/yum源.jpg" data-sub-html="<h2>yum源</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/yum%e6%ba%90.jpg"
+            data-srcset="/images/linux/yum%e6%ba%90.jpg, /images/linux/yum%e6%ba%90.jpg 1.5x, /images/linux/yum%e6%ba%90.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/yum源.jpg" />
+    </a><figcaption class="image-caption">yum源</figcaption>
+    </figure>
+<h4 id="3-yum源配置文件">3. yum源配置文件</h4>
+<figure><a class="lightgallery" href="/images/linux/yum%e6%ba%90%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg" title="/images/linux/yum源配置文件.jpg" data-thumbnail="/images/linux/yum源配置文件.jpg" data-sub-html="<h2>yum源配置文件</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/yum%e6%ba%90%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg"
+            data-srcset="/images/linux/yum%e6%ba%90%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg, /images/linux/yum%e6%ba%90%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg 1.5x, /images/linux/yum%e6%ba%90%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/yum源配置文件.jpg" />
+    </a><figcaption class="image-caption">yum源配置文件</figcaption>
+    </figure>
+<h4 id="4-base网络源文件介绍">4. Base网络源文件介绍</h4>
+<figure><a class="lightgallery" href="/images/linux/yum%e7%bd%91%e7%bb%9c%e6%ba%90%e6%96%87%e4%bb%b6%e4%bb%8b%e7%bb%8d.jpg" title="/images/linux/yum网络源文件介绍.jpg" data-thumbnail="/images/linux/yum网络源文件介绍.jpg" data-sub-html="<h2>yum网络源文件介绍</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/yum%e7%bd%91%e7%bb%9c%e6%ba%90%e6%96%87%e4%bb%b6%e4%bb%8b%e7%bb%8d.jpg"
+            data-srcset="/images/linux/yum%e7%bd%91%e7%bb%9c%e6%ba%90%e6%96%87%e4%bb%b6%e4%bb%8b%e7%bb%8d.jpg, /images/linux/yum%e7%bd%91%e7%bb%9c%e6%ba%90%e6%96%87%e4%bb%b6%e4%bb%8b%e7%bb%8d.jpg 1.5x, /images/linux/yum%e7%bd%91%e7%bb%9c%e6%ba%90%e6%96%87%e4%bb%b6%e4%bb%8b%e7%bb%8d.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/yum网络源文件介绍.jpg" />
+    </a><figcaption class="image-caption">yum网络源文件介绍</figcaption>
+    </figure>
+<h4 id="5-yum常用命令">5. yum常用命令</h4>
+<h5 id="yum-repolist">yum repolist</h5>
+<ul>
+<li>查看使用的代理</li>
+</ul>
+<h5 id="yum-list">yum list</h5>
+<ul>
+<li>查询仓库中所有rnp包</li>
+<li></li>
+</ul>
+<h3 id="七--进程与服务">七 、 进程与服务</h3>
+<h4 id="1-程序与进程的区别">1. 程序与进程的区别</h4>
+<figure><a class="lightgallery" href="/images/linux/%e7%a8%8b%e5%ba%8f%e4%b8%8e%e8%bf%9b%e7%a8%8b%e5%8c%ba%e5%88%ab.jpg" title="/images/linux/程序与进程区别.jpg" data-thumbnail="/images/linux/程序与进程区别.jpg" data-sub-html="<h2>程序与进程区别</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e7%a8%8b%e5%ba%8f%e4%b8%8e%e8%bf%9b%e7%a8%8b%e5%8c%ba%e5%88%ab.jpg"
+            data-srcset="/images/linux/%e7%a8%8b%e5%ba%8f%e4%b8%8e%e8%bf%9b%e7%a8%8b%e5%8c%ba%e5%88%ab.jpg, /images/linux/%e7%a8%8b%e5%ba%8f%e4%b8%8e%e8%bf%9b%e7%a8%8b%e5%8c%ba%e5%88%ab.jpg 1.5x, /images/linux/%e7%a8%8b%e5%ba%8f%e4%b8%8e%e8%bf%9b%e7%a8%8b%e5%8c%ba%e5%88%ab.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/程序与进程区别.jpg" />
+    </a><figcaption class="image-caption">程序与进程区别</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/linux/%e6%9c%8d%e5%8a%a1.jpg" title="/images/linux/服务.jpg" data-thumbnail="/images/linux/服务.jpg" data-sub-html="<h2>服务</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e6%9c%8d%e5%8a%a1.jpg"
+            data-srcset="/images/linux/%e6%9c%8d%e5%8a%a1.jpg, /images/linux/%e6%9c%8d%e5%8a%a1.jpg 1.5x, /images/linux/%e6%9c%8d%e5%8a%a1.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/服务.jpg" />
+    </a><figcaption class="image-caption">服务</figcaption>
+    </figure>
+<h4 id="2-进程介绍">2. 进程介绍</h4>
+<figure><a class="lightgallery" href="/images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d.jpg" title="/images/linux/进程介绍.jpg" data-thumbnail="/images/linux/进程介绍.jpg" data-sub-html="<h2>进程介绍</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d.jpg"
+            data-srcset="/images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d.jpg, /images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d.jpg 1.5x, /images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/进程介绍.jpg" />
+    </a><figcaption class="image-caption">进程介绍</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d2.jpg" title="/images/linux/进程介绍2.jpg" data-thumbnail="/images/linux/进程介绍2.jpg" data-sub-html="<h2>进程介绍2</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d2.jpg"
+            data-srcset="/images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d2.jpg, /images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d2.jpg 1.5x, /images/linux/%e8%bf%9b%e7%a8%8b%e4%bb%8b%e7%bb%8d2.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/进程介绍2.jpg" />
+    </a><figcaption class="image-caption">进程介绍2</figcaption>
+    </figure>
+<h4 id="3-进程的分类">3. 进程的分类</h4>
+<figure><a class="lightgallery" href="/images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%b1%bb%e5%9e%8b.jpg" title="/images/linux/进程的类型.jpg" data-thumbnail="/images/linux/进程的类型.jpg" data-sub-html="<h2>进程的类型</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%b1%bb%e5%9e%8b.jpg"
+            data-srcset="/images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%b1%bb%e5%9e%8b.jpg, /images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%b1%bb%e5%9e%8b.jpg 1.5x, /images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%b1%bb%e5%9e%8b.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/进程的类型.jpg" />
+    </a><figcaption class="image-caption">进程的类型</figcaption>
+    </figure>
+<h4 id="4-进程的状态">4. 进程的状态</h4>
+<figure><a class="lightgallery" href="/images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%8a%b6%e6%80%81.jpg" title="/images/linux/进程的状态.jpg" data-thumbnail="/images/linux/进程的状态.jpg" data-sub-html="<h2>进程的状态</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%8a%b6%e6%80%81.jpg"
+            data-srcset="/images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%8a%b6%e6%80%81.jpg, /images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%8a%b6%e6%80%81.jpg 1.5x, /images/linux/%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%8a%b6%e6%80%81.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/进程的状态.jpg" />
+    </a><figcaption class="image-caption">进程的状态</figcaption>
+    </figure>
+<h4 id="5-服务的分类">5. 服务的分类</h4>
+<figure><a class="lightgallery" href="/images/linux/%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%88%86%e7%b1%bb.jpg" title="/images/linux/服务的分类.jpg" data-thumbnail="/images/linux/服务的分类.jpg" data-sub-html="<h2>服务的分类</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%88%86%e7%b1%bb.jpg"
+            data-srcset="/images/linux/%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%88%86%e7%b1%bb.jpg, /images/linux/%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%88%86%e7%b1%bb.jpg 1.5x, /images/linux/%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%88%86%e7%b1%bb.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/服务的分类.jpg" />
+    </a><figcaption class="image-caption">服务的分类</figcaption>
+    </figure>
+<h4 id="6-进程的管理">6. 进程的管理</h4>
+<h5 id="1-进程监控命令">1. 进程监控命令</h5>
+<ul>
+<li>监控静态和动态的进程</li>
+</ul>
+<h6 id="ps">ps</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">ps [选项] 
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-aux 显示所有包含其他使用者的行程
+</span></span><span class="line"><span class="cl">	-ef  显示所有进程信息，连同命令行
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">	ps -ef | grep 进程名     //查找进程   可查看pid与ppid
+</span></span><span class="line"><span class="cl">	ps -aux       			//查看所有进程
+</span></span><span class="line"><span class="cl">	ps -u root				//查看root用户的持有进程
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="pstree">pstree</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">实例：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	pstree -apnh 	//显示进程间的关系
+</span></span><span class="line"><span class="cl">	pstree -u 		//显示用户名称
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="top">top</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> top [选项] 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 选项：
+</span></span><span class="line"><span class="cl"> 	-d    改变显示的更新速度
+</span></span><span class="line"><span class="cl"> 	-c 	  显示完整的路径与名称
+</span></span><span class="line"><span class="cl"> 	
+</span></span><span class="line"><span class="cl"> 实例：
+</span></span><span class="line"><span class="cl"> 	top -d 3  		//每三秒刷新进程信息
+</span></span><span class="line"><span class="cl"> 	top -c			// 显示完整的路径与名称
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="2-进程控制命令">2. 进程控制命令</h5>
+<ul>
+<li>终止进程</li>
+</ul>
+<h6 id="kill">kill</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">kill [选项] pid
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	-9  强制杀死
+</span></span><span class="line"><span class="cl">	-1 	重新加载进程
+</span></span><span class="line"><span class="cl">	-15 正常终止进程
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5-服务的管理">5. 服务的管理</h4>
+<h5 id="systemdctl">systemdctl</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">systemdctl [选项]  服务名
+</span></span><span class="line"><span class="cl">选项：
+</span></span><span class="line"><span class="cl">	start
+</span></span><span class="line"><span class="cl">	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="八-ssh服务">八、 ssh服务</h3>
+<h4 id="1-ssh介绍">1. ssh介绍</h4>
+<figure><a class="lightgallery" href="/images/linux/ssh%e4%bb%8b%e7%bb%8d.jpg" title="/images/linux/ssh介绍.jpg" data-thumbnail="/images/linux/ssh介绍.jpg" data-sub-html="<h2>ssh介绍</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/ssh%e4%bb%8b%e7%bb%8d.jpg"
+            data-srcset="/images/linux/ssh%e4%bb%8b%e7%bb%8d.jpg, /images/linux/ssh%e4%bb%8b%e7%bb%8d.jpg 1.5x, /images/linux/ssh%e4%bb%8b%e7%bb%8d.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/ssh介绍.jpg" />
+    </a><figcaption class="image-caption">ssh介绍</figcaption>
+    </figure>
+<h4 id="2-ssh版本">2. ssh版本</h4>
+<figure><a class="lightgallery" href="/images/linux/ssh%e7%89%88%e6%9c%ac.png" title="/images/linux/ssh版本.png" data-thumbnail="/images/linux/ssh版本.png" data-sub-html="<h2>ssh版本</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/ssh%e7%89%88%e6%9c%ac.png"
+            data-srcset="/images/linux/ssh%e7%89%88%e6%9c%ac.png, /images/linux/ssh%e7%89%88%e6%9c%ac.png 1.5x, /images/linux/ssh%e7%89%88%e6%9c%ac.png 2x"
+            data-sizes="auto"
+            alt="/images/linux/ssh版本.png" />
+    </a><figcaption class="image-caption">ssh版本</figcaption>
+    </figure>
+<h4 id="3-ssh远程登录">3. ssh远程登录</h4>
+<figure><a class="lightgallery" href="/images/linux/ssh%e8%bf%9c%e7%a8%8b%e7%99%bb%e5%bd%95.jpg" title="/images/linux/ssh远程登录.jpg" data-thumbnail="/images/linux/ssh远程登录.jpg" data-sub-html="<h2>ssh远程登录</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/ssh%e8%bf%9c%e7%a8%8b%e7%99%bb%e5%bd%95.jpg"
+            data-srcset="/images/linux/ssh%e8%bf%9c%e7%a8%8b%e7%99%bb%e5%bd%95.jpg, /images/linux/ssh%e8%bf%9c%e7%a8%8b%e7%99%bb%e5%bd%95.jpg 1.5x, /images/linux/ssh%e8%bf%9c%e7%a8%8b%e7%99%bb%e5%bd%95.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/ssh远程登录.jpg" />
+    </a><figcaption class="image-caption">ssh远程登录</figcaption>
+    </figure>
+<h4 id="4-文件上传和下载">4. 文件上传和下载</h4>
+<figure><a class="lightgallery" href="/images/linux/%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6.jpg" title="/images/linux/上传文件.jpg" data-thumbnail="/images/linux/上传文件.jpg" data-sub-html="<h2>服务的分类</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6.jpg"
+            data-srcset="/images/linux/%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6.jpg, /images/linux/%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6.jpg 1.5x, /images/linux/%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/上传文件.jpg" />
+    </a><figcaption class="image-caption">服务的分类</figcaption>
+    </figure>
+<h3 id="九-shell">九、 shell</h3>
+<h4 id="1-shell介绍">1. shell介绍</h4>
+<figure><a class="lightgallery" href="/images/linux/shell%e4%bb%8b%e7%bb%8d.jpg" title="/images/linux/shell介绍.jpg" data-thumbnail="/images/linux/shell介绍.jpg" data-sub-html="<h2>shell介绍</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/shell%e4%bb%8b%e7%bb%8d.jpg"
+            data-srcset="/images/linux/shell%e4%bb%8b%e7%bb%8d.jpg, /images/linux/shell%e4%bb%8b%e7%bb%8d.jpg 1.5x, /images/linux/shell%e4%bb%8b%e7%bb%8d.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/shell介绍.jpg" />
+    </a><figcaption class="image-caption">shell介绍</figcaption>
+    </figure>
+<h4 id="2-shell的类型">2. shell的类型</h4>
+<figure><a class="lightgallery" href="/images/linux/shell%e7%9a%84%e5%88%86%e7%b1%bb.jpg" title="/images/linux/shell的分类.jpg" data-thumbnail="/images/linux/shell的分类.jpg" data-sub-html="<h2>shell的分类</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/shell%e7%9a%84%e5%88%86%e7%b1%bb.jpg"
+            data-srcset="/images/linux/shell%e7%9a%84%e5%88%86%e7%b1%bb.jpg, /images/linux/shell%e7%9a%84%e5%88%86%e7%b1%bb.jpg 1.5x, /images/linux/shell%e7%9a%84%e5%88%86%e7%b1%bb.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/shell的分类.jpg" />
+    </a><figcaption class="image-caption">shell的分类</figcaption>
+    </figure>
+<h4 id="3-bash特性">3. bash特性</h4>
+<figure><a class="lightgallery" href="/images/linux/shell-bash%e5%8a%9f%e8%83%bd.jpg" title="/images/linux/shell-bash功能.jpg" data-thumbnail="/images/linux/shell-bash功能.jpg" data-sub-html="<h2>shell-bash功能</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/shell-bash%e5%8a%9f%e8%83%bd.jpg"
+            data-srcset="/images/linux/shell-bash%e5%8a%9f%e8%83%bd.jpg, /images/linux/shell-bash%e5%8a%9f%e8%83%bd.jpg 1.5x, /images/linux/shell-bash%e5%8a%9f%e8%83%bd.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/shell-bash功能.jpg" />
+    </a><figcaption class="image-caption">shell-bash功能</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/images/linux/shell%e9%80%9a%e9%85%8d%e7%ac%a6.jpg" title="/images/linux/shell通配符.jpg" data-thumbnail="/images/linux/shell通配符.jpg" data-sub-html="<h2>shell通配符</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/shell%e9%80%9a%e9%85%8d%e7%ac%a6.jpg"
+            data-srcset="/images/linux/shell%e9%80%9a%e9%85%8d%e7%ac%a6.jpg, /images/linux/shell%e9%80%9a%e9%85%8d%e7%ac%a6.jpg 1.5x, /images/linux/shell%e9%80%9a%e9%85%8d%e7%ac%a6.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/shell通配符.jpg" />
+    </a><figcaption class="image-caption">shell通配符</figcaption>
+    </figure>
+<h5 id="别名">别名</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">alias chm=&#39;cd /home&#39;
+</span></span><span class="line"><span class="cl">将命令封装为chm，使用chm可直接打开home目录
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="通配符">通配符</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">ls *
+</span></span><span class="line"><span class="cl">ls l*
+</span></span><span class="line"><span class="cl">-------
+</span></span><span class="line"><span class="cl">ls l?
+</span></span><span class="line"><span class="cl">ls ??
+</span></span><span class="line"><span class="cl">-------
+</span></span><span class="line"><span class="cl">ls l[abcd]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4-变量">4. 变量</h4>
+<figure><a class="lightgallery" href="/images/linux/%e5%8f%98%e9%87%8f.jpg" title="/images/linux/变量.jpg" data-thumbnail="/images/linux/变量.jpg" data-sub-html="<h2>变量</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e5%8f%98%e9%87%8f.jpg"
+            data-srcset="/images/linux/%e5%8f%98%e9%87%8f.jpg, /images/linux/%e5%8f%98%e9%87%8f.jpg 1.5x, /images/linux/%e5%8f%98%e9%87%8f.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/变量.jpg" />
+    </a><figcaption class="image-caption">变量</figcaption>
+    </figure>
+<h4 id="5-脚本">5. 脚本</h4>
+<figure><a class="lightgallery" href="/images/linux/%e8%84%9a%e6%9c%ac.jpg" title="/images/linux/脚本.jpg" data-thumbnail="/images/linux/脚本.jpg" data-sub-html="<h2>脚本</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/linux/%e8%84%9a%e6%9c%ac.jpg"
+            data-srcset="/images/linux/%e8%84%9a%e6%9c%ac.jpg, /images/linux/%e8%84%9a%e6%9c%ac.jpg 1.5x, /images/linux/%e8%84%9a%e6%9c%ac.jpg 2x"
+            data-sizes="auto"
+            alt="/images/linux/脚本.jpg" />
+    </a><figcaption class="image-caption">脚本</figcaption>
+    </figure>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/linux/linux/" data-title="linux - 基础命令" data-hashtags="linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/linux/linux/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/linux/linux/" data-title="linux - 基础命令"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/linux/linux/" data-title="linux - 基础命令"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/linux/linux/" data-title="linux - 基础命令"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/linux/linux_installer/" class="prev" rel="prev" title="linux - 软件安装"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>linux - 软件安装</a>
+            <a href="/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="next" rel="next" title="go语言设计与实现">go语言设计与实现<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

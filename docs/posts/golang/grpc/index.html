@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="grpc开源框架 简介 1 2 3 a. 传输协会http 2.0 b. 采用protobuffer传输消息 c. 具备四种传输模式 http版本特性 1 2 3 4 5 6 7 8 9 10 11 12" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/golang/grpc/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="grpc开源框架 简介 1 2 3 a. 传输协会http 2.0 b. 采用protobuffer传输消息 c. 具备四种传输模式 http版本特性 1 2 3 4 5 6 7 8 9 10 11 12"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/golang/grpc/" /><link rel="prev" href="http://example.org/posts/http/%E4%B8%80%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%88%9D%E8%AF%86%E7%AF%87/" /><link rel="next" href="http://example.org/posts/golang/go%E5%BE%AE%E6%9C%8D%E5%8A%A11/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/golang\/grpc\/"
+        },"genre": "posts","wordcount":  2221 ,
+        "url": "http:\/\/example.org\/posts\/golang\/grpc\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2221 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#grpc开源框架">grpc开源框架</a></li>
+    <li><a href="#一编译器安装">一、编译器安装</a></li>
+    <li><a href="#二proto">二、proto</a>
+      <ul>
+        <li><a href="#创建proto文件">创建proto文件</a></li>
+        <li><a href="#编写proto文件">编写proto文件</a></li>
+        <li><a href="#编译proto">编译proto</a></li>
+        <li><a href="#proto语法">proto语法</a></li>
+      </ul>
+    </li>
+    <li><a href="#三grpc代码实现">三、grpc代码实现</a>
+      <ul>
+        <li><a href="#服务端代码实现">服务端代码实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#四grpc-ui">四、grpc-UI</a>
+      <ul>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#基本命令">基本命令</a></li>
+        <li><a href="#四种传输方式的请求">四种传输方式的请求</a>
+          <ul>
+            <li><a href="#requsert-form">requsert form</a></li>
+            <li><a href="#json">json</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="grpc开源框架">grpc开源框架</h2>
+<ul>
+<li>
+<p>简介</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">a. 传输协会http 2.0 
+</span></span><span class="line"><span class="cl">b. 采用protobuffer传输消息
+</span></span><span class="line"><span class="cl">c. 具备四种传输模式
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>http版本特性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">http 1.0：提供长连接，请求回应的模式
+</span></span><span class="line"><span class="cl">	短连接：一次连接只能发送一个请求；每个请求都要进行三次握手和四次挥手
+</span></span><span class="line"><span class="cl">	长连接（发送ack包）：一次连接可以发送多个请求；请求为同步请求，阻塞后影响效果
+</span></span><span class="line"><span class="cl">http 1.1：
+</span></span><span class="line"><span class="cl">	piperline:一次连接并发多个请求；请求按顺序返回
+</span></span><span class="line"><span class="cl">http 2.0 ：
+</span></span><span class="line"><span class="cl">	stream: 乱序发送,乱序接收
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http 具备安全连接机制：
+</span></span><span class="line"><span class="cl">	a. ssl:
+</span></span><span class="line"><span class="cl">	b. tls:
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>protobuffer</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">跨语言
+</span></span><span class="line"><span class="cl">数据流小：传输时，只把value进行压缩传输
+</span></span><span class="line"><span class="cl">数据压缩快：
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>grpc service API</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1. unary api  一元普通模式
+</span></span><span class="line"><span class="cl">		：	一个请求一个响应
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.client stream api  客户端流模式
+</span></span><span class="line"><span class="cl">		：	多个请求一个响应，客户端任务繁重时使用
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3.server stream api 服务端流
+</span></span><span class="line"><span class="cl">		：	一个请求多个响应，客户端任务繁重时使用
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4.bidirectional stream api  双端流
+</span></span><span class="line"><span class="cl">		：	多个请求多个响应
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="一编译器安装">一、编译器安装</h2>
+<ul>
+<li>
+<p>安装proto文件编译器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"> <span class="k">go</span> <span class="nx">install</span> <span class="nx">google</span><span class="p">.</span><span class="nx">golang</span><span class="p">.</span><span class="nx">org</span><span class="o">/</span><span class="nx">protobuf</span><span class="o">/</span><span class="nx">cmd</span><span class="o">/</span><span class="nx">protoc</span><span class="o">-</span><span class="nx">gen</span><span class="o">-</span><span class="k">go</span><span class="err">@</span><span class="nx">v1</span><span class="mf">.26</span>
+</span></span><span class="line"><span class="cl"> <span class="k">go</span> <span class="nx">install</span> <span class="nx">google</span><span class="p">.</span><span class="nx">golang</span><span class="p">.</span><span class="nx">org</span><span class="o">/</span><span class="nx">grpc</span><span class="o">/</span><span class="nx">cmd</span><span class="o">/</span><span class="nx">protoc</span><span class="o">-</span><span class="nx">gen</span><span class="o">-</span><span class="k">go</span><span class="o">-</span><span class="nx">grpc</span><span class="err">@</span><span class="nx">v1</span><span class="mf">.1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>tips:安装完后默认存储到gopath里的bin目录下</p>
+</li>
+<li>
+<p>安装golangProto文件识别插件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">打开goland编译器，打开插件搜索protocol buffers 点击安装
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装grpc包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">go</span> <span class="nx">get</span> <span class="nx">google</span><span class="p">.</span><span class="nx">golang</span><span class="p">.</span><span class="nx">org</span><span class="o">/</span><span class="nx">grpc</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>tpis:建议使用go mod tidy</p>
+</li>
+</ul>
+<h2 id="二proto">二、proto</h2>
+<h3 id="创建proto文件">创建proto文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">在goland文件中创建file类型文件后缀为.proto
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="编写proto文件">编写proto文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="n">syntax</span> <span class="o">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">option</span> <span class="n">go_package</span> <span class="o">=</span> <span class="s">&#34;./;admin&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kn">package</span> <span class="nn">admin</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//-------------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span>  <span class="nc">HelloReq</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="kt">string</span> <span class="n">Name</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">HelloRes</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="kt">string</span> <span class="n">Order</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">service</span> <span class="n">Hello</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="k">rpc</span> <span class="n">GET</span><span class="p">(</span><span class="n">HelloReq</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">HelloRes</span><span class="p">){}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="编译proto">编译proto</h3>
+<ul>
+<li>
+<p>方式一：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">protoc</span> <span class="o">--</span><span class="nx">go_out</span><span class="p">=.</span> <span class="o">--</span><span class="nx">go_opt</span><span class="p">=</span><span class="nx">paths</span><span class="p">=</span><span class="nx">source_relative</span>    <span class="o">--</span><span class="k">go</span><span class="o">-</span><span class="nx">grpc_out</span><span class="p">=.</span> <span class="o">--</span><span class="k">go</span><span class="o">-</span><span class="nx">grpc_opt</span><span class="p">=</span><span class="nx">paths</span><span class="p">=</span><span class="nx">source_relative</span>     <span class="p">[</span><span class="nx">proto</span><span class="err">文件路径</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>tips:  1. 使用后会在目标文件下生成pb.gp和grpc.pb.go文件</p>
+<p>​	      2. massge放在pb文件内；server和client放在grpc文件内</p>
+<ol start="3">
+<li>
+<p>这种方式在服务实现时，必须在结构体内嵌入Unimplemented才算实现了接口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Admin</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">person</span><span class="p">.</span><span class="nx">UnimplementedPersonServer</span>   
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+<li>
+<p>方式二：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> protoc --go_out=plugins=grpc:. [proto文件]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>tips：1. 在proto文件目录下执行命令，会在当前目录下生成一个pb.go文件</p>
+<p>​		   2. massge与server和client放在一个文件内</p>
+</li>
+<li>
+<p>proto生成对应的主要代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HelloReq</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">state</span>         <span class="nx">protoimpl</span><span class="p">.</span><span class="nx">MessageState</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sizeCache</span>     <span class="nx">protoimpl</span><span class="p">.</span><span class="nx">SizeCache</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">unknownFields</span> <span class="nx">protoimpl</span><span class="p">.</span><span class="nx">UnknownFields</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span> <span class="kt">string</span> <span class="s">`protobuf:&#34;bytes,1,opt,name=Name,proto3&#34; json:&#34;Name,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HelloClient</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">GET</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">in</span> <span class="o">*</span><span class="nx">HelloReq</span><span class="p">,</span> <span class="nx">opts</span> <span class="o">...</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">CallOption</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">HelloRes</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">helloClient</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">cc</span> <span class="nx">grpc</span><span class="p">.</span><span class="nx">ClientConnInterface</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewHelloClient</span><span class="p">(</span><span class="nx">cc</span> <span class="nx">grpc</span><span class="p">.</span><span class="nx">ClientConnInterface</span><span class="p">)</span> <span class="nx">HelloClient</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">helloClient</span><span class="p">{</span><span class="nx">cc</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">helloClient</span><span class="p">)</span> <span class="nf">GET</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">in</span> <span class="o">*</span><span class="nx">HelloReq</span><span class="p">,</span> <span class="nx">opts</span> <span class="o">...</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">CallOption</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">HelloRes</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">out</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">HelloRes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">cc</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;/admin.Hello/GET&#34;</span><span class="p">,</span> <span class="nx">in</span><span class="p">,</span> <span class="nx">out</span><span class="p">,</span> <span class="nx">opts</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">out</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HelloServer</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">GET</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="o">*</span><span class="nx">HelloReq</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">HelloRes</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">mustEmbedUnimplementedHelloServer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// UnimplementedHelloServer must be embedded to have forward compatible implementations.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">UnimplementedHelloServer</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">UnimplementedHelloServer</span><span class="p">)</span> <span class="nf">GET</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="o">*</span><span class="nx">HelloReq</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">HelloRes</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">status</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="nx">codes</span><span class="p">.</span><span class="nx">Unimplemented</span><span class="p">,</span> <span class="s">&#34;method GET not implemented&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="proto语法">proto语法</h3>
+<ul>
+<li>
+<p>官网语法地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">https://developers.google.com/protocol-buffers/docs/proto3
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>语法演示</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="c1">//--------------------------声明---------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="n">syntax</span> <span class="o">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span>                         <span class="c1">// 向编译器声明语法版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">option</span> <span class="n">go_package</span> <span class="o">=</span> <span class="s">&#34;./;admin&#34;</span><span class="p">;</span>   <span class="c1">//admin表示包名；需求放在admin文件夹下，否则报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kn">package</span> <span class="nn">admin</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//----------------------------结构体------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">多行注释
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>   <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//------数据类型-----
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">User</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="kt">string</span> <span class="n">query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>         <span class="c1">// 字段值可传一个或者不传；编号用在二进制消息格式中区分字段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">string</span> <span class="n">Name</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">bool</span>  <span class="n">x10</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">double</span> <span class="n">id</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">float</span> <span class="n">x0</span><span class="o">=</span><span class="mi">9</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">bytes</span> <span class="n">x11</span><span class="o">=</span><span class="mi">11</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">int32</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">int64</span>  <span class="n">x2</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">uint32</span> <span class="n">x1</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">uint64</span> <span class="n">x3</span><span class="o">=</span><span class="mi">6</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">sint32</span> <span class="n">x4</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">sint64</span> <span class="n">x5</span><span class="o">=</span><span class="mi">8</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//-------数据结构-----
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">person</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="k">repeated</span> <span class="kt">string</span> <span class="n">ary</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span>       <span class="c1">//数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">map_S</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>	<span class="c1">//地图
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">enum</span> <span class="n">SEX</span><span class="p">{</span>                    <span class="c1">//枚举全部大写，必须0开始
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  	<span class="n">MAN</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  	<span class="n">WOMAN</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  	<span class="n">OTHER</span> <span class="o">=</span><span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="n">SEX</span> <span class="n">sex</span> <span class="o">=</span><span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//----------嵌套类型------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">Test</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="n">user</span><span class="p">&gt;</span> <span class="n">map_user</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="k">repeated</span> <span class="n">user</span> <span class="n">user_ary</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="kd">message</span> <span class="nc">V</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">name</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">V</span> <span class="n">v</span><span class="o">=</span><span class="mi">3</span><span class="err">；</span>   <span class="c1">//使用嵌套结构体V;结构体与名称不能相同；
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//-------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">save_key</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>	<span class="n">reserved</span> <span class="s">&#34;key1&#34;</span><span class="p">,</span><span class="s">&#34;key2&#34;</span><span class="err">；</span><span class="c1">//保留key值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">reserved</span> <span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">;</span>       <span class="c1">//保留唯一标识
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//----------------------------服务端四种传输方式---------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">service</span> <span class="n">Person</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="k">rpc</span> <span class="n">serch</span><span class="p">(</span><span class="n">personRequest</span><span class="p">)</span> <span class="k">returns</span><span class="p">(</span><span class="n">personRely</span><span class="p">){}</span>  <span class="c1">//即可响应
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">rpc</span> <span class="n">serchin</span><span class="p">(</span><span class="n">stream</span> <span class="n">personRequest</span><span class="p">)</span> <span class="k">returns</span><span class="p">(</span><span class="n">personRely</span><span class="p">){}</span> <span class="c1">//入参为流
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">rpc</span> <span class="n">serchout</span><span class="p">(</span><span class="n">personRequest</span><span class="p">)</span> <span class="k">returns</span><span class="p">(</span><span class="n">stream</span> <span class="n">personRely</span><span class="p">){}</span> <span class="c1">//出参为流
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">rpc</span> <span class="n">serchio</span><span class="p">(</span><span class="n">stream</span> <span class="n">personRequest</span><span class="p">)</span> <span class="k">returns</span><span class="p">(</span><span class="n">stream</span> <span class="n">personRely</span><span class="p">){}</span> <span class="c1">//双向流
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">//----------------------------消息体------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">loginRequest</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">loginReply</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="三grpc代码实现">三、grpc代码实现</h2>
+<h3 id="服务端代码实现">服务端代码实现</h3>
+<ul>
+<li>
+<p>代码实现步骤</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">server端实现
+</span></span><span class="line"><span class="cl">- 实现步骤
+</span></span><span class="line"><span class="cl">  1. 服务实现
+</span></span><span class="line"><span class="cl">  2. 创建监听套接字
+</span></span><span class="line"><span class="cl">  3. 创建服务端
+</span></span><span class="line"><span class="cl">  4. 注册服务
+</span></span><span class="line"><span class="cl">  5. 启动服务端
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//2.创建套接字监听
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">listen</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">Listen</span><span class="p">(</span><span class="s">&#34;tcp&#34;</span><span class="p">,</span> <span class="s">&#34;127.0.0.1:8080&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//3.创建服务端
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">server</span><span class="o">:=</span><span class="nx">grpc</span><span class="p">.</span><span class="nf">NewServer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//4.注册服务：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">person</span><span class="p">.</span><span class="nf">RegisterPersonServer</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span><span class="nx">admin</span><span class="p">.</span><span class="nx">Admin</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">person</span><span class="p">.</span><span class="nf">RegisterAdminServer</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span><span class="nx">P</span><span class="p">.</span><span class="nx">P</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">reflection</span><span class="p">.</span><span class="nf">Register</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>   <span class="c1">//配合grpcUI使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//5.启动服务端：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">err</span><span class="p">=</span> <span class="nx">server</span><span class="p">.</span><span class="nf">Serve</span><span class="p">(</span><span class="nx">listen</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>官方服务端实现实例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_server/main.go
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="四grpc-ui">四、grpc-UI</h2>
+<ul>
+<li>
+<p>官网</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">https://github.com/fullstorydev/grpcui
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="安装">安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>下载成功后会在gopath的bin目录下生成grpcui的可执行程序</li>
+</ul>
+<h3 id="基本命令">基本命令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">grpcui -help    //表示安装成功
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">grpcui -plaintext localhost:12345    //启动grpc客户端进行grpc调用测试
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="四种传输方式的请求">四种传输方式的请求</h3>
+<h4 id="requsert-form">requsert form</h4>
+<ul>
+<li>
+<p>即可响应</p>
+<ul>
+<li>
+<p>request Data</p>
+<p>输入一个请求对象的参数</p>
+</li>
+<li>
+<p>response</p>
+<p>返回一个响应对象</p>
+</li>
+</ul>
+</li>
+<li>
+<p>入参为流</p>
+<ul>
+<li>
+<p>request Data</p>
+<p>点击request data 中的add item按钮，添加多个对象，多个对象按一次请求发送（后端需要for接收recv对象，当出错时就传输完成了）</p>
+</li>
+<li>
+<p>response</p>
+<p>返回一个响应对象</p>
+</li>
+</ul>
+</li>
+<li>
+<p>出参为流</p>
+<ul>
+<li>
+<p>request Data</p>
+<p>输入一个请求对象的参数</p>
+</li>
+<li>
+<p>response</p>
+<p>返回多个对象（后端需要for来返回send对象，当一个对象返回结束后，给出一个提示继续返回下一个对象）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>出入均为流</p>
+</li>
+</ul>
+<h4 id="json">json</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">在处理具有流请求的 RPC 时，JSON 数据将是一个 JSON 数组，其中每个元素都是流中的一条消息。
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/golang/grpc/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/golang/grpc/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/golang/grpc/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/golang/grpc/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/golang/grpc/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/http/%E4%B8%80%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%88%9D%E8%AF%86%E7%AF%87/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/golang/go%E5%BE%AE%E6%9C%8D%E5%8A%A11/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

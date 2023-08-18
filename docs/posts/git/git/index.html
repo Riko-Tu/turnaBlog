@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="git .gitignore 文件 有时一些文件最好不要用 Git 去查。这通常是在不知名.gitignore的特殊文件中完成。你可以在github.com/github/gi" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/git/git/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="git .gitignore 文件 有时一些文件最好不要用 Git 去查。这通常是在不知名.gitignore的特殊文件中完成。你可以在github.com/github/gi"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/git/git/" /><link rel="prev" href="http://example.org/posts/golang/go%E5%9F%BA%E7%A1%80%E8%BE%83%E8%AF%A6%E7%BB%86/" /><link rel="next" href="http://example.org/posts/docker/docker/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/git\/git\/"
+        },"genre": "posts","wordcount":  1976 ,
+        "url": "http:\/\/example.org\/posts\/git\/git\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1976 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gitignore-文件">.gitignore 文件</a></li>
+    <li><a href="#配置">配置</a>
+      <ul>
+        <li><a href="#初始化git">初始化git</a></li>
+      </ul>
+    </li>
+    <li><a href="#创建仓库">创建仓库</a></li>
+    <li><a href="#分支">分支</a></li>
+    <li><a href="#进行更改">进行更改</a></li>
+    <li><a href="#重做提交">重做提交</a></li>
+    <li><a href="#同步更改">同步更改</a></li>
+    <li><a href="#术语表">术语表</a></li>
+    <li><a href="#本地">本地</a></li>
+    <li><a href="#分支-1">分支</a>
+      <ul>
+        <li><a href="#创建分支">创建分支</a></li>
+        <li><a href="#查看本库已有分支">查看本库已有分支</a></li>
+        <li><a href="#切换分支">切换分支</a></li>
+        <li><a href="#合并分支">合并分支</a></li>
+        <li><a href="#合并分支冲突">合并分支冲突</a></li>
+        <li><a href="#更改分支名">更改分支名</a></li>
+      </ul>
+    </li>
+    <li><a href="#远程库">远程库</a>
+      <ul>
+        <li><a href="#连接">连接</a></li>
+        <li><a href="#查看已连接">查看已连接</a></li>
+        <li><a href="#推送">推送</a></li>
+        <li><a href="#强制推送">强制推送</a></li>
+        <li><a href="#rebase拉取">rebase拉取</a></li>
+        <li><a href="#克隆本地">克隆本地</a></li>
+        <li><a href="#拉取代码分步操作">拉取代码：分步操作</a></li>
+        <li><a href="#拉取代码直接合并">拉取代码：直接合并</a></li>
+        <li><a href="#origin-branch修改时">origin branch修改时</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="git">git</h1>
+<h2 id="gitignore-文件">.gitignore 文件</h2>
+<p>有时一些文件最好不要用 Git 去查。这通常是在不知名<code>.gitignore</code>的特殊文件中完成。你可以在<a href="https://github.com/github/gitignore" target="_blank" rel="noopener noreffer ">github.com/github/gitignore</a>找到<a href="https://github.com/github/gitignore" target="_blank" rel="noopener noreffer ">细节</a>的<code>.gitignore</code>文件模板。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">需要特别注意的是：
+</span></span><span class="line"><span class="cl">1）.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。
+</span></span><span class="line"><span class="cl">2）想要.gitignore起作用，必须要在这些文件不在暂存区中才可以，.gitignore文件只是忽略没有被staged(cached)文件，
+</span></span><span class="line"><span class="cl">  ``对于已经被staged文件，加入ignore文件时一定要先从staged移除，才可以忽略。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置">配置</h2>
+<p>对所有本地仓库的用户信息进行配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git config --global user.name &#34;[name]&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对你的提交操作设置关联的用户名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git config --global user.email &#34;[email address]&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对你的提交操作设置关联的邮箱地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git config --global color.ui auto
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以有帮助的彩色液晶输出</p>
+<h3 id="初始化git">初始化git</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rm -r --cached .     //清除git所有缓存
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="创建仓库">创建仓库</h2>
+<p>当某物于一个新的仓库时，你很相似一次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在使用过<code>git init</code>命令后，使用以下命令将本地仓库与一个 GitHub 上的空仓库连接起来：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git remote add origin [url]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将现有目录转换为一个 Git 仓库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git clone [url]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>克隆（下载）一个已在 GitHub 上的仓库，包括所有的文件、分支和提交（提交）</p>
+<h2 id="分支">分支</h2>
+<p>分支是使用 Git 工作的一个部分<code>git status</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git branch [branch-name]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建一个新分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git switch -c [branch-name]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>切换到分支指定并更新工作目录（工作目录）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git merge [branch]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将指定分支的历史合并到当前分支。这通常在拉取请求（PR）中完成，但也是一个重要的 Git 操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git branch -d [branch-name]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除指定分支</p>
+<h2 id="进行更改">进行更改</h2>
+<p>浏览并检查项目文件的发展</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当前版本的历史版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git log --follow [file]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>过去文件的版本历史，包括重例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git diff [first-branch]...[second-branch]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>展示两个分支的内容千差万别</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git show [commit]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出指定提交的元数据和内容变化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git add [file]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将文件进行处理用于版本控制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git commit -m &#34;[descriptive message]&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将文件时刻地记录在历史中</p>
+<h2 id="重做提交">重做提交</h2>
+<p>清除错误和构建用于替换的历史</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git reset [commit]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>撤销所有<code>[commit]</code>后的提交，在本地保存更改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git reset --hard [commit]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>放弃所有历史，改回指定提交。</p>
+<blockquote>
+<p>小心！更改历史可能会带来不良后果。如果您需要更改 GitHub（谨慎）已提交的，请操作。如果您需要帮助，可访问<a href="https://github.community/" target="_blank" rel="noopener noreffer ">github.community</a>或联系支持（支持）。</p>
+</blockquote>
+<h2 id="同步更改">同步更改</h2>
+<p>将你本地收藏与GitHub.com 上的远端同步</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git fetch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下载远端追踪的所有历史</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git merge
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将远端分支合并到当前局部分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git pull
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将所有本地分支提交上传到 GitHub</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用来自GitHub上的对应远端分支的所有新提交更新你当前的本地工作分支。<code>git pull</code>的英文<code>git fetch</code>状语从句：<code>git merge</code>的结合</p>
+<h2 id="术语表">术语表</h2>
+<ul>
+<li><strong>git</strong> : 一个开源的发行版本控制系统</li>
+<li><strong>GitHub</strong> : 一个和协作管理 Git 仓库的平台</li>
+<li><strong>commit 提交</strong>: 一个 Git 对象是你整个仓库的散光值</li>
+<li><strong>分支分支</strong>：一个较轻的可移动的提交<strong>分支</strong></li>
+<li><strong>clone</strong> : 一个仓库的本地版本，包含所有提交和分支</li>
+<li><strong>远程远端</strong>：一个 GitHub 上的公共仓库，所有小组成员通过它来交换修改</li>
+<li><strong>fork</strong> : 一个另一个用户的 GitHub 上的仓库的副本</li>
+<li><strong>拉取请求</strong>：为了更好地和讨论上引入的差异，且具有验证、评论、集成测试等功能的地方的</li>
+<li><strong>HEAD</strong>：代表你当前的工作目录。使用<code>git checkout</code>可移动 HEAD 提交到不同的分支、标记（标签）或</li>
+</ul>
+<h2 id="本地">本地</h2>
+<ul>
+<li>
+<p>版本切换</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> git reset --hard HEAD^        //head^   head^^    也是可把head改成commit号
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="分支-1">分支</h2>
+<h3 id="创建分支">创建分支</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git branch  [分支名] 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看本库已有分支">查看本库已有分支</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git branch -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="切换分支">切换分支</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git checkout [分支名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="合并分支">合并分支</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git merge [要合并过来的分支名]           //切换到接受的分支执行         
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="合并分支冲突">合并分支冲突</h3>
+<ul>
+<li>当两个分支的同一个文件同一处被修改后，合并两分支会产生冲突</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">第一步：打开产生冲突的文件
+</span></span><span class="line"><span class="cl">第二部：将冲突标记符号删除(此时可以直接保存提交)，并将文件修改到不产生冲突为止，保存退出
+</span></span><span class="line"><span class="cl">第三步：git  add .      （add添加到暂存区）
+</span></span><span class="line"><span class="cl">第四部： git commit -m &#34;日志信息&#34;   （添加到本地库）
+</span></span><span class="line"><span class="cl">第五步： git merge [分支名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="更改分支名">更改分支名</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git branch -m [原分支名] [新分支名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="远程库">远程库</h2>
+<h3 id="连接">连接</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git remote add [仓库地址别名]  仓库地址
+</span></span><span class="line"><span class="cl">实例:git remote add origin git@github.com:Riko-Tu/test.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看已连接">查看已连接</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git remote -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="推送">推送</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git push [仓库地址别名] [仓库的分支]
+</span></span><span class="line"><span class="cl">tip:
+</span></span><span class="line"><span class="cl">	1.该命令需要将推送用户邀请进入仓库团队后才可使用
+</span></span><span class="line"><span class="cl">	2.如果仓库不存在该分支，则会在远程库自动创建该分支
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="强制推送">强制推送</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git push origin master -f       //f表示force
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="rebase拉取">rebase拉取</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git pull --rebase origin master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="克隆本地">克隆本地</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git clone 仓库地址
+</span></span><span class="line"><span class="cl">作用：
+</span></span><span class="line"><span class="cl">	1.自动创建origin的远程库别名
+</span></span><span class="line"><span class="cl">	2.自动初始化为本地库
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="拉取代码分步操作">拉取代码：分步操作</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git fetch [远程仓库] [分支名]   //将远程代码拉取到本地，但不合并本地的代码
+</span></span><span class="line"><span class="cl">git checkout [远程仓库] [分支名]  //切换到拉取下来的代码分支，查看代码内容，如果问题不大可以再合并代码
+</span></span><span class="line"><span class="cl">git merge [远程仓库/分支名]  //将fetch的代码与本地库的代码合并
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="拉取代码直接合并">拉取代码：直接合并</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git pull [远程仓库] [分支名]  //pull  等于fetch +merge
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="origin-branch修改时">origin branch修改时</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">更新本地库的分支名
+</span></span><span class="line"><span class="cl">git branch -m main master
+</span></span><span class="line"><span class="cl">git fetch origin
+</span></span><span class="line"><span class="cl">git branch -u origin/master master
+</span></span><span class="line"><span class="cl">git remote set-head origin -a
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/git/git/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/git/git/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/git/git/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/git/git/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/git/git/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/golang/go%E5%9F%BA%E7%A1%80%E8%BE%83%E8%AF%A6%E7%BB%86/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/docker/docker/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,15 +1,24 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>linux - Category - 我的全新 Hugo 网站</title>
-        <link>http://localhost:1313/categories/linux/</link>
-        <description>linux - Category - 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/linux/" rel="self" type="application/rss+xml" /><item>
-    <title>linux 各种软件安装</title>
-    <link>http://localhost:1313/posts/linux/linux_installer/</link>
+        <title>linux - Category - Turan</title>
+        <link>http://example.org/categories/linux/</link>
+        <description>linux - Category - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>linux - 基础命令</title>
+    <link>http://example.org/posts/linux/linux/</link>
     <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/posts/linux/linux_installer/</guid>
-    <description><![CDATA[这是摘要]]></description>
+    <guid>http://example.org/posts/linux/linux/</guid>
+    <description><![CDATA[linux 一、 虚拟机 1. 概念 虚拟机概念 二、 目录结构 1. 根目录 1 * linux采用单根目录结构（不同于windos使用多根目录） 2. 二级目录 linux二级目录]]></description>
+</item>
+<item>
+    <title>linux - 软件安装</title>
+    <link>http://example.org/posts/linux/linux_installer/</link>
+    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/linux/linux_installer/</guid>
+    <description><![CDATA[docker 与 compose 安装docker 与 compose 请按照以下步骤进行操作： 您可以使用以下命令执行此操作： 1 sudo yum update 安装Docker和Docker Compose的依赖项]]></description>
 </item>
 </channel>
 </rss>

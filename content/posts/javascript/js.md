@@ -1,6 +1,6 @@
 ---
 weight: 5
-title: "javascript 数据结构"
+title: "js - 基本数据结构"
 date: 2023-08-03T15:19:34+08:00
 draft: false
 tags: [javascript]

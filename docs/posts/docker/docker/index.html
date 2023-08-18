@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="docker docker&#43;微服务&#43;jekins&#43;gitlab&#43;ci/cd 仓库：存储镜像的仓库 镜像：容器的模板，可通过镜像生成多个容器 容器：通过镜像实例" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/docker/docker/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="docker docker&#43;微服务&#43;jekins&#43;gitlab&#43;ci/cd 仓库：存储镜像的仓库 镜像：容器的模板，可通过镜像生成多个容器 容器：通过镜像实例"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/docker/docker/" /><link rel="prev" href="http://example.org/posts/git/git/" /><link rel="next" href="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/docker\/docker\/"
+        },"genre": "posts","wordcount":  1930 ,
+        "url": "http:\/\/example.org\/posts\/docker\/docker\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1930 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker">docker</a>
+      <ul>
+        <li><a href="#一帮助命令">一、帮助命令</a>
+          <ul>
+            <li><a href="#10-版本检测">1.0 版本检测</a></li>
+            <li><a href="#11-查看信息">1.1 查看信息</a></li>
+            <li><a href="#11-查看命令">1.1 查看命令</a></li>
+          </ul>
+        </li>
+        <li><a href="#二镜像命令">二、镜像命令</a>
+          <ul>
+            <li><a href="#10-查看镜像">1.0 查看镜像</a></li>
+            <li><a href="#11-搜索镜像">1.1 搜索镜像</a></li>
+            <li><a href="#12-下载镜像">1.2 下载镜像</a></li>
+            <li><a href="#13-删除镜像">1.3 删除镜像</a></li>
+          </ul>
+        </li>
+        <li><a href="#三容器命令">三、容器命令</a>
+          <ul>
+            <li><a href="#10-启动容器">1.0 启动容器</a></li>
+            <li><a href="#11-查看容器">1.1 查看容器</a></li>
+            <li><a href="#12-退出容器">1.2 退出容器</a></li>
+            <li><a href="#13-启动已有容器">1.3 启动已有容器</a></li>
+            <li><a href="#14-重启容器">1.4 重启容器</a></li>
+            <li><a href="#15-停止容器">1.5 停止容器</a></li>
+            <li><a href="#16-删除容器">1.6 删除容器</a></li>
+            <li><a href="#17-容器日志">1.7 容器日志</a></li>
+            <li><a href="#18-查看容器内进程">1.8 查看容器内进程</a></li>
+            <li><a href="#19-查看容器细节">1.9 查看容器细节</a></li>
+            <li><a href="#20-进入容器">2.0 进入容器</a></li>
+            <li><a href="#21-容器外执行">2.1 容器外执行</a></li>
+            <li><a href="#22-拷贝容器文件">2.2 拷贝容器文件</a></li>
+            <li><a href="#23-生成镜像">2.3 生成镜像</a></li>
+            <li><a href="#重启服务">重启服务</a></li>
+          </ul>
+        </li>
+        <li><a href="#四镜像原理">四、镜像原理</a></li>
+        <li><a href="#五-容器数据卷">五、 容器数据卷</a>
+          <ul>
+            <li><a href="#10-命令数据同步">1.0 命令数据同步</a></li>
+            <li><a href="#11-dockerfile数据同步">1.1 dockerFile数据同步</a></li>
+            <li><a href="#12-容器间传递共享">1.2 容器间传递共享</a></li>
+          </ul>
+        </li>
+        <li><a href="#六dockerfile">六、dockerFile</a>
+          <ul>
+            <li><a href="#10-语法格式">1.0 语法格式</a></li>
+            <li><a href="#11-dockerfile构建过程">1.1 dockerfile构建过程</a></li>
+            <li><a href="#12-保留字指令">1.2 保留字指令</a></li>
+            <li><a href="#13-语法案例">1.3 语法案例</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="docker">docker</h2>
+<p>docker+微服务+jekins+gitlab+ci/cd</p>
+<p>仓库：存储镜像的仓库</p>
+<p>镜像：容器的模板，可通过镜像生成多个容器</p>
+<p>容器：通过镜像实例化出多个容器</p>
+<h3 id="一帮助命令">一、帮助命令</h3>
+<h4 id="10-版本检测">1.0 版本检测</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="11-查看信息">1.1 查看信息</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker info
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="11-查看命令">1.1 查看命令</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker --help
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="二镜像命令">二、镜像命令</h3>
+<h4 id="10-查看镜像">1.0 查看镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker images [param]
+</span></span><span class="line"><span class="cl">	param:	-a 展示所有镜像（含中间层）
+</span></span><span class="line"><span class="cl">			-q 只展示镜像id
+</span></span><span class="line"><span class="cl">			-qa 只展示所有镜像的id
+</span></span><span class="line"><span class="cl">			--digests 显示镜像的摘要信息
+</span></span><span class="line"><span class="cl">			--no-trunc 显示完整的镜像信息（完整的id信息）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="11-搜索镜像">1.1 搜索镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker search [options] [imagesName]
+</span></span><span class="line"><span class="cl">	[options]:   -s [number]  展示收藏数大于number的镜像
+</span></span><span class="line"><span class="cl">				
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="12-下载镜像">1.2 下载镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker pull tomcat   //默认最新版
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="13-删除镜像">1.3 删除镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker rmi [imagesName/ID]   //默认删除最新版
+</span></span><span class="line"><span class="cl">docker rmi [imagesName] [imagesName/ID]  //删除多个
+</span></span><span class="line"><span class="cl">docker rmi -f $(docker images -qa)  //删除全部
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="三容器命令">三、容器命令</h3>
+<h4 id="10-启动容器">1.0 启动容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker run [options] IMAGE [CMD] [arg]
+</span></span><span class="line"><span class="cl">	[options]:  --name=&#34;容器新名字&#34;：为容器指定一个名称
+</span></span><span class="line"><span class="cl">				-d :后台运行容器，并返回容器id，也即启动守护石容器
+</span></span><span class="line"><span class="cl">				-i:已交互模式运行容器，通常与-t同时使用
+</span></span><span class="line"><span class="cl">				-t:为容器重新分配一个伪输入终端，通常与-i同时使用
+</span></span><span class="line"><span class="cl">				-P:随机端口映射
+</span></span><span class="line"><span class="cl">				-p：指定端口映射，有以下四种格式：
+</span></span><span class="line"><span class="cl">				
+</span></span><span class="line"><span class="cl">docker run -it --name mycentos centoS  //运行centoS,并进入centoS的终端，启动交互式容器	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker run -d centos   //启动守护式容器
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker run -it -p 8888:8080 tomcat // 8888为docker端口，8080是tomcat端口
+</span></span><span class="line"><span class="cl">----------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker start [容器id]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="11-查看容器">1.1 查看容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker ps [param]
+</span></span><span class="line"><span class="cl">	[param]:   -a :列出当前所有正在运行的容器+历史上运行过的
+</span></span><span class="line"><span class="cl">				-l :显示最近创建的容器
+</span></span><span class="line"><span class="cl">				-n :显示最近N个创建的容器
+</span></span><span class="line"><span class="cl">				-q ：静默模式，只显示容器编号
+</span></span><span class="line"><span class="cl">				--no-trunc： 不截断输出
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="12-退出容器">1.2 退出容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">exit  /容器停止并退出
+</span></span><span class="line"><span class="cl">ctrl +P+Q   容器不停止退出
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="13-启动已有容器">1.3 启动已有容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker start [容器id/容器名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="14-重启容器">1.4 重启容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker restart [容器id/容器名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="15-停止容器">1.5 停止容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker stop [容器id/容器名]
+</span></span><span class="line"><span class="cl">docker kill [容器id/容器名]    //强制停止
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="16-删除容器">1.6 删除容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker rm [容器id/容器名]
+</span></span><span class="line"><span class="cl">docker rm -f [容器id/容器名]  //可删除运行中容器
+</span></span><span class="line"><span class="cl">docker rm -f $(docker ps -a -q)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="17-容器日志">1.7 容器日志</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker logs -f -t -tail number [容器名/容器id]
+</span></span><span class="line"><span class="cl">	-t:加入时间戳
+</span></span><span class="line"><span class="cl">	-f:跟随最新的日志打印
+</span></span><span class="line"><span class="cl">	--tail:数字显示最后几条
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="18-查看容器内进程">1.8 查看容器内进程</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker top [容器名/容器id]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="19-查看容器细节">1.9 查看容器细节</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker inspect [容器名/容器id]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="20-进入容器">2.0 进入容器</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker attach [容器名/容器id]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="21-容器外执行">2.1 容器外执行</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker exec -it [容器名/容器id] bashshell
+</span></span><span class="line"><span class="cl">例：
+</span></span><span class="line"><span class="cl">	docker exec -it centos cd /tmp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="22-拷贝容器文件">2.2 拷贝容器文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker cp [容器名/容器id]:[容器文件路径] [当前系统路径]
+</span></span><span class="line"><span class="cl">例：
+</span></span><span class="line"><span class="cl">	docker cp centos:/tmp/yum.log /root
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="23-生成镜像">2.3 生成镜像</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker commit -a=&#34;作者&#34; -m=&#34;描述信息&#34; [容器id] [新镜像名:版本号]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重启服务">重启服务</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service docker restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="四镜像原理">四、镜像原理</h3>
+<h3 id="五-容器数据卷">五、 容器数据卷</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">为保存容器的数据，进行持久性开发，共享存储主机与容器之间的数据
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="10-命令数据同步">1.0 命令数据同步</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker run -it -v /主机目录：/容器内目录 镜像id
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker run -it -v /containerData/centosData:/centosData centos
+</span></span><span class="line"><span class="cl">	//容器的文件夹与主机的文件夹变成共享文件夹
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">docker run -it /主机目录:命令:/容器目录 镜像id
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="11-dockerfile数据同步">1.1 dockerFile数据同步</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">a. 编写可执行的dockerfile文件
+</span></span><span class="line"><span class="cl">b. 构建dockerfile成为新的镜像    docker build -f [指定dockerfile文件] -t [ImageName]
+</span></span><span class="line"><span class="cl">c. 可通过docker inspect [容器id] 查看默认与主机相连的共享文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="12-容器间传递共享">1.2 容器间传递共享</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">docker run -it --name [newcontainerName] --volums-from [runningContainerName] [imageName]  //image为两个容器的镜像，通过镜像来启动一个newContainer，newContainer再与runningContainer数据互通
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="六dockerfile">六、dockerFile</h3>
+<h4 id="10-语法格式">1.0 语法格式</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1. 指令必须大写
+</span></span><span class="line"><span class="cl">2. 语法按照从上到下执行
+</span></span><span class="line"><span class="cl">3. #表示注释
+</span></span><span class="line"><span class="cl">4. 每条指令都会创建一个新的镜像层，并对镜像进行提交
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="11-dockerfile构建过程">1.1 dockerfile构建过程</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1. docker 从基础镜像运行一个容器
+</span></span><span class="line"><span class="cl">2. 执行一条指令并对容器做出修改
+</span></span><span class="line"><span class="cl">3. 执行类似docker commit的操作提交一个新的镜像
+</span></span><span class="line"><span class="cl">4. docker再基于刚提交的镜像运行一个新容器
+</span></span><span class="line"><span class="cl">5. 执行dockerfile中的下一条指令直到所有指令都执行完成
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="12-保留字指令">1.2 保留字指令</h4>
+<ul>
+<li>FROM：基础镜像，当前新镜像是基于哪个镜像</li>
+<li>MAINTAINER：镜像维护者的姓名和邮箱地址</li>
+<li>RUN：容器构建是需要运行的命令</li>
+<li>EXPOSE：当前容器对外暴露的端口号</li>
+<li>WORKDIR：指定在创建容器后，默认进入的目录路径</li>
+<li>ENV：用来在构建镜像过程中设置环境变量</li>
+<li>ADD：将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包</li>
+<li>COPY：拷贝文件和目录到镜像中</li>
+<li>VOLUME：容器数据卷，用户数据保存和持久化工作</li>
+<li>CMD：指定一个容器启动时，需要运行的命令（有多个cmd指令时，只有最后一个生效，CMD会被docker run之后的参数替换）</li>
+<li>ENTRYPOINT：指定一个容器启动时，需要运行的命令（追加参数）</li>
+<li>ONBUILD：当构建一个被继承的dockerfile时运行命令，父镜像obnuild会被触发</li>
+</ul>
+<h4 id="13-语法案例">1.3 语法案例</h4>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/docker/docker/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/docker/docker/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/docker/docker/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/docker/docker/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/docker/docker/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/git/git/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

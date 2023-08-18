@@ -1,15 +1,1 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>content - Tag - 我的全新 Hugo 网站</title>
-        <link>http://localhost:1313/tags/content/</link>
-        <description>content - Tag - 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/content/" rel="self" type="application/rss+xml" /><item>
-    <title>主题文档 - 内容</title>
-    <link>http://localhost:1313/posts/mysql/</link>
-    <pubDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</pubDate>
-    <author>Dillon</author>
-    <guid>http://localhost:1313/posts/mysql/</guid>
-    <description><![CDATA[<p>了解如何在 <strong>LoveIt</strong> 主题中快速, 直观地创建和组织内容.</p>]]></description>
-</item>
-</channel>
-</rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>content - Tag - Turan</title><link>http://example.org/tags/content/</link><description>content - Tag - Turan</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor><webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 05 Mar 2020 16:30:05 +0800</lastBuildDate><atom:link href="http://example.org/tags/content/" rel="self" type="application/rss+xml"/><item><title>主题文档 - 内容</title><link>http://example.org/posts/mysql/</link><pubDate>Thu, 05 Mar 2020 16:30:05 +0800</pubDate><author>Dillon</author><guid>http://example.org/posts/mysql/</guid><description>&lt;p>了解如何在 &lt;strong>LoveIt&lt;/strong> 主题中快速, 直观地创建和组织内容.&lt;/p></description></item></channel></rss>

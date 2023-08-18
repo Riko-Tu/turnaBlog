@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="《二》mongoDB&mdash; 基础命令篇 1、 管理角色介绍 权限名 描述 read 允许用户读取指定数据库 readWrite 允许用户读写指定数据库 dbAdmin 允许用户在指定数据库" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="《二》mongoDB&mdash; 基础命令篇 1、 管理角色介绍 权限名 描述 read 允许用户读取指定数据库 readWrite 允许用户读写指定数据库 dbAdmin 允许用户在指定数据库"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" /><link rel="prev" href="http://example.org/posts/docker/docker/" /><link rel="next" href="http://example.org/posts/database/mysqlindex/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/database\/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87\/"
+        },"genre": "posts","wordcount":  3948 ,
+        "url": "http:\/\/example.org\/posts\/database\/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3948 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-管理角色介绍">1、 管理角色介绍</a></li>
+    <li><a href="#2角色操作">2、角色操作</a></li>
+    <li><a href="#heading"></a></li>
+    <li><a href="#3-数据库操作">3、 数据库操作</a></li>
+    <li><a href="#4-集合操作">4、 集合操作</a></li>
+    <li><a href="#5插入文档">5、插入文档</a></li>
+    <li><a href="#6-查询文档">6、 查询文档</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#61-多文档查询">6.1 多文档查询</a></li>
+            <li><a href="#62-查询操作符">6.2 查询操作符</a></li>
+            <li><a href="#63-排序查询">6.3 排序查询</a></li>
+            <li><a href="#64-分页查询">6.4 分页查询</a></li>
+            <li><a href="#65-模糊查询">6.5 模糊查询</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#7-更新文档">7、 更新文档</a>
+      <ul>
+        <li><a href="#71-更新操作符">7.1 更新操作符</a></li>
+        <li><a href="#72-操作符使用">7.2 操作符使用</a></li>
+        <li><a href="#73-upsert-属性">7.3 upsert 属性</a></li>
+        <li><a href="#74-replace-语义">7.4 replace 语义</a></li>
+        <li><a href="#75-findandmodify-命令">7.5 findAndModify 命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#8删除文档">8、删除文档</a>
+      <ul>
+        <li><a href="#81-删除文档">8.1 删除文档</a></li>
+        <li><a href="#82-返回被删除的文档">8.2 返回被删除的文档</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-聚合操作">9 、聚合操作</a>
+      <ul>
+        <li><a href="#91-单一作用聚合">9.1 单一作用聚合</a>
+          <ul>
+            <li><a href="#介绍">介绍</a></li>
+            <li><a href="#使用">使用</a></li>
+          </ul>
+        </li>
+        <li><a href="#92-聚合管道">9.2 聚合管道</a>
+          <ul>
+            <li><a href="#介绍-1">介绍</a></li>
+            <li><a href="#语法">语法</a></li>
+            <li><a href="#使用-1">使用</a></li>
+          </ul>
+        </li>
+        <li><a href="#93-聚合操作符">9.3 聚合操作符</a>
+          <ul>
+            <li><a href="#group">$group</a></li>
+            <li><a href="#unwind">$unwind</a></li>
+          </ul>
+        </li>
+        <li><a href="#94-分组操作符">9.4 分组操作符</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="二mongodb----基础命令篇">《二》mongoDB&mdash; 基础命令篇</h1>
+<h2 id="1-管理角色介绍">1、 管理角色介绍</h2>
+<table>
+<thead>
+<tr>
+<th>权限名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read</td>
+<td>允许用户读取指定数据库</td>
+</tr>
+<tr>
+<td>readWrite</td>
+<td>允许用户读写指定数据库</td>
+</tr>
+<tr>
+<td>dbAdmin</td>
+<td>允许用户在指定数据库中执行管理函数，如素引创建、删除，查看统计或访问system.profile</td>
+</tr>
+<tr>
+<td>dbowner</td>
+<td>允许用户在指定数据库中执行任意操作，增、删、改、查等</td>
+</tr>
+<tr>
+<td>userAdmin</td>
+<td>许用户向systemm.users集合写入，可以在指定数据库里创建、删除和管理用户</td>
+</tr>
+<tr>
+<td>clusterAdmin</td>
+<td>只在admin数据库中可用，赋予用户所有分片和复制集相关函数的管理权限</td>
+</tr>
+<tr>
+<td>readAnyDatabase</td>
+<td>只在admin数据库中可用，赋予用户所有数据库的读权限</td>
+</tr>
+<tr>
+<td>readWriteAnyDatabase</td>
+<td>只在admin数据库中可用，赋了用户所有数据库的读写权限</td>
+</tr>
+<tr>
+<td>userAdminAnyDatabase</td>
+<td>只在admin数据库中可用，赋予用户所有数据库的userAdmin权限</td>
+</tr>
+<tr>
+<td>dbAdminAnyDatabase</td>
+<td>只在admin数据库中可用，予用户所有数据库的dbAdmin权限</td>
+</tr>
+<tr>
+<td>root</td>
+<td>只在admin数据库中可用。招级账号，招级权限</td>
+</tr>
+</tbody>
+</table>
+<p>用户认证，返回1表示认证成功</p>
+<h2 id="2角色操作">2、角色操作</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## 创建角色，root用户必须切换到admin库使用
+</span></span><span class="line"><span class="cl">db.createUser({user:&#39;name&#39;,pwd:&#39;pd&#39;,roles:[&#39;root&#39;]})
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 给指定turan数据库创建用户
+</span></span><span class="line"><span class="cl">use turan;
+</span></span><span class="line"><span class="cl">db.createUser({user:&#39;name&#39;,pwd:&#39;pd&#39;,roles:[&#39;dbOwner&#39;]})
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 指定用户连接指定数据库
+</span></span><span class="line"><span class="cl">mongo --port 27017 -u &#34;name&#34; -p &#34;pd&#34; --authenticationDatabase=turan
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 删除用户
+</span></span><span class="line"><span class="cl">db.system.users.remove({user:&#34;用户名&#34;})
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 查看当前数据库已存在的用户列表
+</span></span><span class="line"><span class="cl">show users
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 查看当前数据库角色列表,可在创建用户时选择这些角色
+</span></span><span class="line"><span class="cl">show roles
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="heading"></h2>
+<h2 id="3-数据库操作">3、 数据库操作</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## 查看所有数据库
+</span></span><span class="line"><span class="cl">show dbs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 切换数据库，不存在时创建
+</span></span><span class="line"><span class="cl">use  test
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 删除当前数据库，使用前先切换到指定数据库
+</span></span><span class="line"><span class="cl">db.dropDatabase()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 查看当前数据库集合
+</span></span><span class="line"><span class="cl">show tables
+</span></span><span class="line"><span class="cl">show collections
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-集合操作">4、 集合操作</h2>
+<ul>
+<li>集合是一个环形链表，环形链表头尾是相连的，当尾部溢出时，会从头部开始覆盖数据；在创建集合时有三个可选参数</li>
+</ul>
+<p>optionse参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>capped</td>
+<td>布尔</td>
+<td>(可选)如果为true，则创建固定集合。固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档。</td>
+</tr>
+<tr>
+<td>size</td>
+<td>数值</td>
+<td>(可选)为固定集合指定一个最大值 (以字节计) 。如果 capped 为 true，也需要指定该字段</td>
+</tr>
+<tr>
+<td>max</td>
+<td>数值</td>
+<td>(可选)指定固定集合中包含文档的最大数量</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>当集合不存在时，向集合中插入文档也会创建集合</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## 创建集合
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 删除集合 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 查看集合信息
+</span></span><span class="line"><span class="cl">db.集合名.stats();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">## 查看集合帮助信息
+</span></span><span class="line"><span class="cl">db.集合名.help();
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5插入文档">5、插入文档</h2>
+<p>必须先切换到指定的数据库，然后再指定集合使用查询api</p>
+<p>use turan  // 使用turan数据库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 插入一条</span>
+</span></span><span class="line"><span class="cl">db.document.insertOne<span class="o">({</span><span class="s2">&#34;test&#34;</span>:<span class="s1">&#39;test&#39;</span><span class="o">}</span>,<span class="o">{</span>writeConcern:1,ordered:true<span class="o">}</span> <span class="o">)</span>
+</span></span><span class="line"><span class="cl">- writeConcern ：默认为1，1表示节点的数量，可选大于1<span class="p">;</span>majority表示写操作被大多数节点写入成功才算成功
+</span></span><span class="line"><span class="cl">- ordered ： 按顺序写入，默认为true；
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 插入多条</span>
+</span></span><span class="line"><span class="cl">db.document.insertMany<span class="o">([{</span><span class="s2">&#34;test&#34;</span>:<span class="s1">&#39;test&#39;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&#34;test&#34;</span>:<span class="s1">&#39;test&#39;</span><span class="o">}])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-查询文档">6、 查询文档</h2>
+<p>可以用find命令对指定的数据进行更新，命令的格式如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">db.document.find(query,projection)     
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>query: 可选，使用查询操作符指定查询条件</li>
+<li>projection:  可选，查询列表</li>
+</ul>
+<h4 id="61-多文档查询">6.1 多文档查询</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 空参数</span>
+</span></span><span class="line"><span class="cl">db.document.find<span class="o">()</span>   一次性最多返回20条，大于时使用it继续获取
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 查询title为qwe的文档，只返回title字段</span>
+</span></span><span class="line"><span class="cl">db.document.find<span class="o">({</span>title:<span class="s1">&#39;qwe&#39;</span><span class="o">}</span>,<span class="o">{</span>title:1<span class="o">})</span>   条件和筛选字段查询
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 使用id查询</span>
+</span></span><span class="line"><span class="cl">db.document.find<span class="o">({</span>_id:ObjectID<span class="o">(</span><span class="s2">&#34;xxxxxxxxxx&#34;</span><span class="o">)})</span>     需要将id值转成objectid
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 查询likenum数大于60的文档，</span>
+</span></span><span class="line"><span class="cl">db.document.find<span class="o">({</span>likeNum:<span class="o">{</span><span class="nv">$gt</span>:60<span class="o">}})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="62-查询操作符">6.2 查询操作符</h4>
+<table>
+<thead>
+<tr>
+<th>SQL</th>
+<th>MQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a=1</td>
+<td>{a: 1}</td>
+</tr>
+<tr>
+<td>a&lt;&gt;1</td>
+<td>{a: {$ne: 1}}</td>
+</tr>
+<tr>
+<td>a&gt;1</td>
+<td>{a: {$gt: 1}}</td>
+</tr>
+<tr>
+<td>a&gt;=1</td>
+<td>{a: {$gte: 1}}</td>
+</tr>
+<tr>
+<td>a&lt;1</td>
+<td>{a: {$lt: 13}}</td>
+</tr>
+<tr>
+<td>a&lt;=1</td>
+<td>{a: ($lte: 1}}</td>
+</tr>
+<tr>
+<td>a=1AND b=1</td>
+<td>{a: 1, b: 1}</td>
+</tr>
+<tr>
+<td>a= 1 0R b= 1</td>
+<td>{$or:[{a:1},{b:1}]}</td>
+</tr>
+<tr>
+<td>a Is NULL</td>
+<td>{a: {$exists: false}}</td>
+</tr>
+<tr>
+<td>a lN (1, 2, 3)</td>
+<td>{a: {$in: [1, 2, 3]}}</td>
+</tr>
+</tbody>
+</table>
+<h4 id="63-排序查询">6.3 排序查询</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 按likeNum字段降序</span>
+</span></span><span class="line"><span class="cl">db.document.find<span class="o">(</span>query,projection<span class="o">)</span>.sort<span class="o">({</span>likeNum:-1<span class="o">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 按likeNum字段升序</span>
+</span></span><span class="line"><span class="cl">db.document.find<span class="o">(</span>query,projection<span class="o">)</span>.sort<span class="o">({</span>likeNum:1<span class="o">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="64-分页查询">6.4 分页查询</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 跳过4行后，获取4行数据</span>
+</span></span><span class="line"><span class="cl">db.document.find<span class="o">(</span>query,projection<span class="o">)</span>.skip<span class="o">(</span>4<span class="o">)</span>.limit<span class="o">(</span>4<span class="o">)</span>.sort<span class="o">({</span>likeNum:-1<span class="o">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="65-模糊查询">6.5 模糊查询</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## 按tpye模糊匹配qwe
+</span></span><span class="line"><span class="cl">db.document.find({type:/qwe/})
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="7-更新文档">7、 更新文档</h2>
+<p>可以用update命令对指定的数据进行更新，命令的格式如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 更新单条</span>
+</span></span><span class="line"><span class="cl">db.collTection.updateOne<span class="o">(</span>query,update,options<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 更新多条</span>
+</span></span><span class="line"><span class="cl">db.collTection.updateMany<span class="o">(</span>query,update,options<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>query: 描述更新的查询条件:</p>
+</li>
+<li>
+<p>update: 描述更新的动作及新的内容:</p>
+</li>
+<li>
+<p>options: 描述更新的 选项</p>
+<ul>
+<li>upsert: 可选，如果不存在update的记录，是否插入新的记录。默认false，不插入。</li>
+<li>writeConcern :可选，决定一个写操作落到多少个节点上才算成功。</li>
+</ul>
+</li>
+</ul>
+<h3 id="71-更新操作符">7.1 更新操作符</h3>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$set</td>
+<td>($set:{field:value}}</td>
+<td>指定一个键并更新值，若键不存在则创建</td>
+</tr>
+<tr>
+<td>$unset</td>
+<td>($unset : {field : 1 }}</td>
+<td>删除一个键</td>
+</tr>
+<tr>
+<td>$inc</td>
+<td>{$inc : {field : value }}</td>
+<td>对数值类型进行增减</td>
+</tr>
+<tr>
+<td>$rename</td>
+<td>{$rename :{ fold field name : new field name }}</td>
+<td>修改字段名称</td>
+</tr>
+<tr>
+<td>$push</td>
+<td>{$push : {field : value }}</td>
+<td>将数值追加到数组中，若数组不存在则会进行初始化</td>
+</tr>
+<tr>
+<td>$pushAll</td>
+<td>{$pushAll : {field : value_array}}</td>
+<td>追加多个值到一个数组字段内</td>
+</tr>
+<tr>
+<td>$pull</td>
+<td>{$pull : {field :_value}}</td>
+<td>从数组中删除指定的元素</td>
+</tr>
+<tr>
+<td>$addToSet</td>
+<td>{$addToSet : {field ; value }}</td>
+<td>添加元素到数组中，具有排重功能</td>
+</tr>
+<tr>
+<td>$pop</td>
+<td>{$pop : {field : 1}}</td>
+<td>删除数组的第一个或最后一个元素</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-操作符使用">7.2 操作符使用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## $set  ：查询值为1,2,3的a字段，并将a更新为5</span>
+</span></span><span class="line"><span class="cl">db.collTection.update<span class="o">({</span>a:<span class="o">{</span><span class="nv">$in</span>:<span class="o">[</span>1, 2, 3<span class="o">]}}</span>,<span class="o">{</span><span class="nv">$set</span>:<span class="o">{</span>a:5<span class="o">}})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $unset</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $inc</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $rename</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $push</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $pushAll</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $pull</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $addToSet</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $pop</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="73-upsert-属性">7.3 upsert 属性</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 如果title为1不存在，则插入一条title为2</span>
+</span></span><span class="line"><span class="cl">db.collTection.updateOne<span class="o">({</span>title:1<span class="o">}</span>,<span class="o">{</span><span class="nv">$set</span>:<span class="o">{</span>title:2<span class="o">}}</span>,<span class="o">{</span>upsert:true<span class="o">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 如果title为1不存在，则放弃更新</span>
+</span></span><span class="line"><span class="cl">db.collTection.updateOne<span class="o">({</span>title:1<span class="o">}</span>,<span class="o">{</span><span class="nv">$set</span>:<span class="o">{</span>title:2<span class="o">}})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="74-replace-语义">7.4 replace 语义</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 查询title等于1的文档的全部字段，完全替换为title等于2</span>
+</span></span><span class="line"><span class="cl">db.collTection.updateOne<span class="o">({</span>title:1<span class="o">}</span>,<span class="o">{</span>title:2<span class="o">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="75-findandmodify-命令">7.5 findAndModify 命令</h3>
+<p>该语句只能更新<strong>单个文档</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">db.document.findAndModify(
+</span></span><span class="line"><span class="cl">	{query:{test:&#39;test&#39;},update:{$inc:{title:1}},new:true}
+</span></span><span class="line"><span class="cl">	)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>query：需要查询的字段值</li>
+<li>update：需要更新的字段值</li>
+<li>new：默认为false，返回旧值文档；为true时，返回更新后的文档</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">##  查询test字段等于test的文档，并将title+1，更新后返回更新后的文档</span>
+</span></span><span class="line"><span class="cl">db.document.findAndModify<span class="o">(</span>
+</span></span><span class="line"><span class="cl">		<span class="o">{</span>
+</span></span><span class="line"><span class="cl">		query:<span class="o">{</span>test:<span class="s1">&#39;test&#39;</span><span class="o">}</span>,
+</span></span><span class="line"><span class="cl">		update:<span class="o">{</span><span class="nv">$inc</span>:<span class="o">{</span>title:1<span class="o">}</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>,
+</span></span><span class="line"><span class="cl">		new:true<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8删除文档">8、删除文档</h2>
+<p>删除文档使用deleteMany和deleteOne操作；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 删除多个文档</span>
+</span></span><span class="line"><span class="cl">db.collection.deleteMany<span class="o">(</span>query<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 删除单个文档</span>
+</span></span><span class="line"><span class="cl">db.collection.deleteOne<span class="o">(</span>query<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>query: 查询列表</li>
+</ul>
+<h3 id="81-删除文档">8.1 删除文档</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 将title等于一的文档全部删除</span>
+</span></span><span class="line"><span class="cl">db.collection.deleteMany<span class="o">({</span>title:1<span class="o">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 删除单个title等于1的文档</span>
+</span></span><span class="line"><span class="cl">db.collection.deleteOne<span class="o">({</span>title:1<span class="o">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="82-返回被删除的文档">8.2 返回被删除的文档</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 删除一条test为test的文档，并返回该文档</span>
+</span></span><span class="line"><span class="cl">db.document.findOneAndDelete<span class="o">({</span>test:<span class="s1">&#39;test&#39;</span><span class="o">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="9-聚合操作">9 、聚合操作</h2>
+<p>聚合操作处理数招记录并返回计算结果(诸如统计平均值，求和等)。聚合操作组值来自多个文档，可以对分组数据执行各种操作以返回单个结果。案合操作包含三类: 单一作用聚合、聚合管道、MapReduce。</p>
+<ul>
+<li>单一作用聚合: 提供了对常见聚合过程的简单访问，操作都从单个集合聚合文档。</li>
+<li>聚合管道是一个数据聚合的框架，模型基于数据处理流水线的概念。文档进入多级管道，将文档转换为聚合结果。</li>
+<li>MapReduce操作具有两个阶段:处理每个文档并向每个输入文档发射一个或多个对象的map阶段，以及reduce组合map操作的输出
+阶段。</li>
+</ul>
+<h3 id="91-单一作用聚合">9.1 单一作用聚合</h3>
+<h4 id="介绍">介绍</h4>
+<p>MongoDB提供 三种 这类单一作用的聚合函数，这些函数只能在一个集合中使用，所以在实战中使用较少；</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>db.collection.estimatedDocumentCount()</td>
+<td>忽略查询条件，返回集合或视图中所有文档的计数</td>
+</tr>
+<tr>
+<td>db.collection.count(query)</td>
+<td>返回与find()集合或视图的查询匹配的文档计数 。等同于db.collection.find(query).count()构造</td>
+</tr>
+<tr>
+<td>db.collection.distinct(query,filter)</td>
+<td>在单个集合或视图中查找指定字段的不同值，并在数组中返回结果</td>
+</tr>
+</tbody>
+</table>
+<h4 id="使用">使用</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 返回document集合的总文档数量</span>
+</span></span><span class="line"><span class="cl">db.document.estimatedDocumentCount<span class="o">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">##  返回title等于1的文档数量</span>
+</span></span><span class="line"><span class="cl">db.document.count<span class="o">({</span>title:1<span class="o">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 只返回去重后的test字段值</span>
+</span></span><span class="line"><span class="cl">db.collection.distinct<span class="o">(</span><span class="s2">&#34;test&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 先查询likeNum小于13的文档，再去重title字段，单独返回title字段值</span>
+</span></span><span class="line"><span class="cl">db.document.distinct<span class="o">(</span><span class="s2">&#34;title&#34;</span>,<span class="o">{</span>likeNum:<span class="o">{</span><span class="nv">$lt</span>: 13<span class="o">}})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="92-聚合管道">9.2 聚合管道</h3>
+<h4 id="介绍-1">介绍</h4>
+<ul>
+<li>
+<p>MongoDB 聚合框架 (Aggregation Framework) 是一个计算框架，它可以:</p>
+<ul>
+<li>作用在一个或几个集合上:</li>
+<li>对集合中的数据进行的一系列运算</li>
+<li>将这些数据转化为期望的形式</li>
+</ul>
+<blockquote>
+<p>从效果而言，聚合框架相当于 SQL 查询中的GROUP BY、 LEFT OUTERJOIN 、AS等</p>
+</blockquote>
+</li>
+<li>
+<p>整个聚合运算过程称为管道 (Pipeline) ，它是由多个阶段 (Stage) 组成的，每个管道:</p>
+<ul>
+<li>接受一系列文档 (原始数据)</li>
+<li>每个阶段对这些文档进行一系列运算结果将文档输出给下一个阶段;</li>
+</ul>
+</li>
+</ul>
+<p><strong>在这个例子中</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">db.orders.aggregate([
+</span></span><span class="line"><span class="cl">	{ $match: { status: &#34;A&#34; } },
+</span></span><span class="line"><span class="cl">    { $group: { _id: &#34;$cust_id&#34;, total: { $sum: &#34;$amount&#34; } } }
+</span></span><span class="line"><span class="cl">])
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>第一阶段</strong>：<a href="" rel=""><code>$match</code></a>阶段按<code>status</code>字段过滤文档，并将<code>status</code>等于<code>&quot;A&quot;</code>的文档传递到下一阶段。</p>
+<p><strong>第二阶段</strong>：<a href="" rel=""><code>$group</code></a>阶段按<code>cust_id</code>字段将文档分组，以计算每个<code>cust_id</code>唯一值的金额总和。</p>
+<h4 id="语法">语法</h4>
+<p>聚合管道操作语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pipeline = [$stage1, $stage2, ...$stageN];
+</span></span><span class="line"><span class="cl">db.co1lection.aggregate(pipeline , {options})
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>pipelines 一组数据聚合阶段。除$out、$Merge和sgeonear阶段之外，每个阶段都可以在管道中出现多次。</li>
+<li>options 可选，聚合操作的其他参数。包含: 查询计划、是否使用临时文件、游标、最大操作时间、读写策略、强制索引等等</li>
+</ul>
+<h4 id="使用-1">使用</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## $project : 将title字段改为name；字段值为0时不展示，为1时展示该字段；有as和查询列表功能</span>
+</span></span><span class="line"><span class="cl">db.document.aggregate<span class="o">([{</span><span class="nv">$project</span>:<span class="o">{</span>name:<span class="s2">&#34;</span><span class="nv">$title</span><span class="s2">&#34;</span>,_id:0,type:1<span class="o">}}])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $match和$count: 过滤test等于1223，然后统计过滤后的数量，并赋值返回到count字段</span>
+</span></span><span class="line"><span class="cl">db.document.aggregate<span class="o">([{</span><span class="nv">$match</span>:<span class="o">{</span>test:<span class="s1">&#39;1223&#39;</span><span class="o">}}</span>,<span class="o">{</span><span class="nv">$count</span>:<span class="s2">&#34;count&#34;</span><span class="o">}])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $group : 对test进行分组，然后对likeNum字段进行求和</span>
+</span></span><span class="line"><span class="cl">db.document.aggregate<span class="o">([{</span><span class="nv">$group</span>:<span class="o">{</span>_id:<span class="s2">&#34;</span><span class="nv">$test</span><span class="s2">&#34;</span>,likenum:<span class="o">{</span><span class="nv">$sum</span>:<span class="s2">&#34;</span><span class="nv">$likeNum</span><span class="s2">&#34;</span><span class="o">}}}])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## $group : 对test进行分组，对title进行分组，然后对likeNum字段进行求和</span>
+</span></span><span class="line"><span class="cl">db.document.aggregate<span class="o">([{</span><span class="nv">$group</span>:<span class="o">{</span>_id:<span class="o">{</span>test:<span class="s2">&#34;</span><span class="nv">$test</span><span class="s2">&#34;</span>,title:<span class="s2">&#34;</span><span class="nv">$title</span><span class="s2">&#34;</span><span class="o">}</span>,likenum:<span class="o">{</span><span class="nv">$sum</span>:<span class="s2">&#34;</span><span class="nv">$likeNum</span><span class="s2">&#34;</span><span class="o">}}}])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="93-聚合操作符">9.3 聚合操作符</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>描述</th>
+<th>SQL等价运算符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$match</td>
+<td>筛选条件</td>
+<td>where</td>
+</tr>
+<tr>
+<td>$project</td>
+<td>投影</td>
+<td>as</td>
+</tr>
+<tr>
+<td>$lookup</td>
+<td>左外连接</td>
+<td>left outer join</td>
+</tr>
+<tr>
+<td>$sort</td>
+<td>排序</td>
+<td>order by</td>
+</tr>
+<tr>
+<td>$group</td>
+<td>分组</td>
+<td>group by</td>
+</tr>
+<tr>
+<td>$skip/$limit</td>
+<td>分页</td>
+<td></td>
+</tr>
+<tr>
+<td>$unwind</td>
+<td>展开数组</td>
+<td></td>
+</tr>
+<tr>
+<td>$graphLookup</td>
+<td>图搜索</td>
+<td></td>
+</tr>
+<tr>
+<td>$facet/$bucket</td>
+<td>分面搜索</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="group">$group</h4>
+<p>$group不会输出具体的文档而只是统计信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">$group:{ _id: &lt;expression&gt;, &lt;field1&gt;: { &lt;accumulatorl&gt; : &lt;expression1&gt; }, ... }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>_id宇家是必道的但是，可以指d值为null来为整个输入文档计算累计值</li>
+<li>剩余的计算字段是可选的，并使用<!-- raw HTML omitted -->运算符进行计算。</li>
+<li>_id和<!-- raw HTML omitted -->表达式可以接受任何有效的表达式.</li>
+</ul>
+<h4 id="unwind">$unwind</h4>
+<p>可以将数组拆分为单独的文档</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{$unwind:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">path: &lt;field path&gt;，
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">37
+</span></span><span class="line"><span class="cl">incTudeArrayIndex: &lt;string&gt;,
+</span></span><span class="line"><span class="cl">preserveNu17AndEmptyArrays : &lt;boolean&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>path:#妻指定字段路径，在字段名称前加上S符并用引号括起来。</li>
+<li>incTudeArrayIndex:#可选，一个新宁段的名称用于存放元素的数组索引。该名称不能以S开头。</li>
+<li>preserveNu17AndEmptyArrays:#可选，default ;false，若为true,如果路径为空，缺少或为空数组，则sunwind输出文档</li>
+</ul>
+<h3 id="94-分组操作符">9.4 分组操作符</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$avg</td>
+<td>计算均值</td>
+</tr>
+<tr>
+<td>$first</td>
+<td>返回每组第一个文档，如果有排序，按照排序，如果没有按照默认的存储的顺序的第一个文档。</td>
+</tr>
+<tr>
+<td>$last</td>
+<td>返回每组最后一个文档，如果有排序，按照排序，如果没有按照默认的存储的顺序的最后个文档。</td>
+</tr>
+<tr>
+<td>$max</td>
+<td>根据分组，获取集合中所有文档对应值得最大值。</td>
+</tr>
+<tr>
+<td>$min</td>
+<td>根据分组，获取集合中所有文档对应值得最小值。</td>
+</tr>
+<tr>
+<td>$push</td>
+<td>将指定的表达式的值添加到一个数组中。</td>
+</tr>
+<tr>
+<td>$addToSet</td>
+<td>将表达式的值添加到一个集合中 (无重复值，无序)。</td>
+</tr>
+<tr>
+<td>$sum</td>
+<td>计算总和</td>
+</tr>
+<tr>
+<td>$stdDevPop</td>
+<td>返回输入值的总体标准偏差 (population standard deviation)</td>
+</tr>
+<tr>
+<td>$stdDevSamp</td>
+<td>返回输入值的样本标准偏差 (the sample standard deviation)</td>
+</tr>
+</tbody>
+</table>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/docker/docker/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/database/mysqlindex/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

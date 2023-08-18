@@ -1,6 +1,6 @@
 ---
 weight: 5
-title: "window对象详解"
+title: "js - window对象详解"
 date: 2023-08-03T15:19:34+08:00
 draft: false
 tags: [javascript]

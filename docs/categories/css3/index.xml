@@ -1,14 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>css3 - Category - 我的全新 Hugo 网站</title>
-        <link>http://localhost:1313/categories/css3/</link>
-        <description>css3 - Category - 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/css3/" rel="self" type="application/rss+xml" /><item>
+        <title>css3 - Category - Turan</title>
+        <link>http://example.org/categories/css3/</link>
+        <description>css3 - Category - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/css3/" rel="self" type="application/rss+xml" /><item>
     <title>css3</title>
-    <link>http://localhost:1313/posts/css/css3/</link>
+    <link>http://example.org/posts/css/css3/</link>
     <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/posts/css/css3/</guid>
+    <guid>http://example.org/posts/css/css3/</guid>
     <description><![CDATA[css3 详解]]></description>
 </item>
 </channel>

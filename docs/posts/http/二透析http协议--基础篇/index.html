@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="《二》透析http协议&ndash;基础篇 HTTP报文是什么样子的？ 报文结构 HTTP 协议的请求报文和响应报文的结构基本相同，由三大部分组成： 起始行" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="《二》透析http协议&ndash;基础篇 HTTP报文是什么样子的？ 报文结构 HTTP 协议的请求报文和响应报文的结构基本相同，由三大部分组成： 起始行"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" /><link rel="prev" href="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" /><link rel="next" href="http://example.org/posts/http/%E4%B8%89%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E8%BF%9B%E9%98%B6%E7%AF%87/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/http\/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87\/"
+        },"genre": "posts","wordcount":  7153 ,
+        "url": "http:\/\/example.org\/posts\/http\/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7153 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#http报文是什么样子的">HTTP报文是什么样子的？</a>
+      <ul>
+        <li><a href="#报文结构">报文结构</a></li>
+        <li><a href="#请求行">请求行</a></li>
+        <li><a href="#请求头响应头">请求头/响应头</a></li>
+        <li><a href="#请求体">请求体</a></li>
+        <li><a href="#状态行">状态行</a></li>
+        <li><a href="#常用头部字段">常用头部字段</a></li>
+      </ul>
+    </li>
+    <li><a href="#请求方法介绍">请求方法介绍</a>
+      <ul>
+        <li><a href="#gethead">GET/HEAD</a></li>
+        <li><a href="#postput">POST/PUT</a></li>
+        <li><a href="#其他方法">其他方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#安全与幂等">安全与幂等</a></li>
+    <li><a href="#uri的组成">URI的组成</a></li>
+    <li><a href="#状态码的使用">状态码的使用</a>
+      <ul>
+        <li><a href="#常见状态码">常见状态码</a>
+          <ul>
+            <li><a href="#1">1××</a></li>
+            <li><a href="#2xx">2xx</a></li>
+            <li><a href="#3xx">3xx</a></li>
+            <li><a href="#4xx">4xx</a></li>
+            <li><a href="#5xx">5xx</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="二透析http协议--基础篇">《二》透析http协议&ndash;基础篇</h1>
+<h2 id="http报文是什么样子的">HTTP报文是什么样子的？</h2>
+<h3 id="报文结构">报文结构</h3>
+<p>HTTP 协议的请求报文和响应报文的结构基本相同，由三大部分组成：</p>
+<ol>
+<li>起始行（start line）：描述请求或响应的基本信息：叫做<strong>请求行</strong>和<strong>状态行</strong></li>
+<li>头部字段集合（header）：使用 key-value 形式更详细地说明报文：叫做<strong>请求头</strong>和<strong>响应头</strong></li>
+<li>消息正文（entity）：实际传输的数据，它不一定是纯文本，可以是图片、视频等二进制数据：叫做<strong>请求体</strong>和<strong>响应体</strong></li>
+</ol>
+<p>这其中前两部分起始行和头部字段经常又合称为“<strong>请求头</strong>”或“<strong>响应头</strong>”，消息正文又称为“<strong>实体</strong>”，但与“<strong>header</strong>”对应，很多时候就直接称为“<strong>body</strong>”。</p>
+<p>HTTP 协议规定报文必须有 header，但可以没有 body，而且在 header 之后必须要有一个“空行”，也就是“CRLF”，十六进制的“0D0A”。</p>
+<p>所以，一个完整的 HTTP 报文就像是下图的这个样子，注意在 header 和 body 之间有一个“空行”。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e6%8a%a5%e6%96%87%e7%bb%93%e6%9e%84.jpg"
+        data-srcset="%e6%8a%a5%e6%96%87%e7%bb%93%e6%9e%84.jpg, %e6%8a%a5%e6%96%87%e7%bb%93%e6%9e%84.jpg 1.5x, %e6%8a%a5%e6%96%87%e7%bb%93%e6%9e%84.jpg 2x"
+        data-sizes="auto"
+        alt="报文结构.jpg"
+        title="报文结构" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e5%ae%9e%e9%99%85%e6%8a%a5%e6%96%87.jpg"
+        data-srcset="%e5%ae%9e%e9%99%85%e6%8a%a5%e6%96%87.jpg, %e5%ae%9e%e9%99%85%e6%8a%a5%e6%96%87.jpg 1.5x, %e5%ae%9e%e9%99%85%e6%8a%a5%e6%96%87.jpg 2x"
+        data-sizes="auto"
+        alt="实际报文.jpg"
+        title="实际报文" /></p>
+<blockquote>
+</blockquote>
+<h3 id="请求行">请求行</h3>
+<p>请求行由三部分构成：</p>
+<ol>
+<li>请求方法：是一个动词，如 GET/POST，表示对资源的操作；</li>
+<li>请求目标：通常是一个 URI，标记了请求方法要操作的资源；</li>
+<li>版本号：表示报文使用的 HTTP 协议版本。</li>
+</ol>
+<p>这三个部分通常使用空格（space）来分隔，最后要用 CRLF 换行表示结束。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e8%af%b7%e6%b1%82%e8%a1%8c.jpg"
+        data-srcset="%e8%af%b7%e6%b1%82%e8%a1%8c.jpg, %e8%af%b7%e6%b1%82%e8%a1%8c.jpg 1.5x, %e8%af%b7%e6%b1%82%e8%a1%8c.jpg 2x"
+        data-sizes="auto"
+        alt="请求行.jpg"
+        title="请求头" /></p>
+<p>实际请求头：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /index HTTP/1.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="请求头响应头">请求头/响应头</h3>
+<p>请求行或状态行再加上头部字段集合就构成了 HTTP 报文里完整的请求头或响应头 的示意图</p>
+<p><strong>头部字段</strong>是 <strong>key-value</strong> 的形式，key 和 value 之间用“:”分隔，最后用 CRLF 换行表示字段结束</p>
+<p>HTTP 头字段非常灵活，不仅可以使用标准里的 Host、Connection 等已有头，也可以任意添加自定义头，这就给 HTTP 协议带来了无限的扩展可能。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e8%af%b7%e6%b1%82%e5%a4%b4.jpg"
+        data-srcset="%e8%af%b7%e6%b1%82%e5%a4%b4.jpg, %e8%af%b7%e6%b1%82%e5%a4%b4.jpg 1.5x, %e8%af%b7%e6%b1%82%e5%a4%b4.jpg 2x"
+        data-sizes="auto"
+        alt="请求头.jpg"
+        title="请求头" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e5%93%8d%e5%ba%94%e5%a4%b4.jpg"
+        data-srcset="%e5%93%8d%e5%ba%94%e5%a4%b4.jpg, %e5%93%8d%e5%ba%94%e5%a4%b4.jpg 1.5x, %e5%93%8d%e5%ba%94%e5%a4%b4.jpg 2x"
+        data-sizes="auto"
+        alt="响应头.jpg"
+        title="响应头" /></p>
+<p>不过使用头字段需要注意下面几点：</p>
+<ol>
+<li>字段名不区分大小写，例如“Host”也可以写成“host”，但首字母大写的可读性更好；</li>
+<li>字段名里不允许出现空格，可以使用连字符“-”，但不能使用下划线“_”。例如，“test-name”是合法的字段名，而“test name”“test_name”是不正确的字段名；</li>
+<li>字段名后面必须紧接着“:”，不能有空格，而“:”后的字段值前可以有多个空格；</li>
+<li>字段的顺序是没有意义的，可以任意排列不影响语义；</li>
+<li>字段原则上不能重复，除非这个字段本身的语义允许，例如 Set-Cookie。</li>
+</ol>
+<blockquote>
+<p>HTTP 协议规定了非常多的头部字段，实现各种各样的功能，但基本上可以分为四大类：</p>
+<ol>
+<li>通用字段：在请求头和响应头里都可以出现；</li>
+<li>请求字段：仅能出现在请求头里，进一步说明请求信息或者额外的附加条件；</li>
+<li>响应字段：仅能出现在响应头里，补充说明响应报文的信息；</li>
+<li>实体字段：它实际上属于通用字段，但专门描述 body 的额外信息。</li>
+</ol>
+</blockquote>
+<h3 id="请求体">请求体</h3>
+<p>在 TCP/IP 协议栈里，传输数据基本上都是“header+body”的格式。但 TCP、UDP 因为是传输层的协议，它们不会关心 body 数据是什么，只要把数据发送到对方就算是完成了任务。</p>
+<p>所谓的超文本就是可以传输各种数据，体现在body中，但是双方必须要在头部字段中说明，本次传输的数据类型</p>
+<p>这里简单列举一下在 HTTP 里经常遇到的几个类别：</p>
+<ol>
+<li>text：即文本格式的可读数据，我们最熟悉的应该就是 text/html 了，表示超文本文档，此外还有纯文本 text/plain、样式表 text/css 等。</li>
+<li>image：即图像文件，有 image/gif、image/jpeg、image/png 等。</li>
+<li>audio/video：音频和视频数据，例如 audio/mpeg、video/mp4 等。</li>
+<li>application：数据格式不固定，可能是文本也可能是二进制，必须由上层应用程序来解释。常见的有 application/json，application/javascript、application/pdf 等，另外，如果实在是不知道数据是什么类型，像刚才说的“黑盒”，就会是 application/octet-stream，即不透明的二进制数据。</li>
+</ol>
+<ul>
+<li>
+<p>Encoding type 字段 告诉数据是用的什么编码格式，这样对方才能正确解压缩，还原出原始的数据。</p>
+<p>Encoding type 就少了很多，常用的只有下面三种：</p>
+</li>
+</ul>
+<ol>
+<li>gzip：GNU zip 压缩格式，也是互联网上最流行的压缩格式；</li>
+<li>deflate：zlib（deflate）压缩格式，流行程度仅次于 gzip；</li>
+<li>br：一种专门为 HTTP 优化的新压缩算法（Brotli）。</li>
+</ol>
+<h3 id="状态行">状态行</h3>
+<p>我们再看响应报文里的起始行，在这里它不叫“响应行”，而是叫“<strong>状态行</strong>”（status line），意思是<strong>服务器响应的状态</strong>。</p>
+<p>同样也是由三部分构成：</p>
+<ol>
+<li>版本号：表示报文使用的 HTTP 协议版本；</li>
+<li>状态码：一个三位数，用代码的形式表示处理的结果，比如 200 是成功，500 是服务器错误；</li>
+<li>原因：作为数字状态码补充，是更详细的解释文字，帮助人理解原因</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e7%8a%b6%e6%80%81%e8%a1%8c.jpg"
+        data-srcset="%e7%8a%b6%e6%80%81%e8%a1%8c.jpg, %e7%8a%b6%e6%80%81%e8%a1%8c.jpg 1.5x, %e7%8a%b6%e6%80%81%e8%a1%8c.jpg 2x"
+        data-sizes="auto"
+        alt="状态行.jpg"
+        title="状态行" /></p>
+<p>实际状态头：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HTTP/1.1 200 OK
+</span></span><span class="line"><span class="cl">HTTP/1.1 404 Not Found
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="常用头部字段">常用头部字段</h3>
+<ul>
+<li>
+<p><strong>Host</strong>字段</p>
+<p>它属于请求字段，只能出现在请求头里，它同时也是唯一一个 HTTP/1.1 规范里要求<strong>必须出现</strong>的字段，也就是说，如果请求头里没有 Host，那这就是一个错误的报文。  当一台计算机上托管了多个虚拟主机的时候，服务器端就需要用 Host 字段来选择</p>
+</li>
+<li>
+<p><strong>User-Agent</strong>字段</p>
+<p>只出现在请求头里。它使用一个字符串来描述发起 HTTP 请求的客户端，服务器可以依据它来返回最合适此浏览器显示的页面。</p>
+</li>
+<li>
+<p><strong>Date</strong>字段</p>
+</li>
+</ul>
+<p>属于通用字段，但通常出现在响应头里，表示 HTTP 报文创建的时间，客户端可以使用这个时间再搭配其他字段决定缓存策略。</p>
+<ul>
+<li><strong>Content-Length</strong> 字段</li>
+</ul>
+<p>表示报文里 body 的长度，也就是请求头或响应头空行后面数据的长度。服务器看到这个字段，就知道了后续有多少数据，可以直接接收。如果没有这个字段，那么 body 就是不定长的，需要使用 chunked 方式分段传输</p>
+<ul>
+<li>
+<p><strong>Accept</strong>字段</p>
+<p>客户端可理解的 MIME type，可以用“,”做分隔符列出多个类型，让服务器有更多的选择余地，</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Accept: text/html,application/xml,image/webp,image/png
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这就是告诉服务器：“我能够看懂 HTML、XML 的文本，还有 webp 和 png 的图片，请给我这四类格式的数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Accept: text/html,application/xml;q=0.9,*/*;q=0.8
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它表示浏览器最希望使用的是 HTML 文件，权重是 1，其次是 XML 文件，权重是 0.9，最后是任意数据类型，权重是 0.8。服务器收到请求头后，就会计算权重，再根据自己的实际情况优先输出 HTML 或者 XML。</p>
+<ul>
+<li>
+<p><strong>Content-Type</strong> 字段</p>
+<p>服务器会在响应报文里用头字段<strong>Content-Type</strong>告诉客户端实体数据的真实类型</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Type: text/html; charset=utf-8
+</span></span><span class="line"><span class="cl">Content-Type: image/png
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器看到报文里的类型是“text/html”就知道是 HTML 文件，会调用排版引擎渲染出页面，utf-8表示实体数据的字符编码；看到“image/png”就知道是一个 PNG 文件，就会在页面上显示出图像。</p>
+<ul>
+<li><strong>Accept-Encoding</strong> 字段</li>
+</ul>
+<p>表示 客户端支持的压缩格式  同样也可以用“,”列出多个，服务器可以选择其中一种来压缩数据，实际使用的压缩格式放在响应头字段<strong>Content-Encoding</strong>里。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
+</span></span><span class="line"><span class="cl">Content-Encoding: gzip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过这两个字段是可以省略的，如果请求报文里没有 Accept-Encoding 字段，就表示客户端不支持压缩数据；如果响应报文里没有 Content-Encoding 字段，就表示响应数据没有被压缩。</p>
+<ul>
+<li>
+<p><strong>Accept-Language</strong> 子弹</p>
+<p>字段标记了客户端可理解的自然语言，也允许用“,”做分隔符列出多个类型，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Accept-Language: zh-CN, zh, en
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个请求头会告诉服务器：“最好给我 zh-CN 的汉语文字，如果没有就用其他的汉语方言，如果还没有就给英文”</p>
+</li>
+</ul>
+<h2 id="请求方法介绍">请求方法介绍</h2>
+<p>目前 HTTP/1.1 规定了八种方法，单词<strong>都必须是大写的形式</strong>，我先简单地列把它们列出来，后面再详细讲解。</p>
+<ol>
+<li>GET：获取资源，可以理解为读取或者下载数据；</li>
+<li>HEAD：获取资源的元信息；</li>
+<li>POST：向资源提交数据，相当于写入或上传数据；</li>
+<li>PUT：类似 POST；</li>
+<li>DELETE：删除资源；</li>
+<li>CONNECT：建立特殊的连接隧道；</li>
+<li>OPTIONS：列出可对资源实行的方法；</li>
+<li>TRACE：追踪请求 - 响应的传输路径。</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http%e8%af%b7%e6%b1%82%e6%96%b9%e6%b3%95.jpg"
+        data-srcset="http%e8%af%b7%e6%b1%82%e6%96%b9%e6%b3%95.jpg, http%e8%af%b7%e6%b1%82%e6%96%b9%e6%b3%95.jpg 1.5x, http%e8%af%b7%e6%b1%82%e6%96%b9%e6%b3%95.jpg 2x"
+        data-sizes="auto"
+        alt="http请求方法.jpg"
+        title="http请求方法" /></p>
+<h3 id="gethead">GET/HEAD</h3>
+<ul>
+<li><strong>GET</strong></li>
+</ul>
+<p>应该是 HTTP 协议里最知名的请求方法了，也应该是用的最多的，自 0.9 版出现并一直被保留至今，是名副其实的“元老”。</p>
+<p>它的含义是请求<strong>从服务器获取资源</strong>，这个资源既可以是静态的文本、页面、图片、视频，也可以是由 PHP、Java 动态生成的页面或者其他格式的数据。</p>
+<p>GET 方法虽然基本动作比较简单，但搭配 URI 和其他头字段就能实现对资源更精细的操作。</p>
+<blockquote>
+<p>例如，在 URI 后使用“#”，就可以在获取页面后直接定位到某个标签所在的位置；使用 If-Modified-Since 字段就变成了“有条件的请求”，仅当资源被修改时才会执行获取动作；使用 Range 字段就是“范围请求”，只获取资源的一部分数据。</p>
+</blockquote>
+<ul>
+<li><strong>HEAD</strong></li>
+</ul>
+<p><strong>HEAD</strong>方法与 GET 方法类似，也是请求从服务器获取资源，服务器的处理机制也是一样的，但服务器不会返回请求的实体数据，只会传回响应头，也就是资源的“元信息”。</p>
+<p>HEAD 方法可以看做是 GET 方法的一个“简化版”或者“轻量版”。因为它的响应头与 GET 完全相同，所以可以用在很多并不真正需要资源的场合，避免传输 body 数据的浪费</p>
+<blockquote>
+<p>比如，想要检查一个文件是否存在，只要发个 HEAD 请求就可以了，没有必要用 GET 把整个文件都取下来。再比如，要检查文件是否有最新版本，同样也应该用 HEAD，服务器会在响应头里把文件的修改时间传回来。</p>
+</blockquote>
+<h3 id="postput">POST/PUT</h3>
+<p>向 URI 指定的资源提交数据，数据就放在报文的 body 里。</p>
+<blockquote>
+<p>比如，你上论坛灌水，敲了一堆字后点击“发帖”按钮，浏览器就执行了一次 POST 请求，把你的文字放进报文的 body 里，然后拼好 POST 请求头，通过 TCP 协议发给服务器。</p>
+</blockquote>
+<p>PUT 的作用与 POST 类似，也可以向服务器提交数据，但与 POST 存在微妙的不同，通常 POST 表示的是“新建”“create”或者&quot;insert&quot;的含义，而 PUT 则是“修改”“update”的含义。</p>
+<p>在实际应用中，PUT 用到的比较少。而且，因为它与 POST 的语义、功能太过近似，有的服务器甚至就直接禁止使用 PUT 方法，只用 POST 方法上传数据。</p>
+<p>在发送请求时，POST/PUT方法一般携带头字段“<strong>Content-Length</strong>”表示body的长度</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /10-2 HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: www.chrono.com
+</span></span><span class="line"><span class="cl">Content-Length: 17
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">POST DATA IS HERE
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PUT /10-2 HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: www.chrono.com
+</span></span><span class="line"><span class="cl">Content-Length: 16
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">PUT DATA IS HE
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="其他方法">其他方法</h3>
+<p>讲完了 GET/HEAD/POST/PUT，还剩下四个标准请求方法，它们属于比较“冷僻”的方法，应用的不是很多。</p>
+<p><strong>DELETE</strong>方法指示服务器删除资源，因为这个动作危险性太大，所以通常服务器不会执行真正的删除操作，而是对资源做一个删除标记。当然，更多的时候服务器就直接不处理 DELETE 请求。</p>
+<p><strong>CONNECT</strong>是一个比较特殊的方法，要求服务器为客户端和另一台远程服务器建立一条特殊的连接隧道，这时 Web 服务器在中间充当了代理的角色。</p>
+<p><strong>OPTIONS</strong>方法要求服务器列出可对资源实行的操作方法，在响应头的 Allow 字段里返回。它的功能很有限，用处也不大，有的服务器（例如 Nginx）干脆就没有实现对它的支持。</p>
+<p><strong>TRACE</strong>方法多用于对 HTTP 链路的测试或诊断，可以显示出请求 - 响应的传输路径。它的本意是好的，但存在漏洞，会泄漏网站的信息，所以 Web 服务器通常也是禁止使用</p>
+<h2 id="安全与幂等">安全与幂等</h2>
+<p>关于请求方法还有两个面试时有可能会问到、比较重要的概念：<strong>安全</strong>与<strong>幂等</strong>。</p>
+<p>在 HTTP 协议里，所谓的“<strong>安全</strong>”是指请求方法不会“破坏”服务器上的资源，即不会对服务器上的资源造成实质的修改。</p>
+<p>按照这个定义，只有 GET 和 HEAD 方法是“安全”的，因为它们是“只读”操作，只要服务器不故意曲解请求方法的处理方式，无论 GET 和 HEAD 操作多少次，服务器上的数据都是“安全的”。</p>
+<p>而 POST/PUT/DELETE 操作会修改服务器上的资源，增加或删除数据，所以是“不安全”的。</p>
+<p>所谓的“<strong>幂等</strong>”实际上是一个数学用语，被借用到了 HTTP 协议里，意思是多次执行相同的操作，结果也都是相同的，即多次“幂”后结果“相等”。</p>
+<p>POST 是“新增或提交数据”，多次提交数据会创建多个资源，所以不是幂等的；而 PUT 是“替换或更新数据”，多次更新一个资源，资源还是会第一次更新的状态，所以是幂等的。</p>
+<p>我对你的建议是，你可以对比一下 SQL 来加深理解：把 POST 理解成 INSERT，把 PUT 理解成 UPDATE，这样就很清楚了。多次 INSERT 会添加多条记录，而多次 UPDATE 只操作一条记录，而且效果相同。</p>
+<blockquote>
+<p>数据安全与幂等问题关键在于使用的sql和业务逻辑，一般来说create 和 insert 语句会存在问题，当然也有 其他方式可以解决安全与幂等问题</p>
+</blockquote>
+<h2 id="uri的组成">URI的组成</h2>
+<p>在电脑术语中，统一资源标识符（Uniform Resource Identifier，URI)是一个用于标识某一互联网资源名称的字符串</p>
+<p>Web上可用的每种资源 -<a href="https://baike.baidu.com/item/HTML?fromModule=lemma_inlink" target="_blank" rel="noopener noreffer ">HTML</a>文档、图像、视频片段、程序等 - 由一个通用资源标识符（Uniform Resource Identifier, 简称&quot;URI&quot;）进行定位。</p>
+<p>URI 最常用的形式，由 s<strong>cheme、host:port、path 和 query</strong> 四个部分组成，但有的部分可以视情况省略。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="uri%e7%bb%84%e6%88%90.jpg"
+        data-srcset="uri%e7%bb%84%e6%88%90.jpg, uri%e7%bb%84%e6%88%90.jpg 1.5x, uri%e7%bb%84%e6%88%90.jpg 2x"
+        data-sizes="auto"
+        alt="uri组成.jpg"
+        title="uri组成" /></p>
+<p>URI 第一个组成部分叫<strong>scheme</strong>，翻译成中文叫“<strong>方案名</strong>”或者“<strong>协议名</strong>”，表示<strong>资源应该使用哪种协议</strong>来访问。</p>
+<p>在 scheme 之后，必须是<strong>三个特定的字符</strong>“<strong>://</strong>”，它把 scheme 和后面的部分分离开。</p>
+<p>在“://”之后，是被称为“<strong>authority</strong>”的部分，表示<strong>资源所在的主机名</strong>，通常的形式是“host:port”，即主机名加端口号。</p>
+<p>有了协议名和主机地址、端口号，再加上后面<strong>标记资源所在位置</strong>的<strong>path</strong>，浏览器就可以连接服务器访问资源了。</p>
+<p>实际uri：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://www.chrono.com:8080/11-1?uid=1234&amp;name=mario&amp;referer=xxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="状态码的使用">状态码的使用</h2>
+<p>这五类的具体含义是：</p>
+<ul>
+<li>1××：提示信息，表示目前是协议处理的中间状态，还需要后续的操作；</li>
+<li>2××：成功，报文已经收到并被正确处理；</li>
+<li>3××：重定向，资源位置发生变动，需要客户端重新发送请求；</li>
+<li>4××：客户端错误，请求报文有误，服务器无法处理；</li>
+<li>5××：服务器错误，服务器在处理请求时内部发生了错误。</li>
+</ul>
+<p>目前 RFC 标准里总共有 41 个状态码，但状态码的定义是开放的，允许自行扩展</p>
+<h3 id="常见状态码">常见状态码</h3>
+<h4 id="1">1××</h4>
+<p>“<strong>101 Switching Protocols</strong>”</p>
+<p>它的意思是客户端使用 Upgrade 头字段，要求在 HTTP 协议的基础上改成其他的协议继续通信，比如 WebSocket。而如果服务器也同意变更协议，就会发送状态码 101，但这之后的数据传输就不会再使用 HTTP 了。</p>
+<h4 id="2xx">2xx</h4>
+<p>“<strong>200 OK</strong>”是最常见的成功状态码，表示一切正常，服务器如客户端所期望的那样返回了处理结果，如果是非 HEAD 请求，通常在响应头后都会有 body 数据</p>
+<p>“<strong>204 No Content</strong>”是另一个很常见的成功状态码，它的含义与“200 OK”基本相同，但响应头后没有 body 数据。所以对于 Web 服务器来说，正确地区分 200 和 204 是很必要的。</p>
+<p>“<strong>206 Partial Content</strong>”是 HTTP 分块下载或断点续传的基础，在客户端发送“范围请求”、要求获取资源的部分数据时出现，它与 200 一样，也是服务器成功处理了请求，但 body 里的数据不是资源的全部，而是其中的一部分。  状态码 206 通常还会伴随着头字段“<strong>Content-Range</strong>”，表示响应报文里 body 数据的具体范围</p>
+<p>例如“Content-Range: bytes 0-99/2000”，意思是此次获取的是总计 2000 个字节的前 100 个字节。 但表示 body 只是原数据的一部分。</p>
+<blockquote>
+<p>多用于大文件范围请求传输</p>
+</blockquote>
+<h4 id="3xx">3xx</h4>
+<p><strong>301 Moved Permanently</strong>”俗称“永久重定向”，含义是此次请求的资源已经不存在了，需要改用改用新的 URI 再次访问。</p>
+<p>“<strong>302 Found</strong>”，曾经的描述短语是“<strong>Moved Temporarily</strong>”，俗称“临时重定向”，意思是请求的资源还在，但需要暂时用另一个 URI 来访问。</p>
+<p>“<strong>304 Not Modified</strong>” 是一个比较有意思的状态码，它用于 If-Modified-Since 等条件请求，表示资源未修改，用于缓存控制。它不具有通常的跳转含义，但可以理解成“重定向已到缓存的文件”（即“缓存重定向”）。</p>
+<blockquote>
+<p>301、302 和 304 分别涉及了 HTTP 协议里重要的“重定向跳转”和“缓存控制”</p>
+</blockquote>
+<h4 id="4xx">4xx</h4>
+<p>“<strong>400 Bad Request</strong>”是一个通用的错误码，表示请求报文有错误，但具体是数据格式错误、缺少请求头还是 URI 超长它没有明确说，只是一个笼统的错误，客户端看到 400 只会是“一头雾水”“不知所措”。所以，在开发 Web 应用时应当尽量避免给客户端返回 400，而是要用其他更有明确含义的状态码。</p>
+<p>“<strong>403 Forbidden</strong>”实际上不是客户端的请求出错，而是表示服务器禁止访问资源。原因可能多种多样，例如信息敏感、法律禁止等，如果服务器友好一点，可以在 body 里详细说明拒绝请求的原因，不过现实中通常都是直接给一个“闭门羹”。</p>
+<p>“<strong>404 Not Found</strong>”可能是我们最常看见也是最不愿意看到的一个状态码，它的原意是资源在本服务器上未找到，所以无法提供给客户端。但现在已经被“用滥了”，只要服务器“不高兴”就可以给出个 404，而我们也无从得知后面到底是真的未找到，还是有什么别的原因，某种程度上它比 403 还要令人讨厌。</p>
+<p>4××里剩下的一些代码较明确地说明了错误的原因，都很好理解，开发中常用的有：</p>
+<ul>
+<li>405 Method Not Allowed：不允许使用某些方法操作资源，例如不允许 POST 只能 GET；</li>
+<li>406 Not Acceptable：资源无法满足客户端请求的条件，例如请求中文但只有英文；</li>
+<li>408 Request Timeout：请求超时，服务器等待了过长的时间；</li>
+<li>409 Conflict：多个请求发生了冲突，可以理解为多线程并发时的竞态；</li>
+<li>413 Request Entity Too Large：请求报文里的 body 太大；</li>
+<li>414 Request-URI Too Long：请求行里的 URI 太大；</li>
+<li>429 Too Many Requests：客户端发送了太多的请求，通常是由于服务器的限连策略；</li>
+<li>431 Request Header Fields Too Large：请求头某个字段或总体太大；</li>
+</ul>
+<h4 id="5xx">5xx</h4>
+<p>5××类状态码表示客户端请求报文正确，但服务器在处理时内部发生了错误，无法返回应有的响应数据，是服务器端的“错误码”。</p>
+<p>“<strong>500 Internal Server Error</strong>”与 400 类似，也是一个通用的错误码，服务器究竟发生了什么错误我们是不知道的。不过对于服务器来说这应该算是好事，通常不应该把服务器内部的详细信息，例如出错的函数调用栈告诉外界。虽然不利于调试，但能够防止黑客的窥探或者分析。</p>
+<p>“<strong>501 Not Implemented</strong>”表示客户端请求的功能还不支持，这个错误码比 500 要“温和”一些，和“即将开业，敬请期待”的意思差不多，不过具体什么时候“开业”就不好说了。</p>
+<p>“<strong>502 Bad Gateway</strong>”通常是服务器作为网关或者代理时返回的错误码，表示服务器自身工作正常，访问后端服务器时发生了错误，但具体的错误原因也是不知道的。</p>
+<p>“<strong>503 Service Unavailable</strong>”表示服务器当前很忙，暂时无法响应服务，我们上网时有时候遇到的“网络服务正忙，请稍后重试”的提示信息就是状态码 503。</p>
+<p>503 是一个“临时”的状态，很可能过几秒钟后服务器就不那么忙了，可以继续提供服务，所以 503 响应报文里通常还会有一个“<strong>Retry-After</strong>”字段，指示客户端可以在多久以后再次尝试发送请求。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/http/%E4%B8%89%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E8%BF%9B%E9%98%B6%E7%AF%87/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

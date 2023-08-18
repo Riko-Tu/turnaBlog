@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>golang - Category - Turan</title>
+        <link>http://example.org/categories/golang/</link>
+        <description>golang - Category - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Wed, 16 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/golang/" rel="self" type="application/rss+xml" /><item>
+    <title>go语言设计与实现</title>
+    <link>http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
+    <pubDate>Wed, 16 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</guid>
+    <description><![CDATA[url:https://draveness.me/golang/docs/part1-prerequisite/ch01-prepare/golang-debug/ 第一章 1.0、调试go源代码 在goroot目录下./src/make.bash 脚本会编译 Go 语言的二进制、工具链以及标准库和命令并将源代码和]]></description>
+</item>
+</channel>
+</rss>

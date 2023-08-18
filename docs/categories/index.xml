@@ -1,46 +1,55 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Categories - Category - 我的全新 Hugo 网站</title>
-        <link>http://localhost:1313/categories/</link>
-        <description>Categories - Category - 我的全新 Hugo 网站</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/" rel="self" type="application/rss+xml" /><item>
+        <title>Categories - Category - Turan</title>
+        <link>http://example.org/categories/</link>
+        <description>Categories - Category - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Wed, 16 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>golang</title>
+    <link>http://example.org/categories/golang/</link>
+    <pubDate>Wed, 16 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/categories/golang/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>css3</title>
-    <link>http://localhost:1313/categories/css3/</link>
+    <link>http://example.org/categories/css3/</link>
     <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/categories/css3/</guid>
+    <guid>http://example.org/categories/css3/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>javascript</title>
-    <link>http://localhost:1313/categories/javascript/</link>
+    <link>http://example.org/categories/javascript/</link>
     <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/categories/javascript/</guid>
+    <guid>http://example.org/categories/javascript/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>linux</title>
-    <link>http://localhost:1313/categories/linux/</link>
+    <link>http://example.org/categories/linux/</link>
     <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/categories/linux/</guid>
+    <guid>http://example.org/categories/linux/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>Markdown</title>
-    <link>http://localhost:1313/categories/markdown/</link>
+    <link>http://example.org/categories/markdown/</link>
     <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/categories/markdown/</guid>
+    <guid>http://example.org/categories/markdown/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>documentation</title>
-    <link>http://localhost:1313/categories/documentation/</link>
-    <pubDate>Thu, 05 Mar 2020 16:30:05 &#43;0800</pubDate>
+    <title>MQ</title>
+    <link>http://example.org/categories/mq/</link>
+    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://localhost:1313/categories/documentation/</guid>
+    <guid>http://example.org/categories/mq/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

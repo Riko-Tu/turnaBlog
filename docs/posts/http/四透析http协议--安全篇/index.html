@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="《四》透析http协议&ndash;安全篇 什么是安全？ 通常认为，如果通信过程具备了四个特性，就可以认为是“安全”的，这四个特性是：机密性、完" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="《四》透析http协议&ndash;安全篇 什么是安全？ 通常认为，如果通信过程具备了四个特性，就可以认为是“安全”的，这四个特性是：机密性、完"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" /><link rel="prev" href="http://example.org/posts/javascript/vue/" /><link rel="next" href="http://example.org/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/http\/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87\/"
+        },"genre": "posts","wordcount":  7293 ,
+        "url": "http:\/\/example.org\/posts\/http\/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7293 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是安全">什么是安全？</a></li>
+    <li><a href="#https">https</a></li>
+    <li><a href="#ssltls">SSL/TLS</a></li>
+    <li><a href="#openssl">OpenSSL</a></li>
+    <li><a href="#加密算法">加密算法</a></li>
+    <li><a href="#对称加密">对称加密</a></li>
+    <li><a href="#非对称加密">非对称加密</a></li>
+    <li><a href="#混合加密">混合加密</a></li>
+    <li><a href="#摘要算法">摘要算法</a></li>
+    <li><a href="#数字签名">数字签名</a></li>
+    <li><a href="#数字证书ca">数字证书CA</a></li>
+    <li><a href="#tls协议组成">TLS协议组成</a></li>
+    <li><a href="#ecdhe-握手过程">ECDHE 握手过程</a>
+      <ul>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="四透析http协议--安全篇">《四》透析http协议&ndash;安全篇</h1>
+<h2 id="什么是安全">什么是安全？</h2>
+<p>通常认为，如果通信过程具备了四个特性，就可以认为是“安全”的，这四个特性是：机密性、完整性，身份认证和不可否认。</p>
+<p><strong>机密性</strong>（Secrecy/Confidentiality）是指对数据的“保密”，只能由可信的人访问，对其他人是不可见的“秘密”，简单来说就是不能让不相关的人看到不该看的东西。</p>
+<p>比如小明和小红私下聊天，但“隔墙有耳”，被小强在旁边的房间里全偷听到了，这就是没有机密性。我们之前一直用的 Wireshark ，实际上也是利用了 HTTP 的这个特点，捕获了传输过程中的所有数据。</p>
+<p><strong>完整性</strong>（Integrity，也叫一致性）是指数据在传输过程中没有被窜改，不多也不少，“完完整整”地保持着原状。</p>
+<p>机密性虽然可以让数据成为“秘密”，但不能防止黑客对数据的修改，黑客可以替换数据，调整数据的顺序，或者增加、删除部分数据，破坏通信过程。</p>
+<p>比如，小明给小红写了张纸条：“明天公园见”。小强把“公园”划掉，模仿小明的笔迹把这句话改成了“明天广场见”。小红收到后无法验证完整性，信以为真，第二天的约会就告吹了。</p>
+<p><strong>身份认证</strong>（Authentication）是指确认对方的真实身份，也就是“证明你真的是你”，保证消息只能发送给可信的人。</p>
+<p>如果通信时另一方是假冒的网站，那么数据再保密也没有用，黑客完全可以使用冒充的身份“套”出各种信息，加密和没加密一样。</p>
+<p>比如，小明给小红写了封情书：“我喜欢你”，但不留心发给了小强。小强将错就错，假冒小红回复了一个“白日做梦”，小明不知道这其实是小强的话，误以为是小红的，后果可想而知。</p>
+<p>第四个特性是<strong>不可否认</strong>（Non-repudiation/Undeniable），也叫不可抵赖，意思是不能否认已经发生过的行为，不能“说话不算数”“耍赖皮”。</p>
+<p>比如，小明借了小红一千元，没写借条，第二天矢口否认，小红也确实拿不出借钱的证据，只能认倒霉。另一种情况是小明借钱后还了小红，但没写收条，小红于是不承认小明还钱的事，说根本没还，要小明再掏出一千元。</p>
+<p>所以，只有同时具备了机密性、完整性、身份认证、不可否认这四个特性，通信双方的利益才能有保障，才能算得上是真正的安全</p>
+<h2 id="https">https</h2>
+<p>HTTPS 其实是一个“非常简单”的协议，RFC 文档很小，只有短短的 7 页，里面规定了<strong>新的协议名“https”，默认端口号 443</strong>，至于其他的什么请求 - 应答模式、报文结构、请求方法、URI、头字段、连接管理等等都完全沿用 HTTP，没有任何新的东西。</p>
+<p>也就是说，除了协议名“http”和端口号 80 这两点不同，HTTPS 协议在语法、语义上和 HTTP 完全一样，优缺点也“照单全收”（当然要除去“明文”和“不安全”）。</p>
+<p>既然没有新东西，HTTPS 凭什么就能做到机密性、完整性这些安全特性呢？</p>
+<p>秘密就在于 HTTPS 名字里的“S”，它把 HTTP 下层的传输协议由 TCP/IP 换成了 SSL/TLS，由“<strong>HTTP over TCP/IP</strong>”变成了“<strong>HTTP over SSL/TLS</strong>”，让 HTTP 运行在了安全的 SSL/TLS 协议上（可参考第 4 讲和第 5 讲），收发报文不再使用 Socket API，而是调用专门的安全接口。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="tls.jpg"
+        data-srcset="tls.jpg, tls.jpg 1.5x, tls.jpg 2x"
+        data-sizes="auto"
+        alt="tls.jpg"
+        title="tls" /></p>
+<h2 id="ssltls">SSL/TLS</h2>
+<p>SSL 即安全套接层（Secure Sockets Layer），在 OSI 模型中处于第 5 层（会话层），由网景公司于 1994 年发明，有 v2 和 v3 两个版本，而 v1 因为有严重的缺陷从未公开过。</p>
+<p>SSL 发展到 v3 时已经证明了它自身是一个非常好的安全通信协议，于是互联网工程组 IETF 在 1999 年把它改名为 TLS（传输层安全，Transport Layer Security），正式标准化，版本号从 1.0 重新算起，所以 TLS1.0 实际上就是 SSLv3.1。</p>
+<p>TLS 由记录协议、握手协议、警告协议、变更密码规范协议、扩展协议等几个子协议组成，综合使用了对称加密、非对称加密、身份认证等许多密码学前沿技术。</p>
+<p>浏览器和服务器在使用 TLS 建立连接时需要选择一组恰当的加密算法来实现安全通信，这些算法的组合被称为“密码套件”（cipher suite，也叫加密套件）。</p>
+<p>使用的 TLS 是 1.2，客户端和服务器都支持非常多的密码套件，而最后协商选定的是“ECDHE-RSA-AES256-GCM-SHA384”。</p>
+<p>其实 TLS 的密码套件命名非常规范，格式很固定。基本的形式是“密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法”，比如刚才的密码套件的意思就是：</p>
+<p>“握手时使用 ECDHE 算法进行密钥交换，用 RSA 签名和身份认证，握手后的通信使用 AES 对称算法，密钥长度 256 位，分组模式是 GCM，摘要算法 SHA384 用于消息认证和产生随机数。”</p>
+<h2 id="openssl">OpenSSL</h2>
+<p>说到 TLS，就不能不谈到 OpenSSL，它是一个著名的开源密码学程序库和工具包，几乎支持所有公开的加密算法和协议，已经成为了事实上的标准，许多应用软件都会使用它作为底层库来实现 TLS 功能，包括常用的 Web 服务器 Apache、Nginx 等。</p>
+<p>OpenSSL 是从另一个开源库 SSLeay 发展出来的，曾经考虑命名为“OpenTLS”，但当时（1998 年）TLS 还未正式确立，而 SSL 早已广为人知，所以最终使用了“OpenSSL”的名字。</p>
+<h2 id="加密算法">加密算法</h2>
+<p>实现机密性最常用的手段是“<strong>加密</strong>”（encrypt），就是把消息用某种方式转换成谁也看不懂的乱码，只有掌握特殊“钥匙”的人才能再转换出原始文本。</p>
+<p>这里的“钥匙”就叫做“<strong>密钥</strong>”（key），加密前的消息叫“<strong>明文</strong>”（plain text/clear text），加密后的乱码叫“<strong>密文</strong>”（cipher text），使用密钥还原明文的过程叫“<strong>解密</strong>”（decrypt），是加密的反操作，加密解密的操作过程就是“<strong>加密算法</strong>”。</p>
+<p>由于 HTTPS、TLS 都运行在计算机上，所以“密钥”就是一长串的数字，但约定俗成的度量单位是“位”（bit），而不是“字节”（byte）。比如，说密钥长度是 128，就是 16 字节的二进制串，密钥长度 1024，就是 128 字节的二进制串。</p>
+<p>按照密钥的使用方式，加密可以分为两大类：<strong>对称加密和非对称加密</strong>。</p>
+<h2 id="对称加密">对称加密</h2>
+<p>“对称加密”很好理解，就是指加密和解密时使用的密钥都是同一个，是“对称”的。只要保证了密钥的安全，那整个通信过程就可以说具有了机密性。</p>
+<p>TLS 里有非常多的对称加密算法可供选  目前常用的只有 AES 和 ChaCha20。</p>
+<ul>
+<li>AES</li>
+</ul>
+<p>AES 的意思是“高级加密标准”（Advanced Encryption Standard），密钥长度可以是 128、192 或 256。它是 DES 算法的替代者，安全强度很高，性能也很好，而且有的硬件还会做特殊优化，所以非常流行，是应用最广泛的对称加密算法。</p>
+<ul>
+<li>ChaCha20</li>
+</ul>
+<p>ChaCha20 是 Google 设计的另一种加密算法，密钥长度固定为 256 位，纯软件运行性能要超过 AES，曾经在移动客户端上比较流行，但 ARMv8 之后也加入了 AES 硬件优化，所以现在不再具有明显的优势，但仍然算得上是一个不错算法。</p>
+<ul>
+<li>加密分组模式</li>
+</ul>
+<p>对称算法还有一个“<strong>分组模式</strong>”的概念，它可以让算法用固定长度的密钥加密任意长度的明文</p>
+<p>最新的分组模式被称为 AEAD（Authenticated Encryption with Associated Data），在加密的同时增加了认证的功能，常用的是 GCM、CCM 和 Poly1305。</p>
+<p>把上面这些组合起来，就可以得到 TLS 密码套件中定义的对称加密算法。</p>
+<p>比如，AES128-GCM，意思是密钥长度为 128 位的 AES 算法，使用的分组模式是 GCM；ChaCha20-Poly1305 的意思是 ChaCha20 算法，使用的分组模式是 Poly1305。</p>
+<p>你可以用实验环境的 URI“/24-1”来测试 OpenSSL 里的 AES128-CBC，在 URI 后用参数“key”“plain”输入密钥和明文，服务器会在响应报文里输出加密解密的结果。</p>
+<h2 id="非对称加密">非对称加密</h2>
+<p>对称加密看上去好像完美地实现了机密性，但其中有一个很大的问题：如何把密钥安全地传递给对方，术语叫“<strong>密钥交换</strong>”</p>
+<p>它有两个密钥，一个叫“<strong>公钥</strong>”（public key），一个叫“<strong>私钥</strong>”（private key）。两个密钥是不同的，“不对称”，<strong>公钥可以公开给任何人使用</strong>，而私钥必须严格保密。</p>
+<p>公钥和私钥有个特别的“<strong>单向</strong>”性，虽然都可以用来加密解密，但公钥加密后只能用私钥解密，反过来，私钥加密后也只能用公钥解密。</p>
+<p>在 TLS 里只有很少的几种，比如 DH、DSA、RSA、ECC 等。</p>
+<p>RSA 可能是其中最著名的一个，几乎可以说是非对称加密的代名词，它的安全性基于“<strong>整数分解</strong>”的数学难题，使用两个超大素数的乘积作为生成密钥的材料，想要从公钥推算出私钥是非常困难的。</p>
+<p>10 年前 RSA 密钥的推荐长度是 1024，但随着计算机运算能力的提高，现在 1024 已经不安全，普遍认为至少要 2048 位。</p>
+<p>比起 RSA，ECC 在安全强度和性能上都有明显的优势。160 位的 ECC 相当于 1024 位的 RSA，而 224 位的 ECC 则相当于 2048 位的 RSA。因为密钥短，所以相应的计算量、消耗的内存和带宽也就少，加密解密的性能就上去了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e5%85%ac%e9%92%a5.jpg"
+        data-srcset="%e5%85%ac%e9%92%a5.jpg, %e5%85%ac%e9%92%a5.jpg 1.5x, %e5%85%ac%e9%92%a5.jpg 2x"
+        data-sizes="auto"
+        alt="公钥.jpg"
+        title="公钥" /></p>
+<h2 id="混合加密">混合加密</h2>
+<p>RSA 的运算速度是非常慢的，2048 位的加解密大约是 15KB/S（微秒或毫秒级），而 AES128 则是 13MB/S（纳秒级），差了几百倍。</p>
+<p>TLS 里使用的<strong>混合加密</strong>方式，其实说穿了也很简单：</p>
+<p>在通信刚开始的时候使用非对称算法，比如 RSA、ECDHE，首先解决密钥交换的问题。</p>
+<p>然后用随机数产生对称算法使用的“<strong>会话密钥</strong>”（session key），再用公钥加密。因为会话密钥很短，通常只有 16 字节或 32 字节，所以慢一点也无所谓。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e6%b7%b7%e5%90%88%e5%8a%a0%e5%af%86.jpg"
+        data-srcset="%e6%b7%b7%e5%90%88%e5%8a%a0%e5%af%86.jpg, %e6%b7%b7%e5%90%88%e5%8a%a0%e5%af%86.jpg 1.5x, %e6%b7%b7%e5%90%88%e5%8a%a0%e5%af%86.jpg 2x"
+        data-sizes="auto"
+        alt="混合加密.jpg"
+        title="混合加密" /></p>
+<blockquote>
+<p>黑客虽然拿不到会话密钥，无法破解密文，但可以通过窃听收集到足够多的密文，再尝试着修改、重组后发给网站。因为没有完整性保证，服务器只能“照单全收”，然后他就可以通过服务器的响应获取进一步的线索，最终就会破解出明文。</p>
+<p>在机密性的基础上还必须加上完整性、身份认证等特性，才能实现真正的安全。</p>
+</blockquote>
+<h2 id="摘要算法">摘要算法</h2>
+<p>实现完整性的手段主要是<strong>摘要算法</strong>（Digest Algorithm），也就是常说的散列函数、哈希函数（Hash Function）。</p>
+<p>你可以把摘要算法近似地理解成一种特殊的压缩算法，它能够把任意长度的数据“压缩”成固定长度、而且独一无二的“摘要”字符串，就好像是给这段数据生成了一个数字“指纹”。</p>
+<p>换一个角度，也可以把摘要算法理解成特殊的“单向”加密算法，它只有算法，没有密钥，加密后的数据无法解密，不能从摘要逆推出原文。</p>
+<p>因为摘要算法对输入具有“单向性”和“雪崩效应”，输入的微小不同会导致输出的剧烈变化，所以也被 TLS 用来生成伪随机数（PRF，pseudo random function）</p>
+<p>目前 TLS 推荐使用的是 SHA-1 的后继者：SHA-2。</p>
+<p>SHA-2 实际上是一系列摘要算法的统称，总共有 6 种，常用的有 SHA224、SHA256、SHA384，分别能够生成 28 字节、32 字节、48 字节的摘要。</p>
+<p>摘要算法保证了“数字摘要”和原文是完全等价的。所以，我们只要在原文后附上它的摘要，就能够保证数据的完整性。</p>
+<p>比如，你发了条消息：“转账 1000 元”，然后再加上一个 SHA-2 的摘要。网站收到后也计算一下消息的摘要，把这两份“指纹”做个对比，如果一致，就说明消息是完整可信的，没有被修改。</p>
+<p>不过摘要算法不具有机密性，如果明文传输，那么黑客可以修改消息后把摘要也一起改了，网站还是鉴别不出完整性。</p>
+<p>所以，真正的完整性必须要建立在机密性之上，在混合加密系统里用会话密钥加密消息和摘要，这样黑客无法得知明文，也就没有办法动手脚了。</p>
+<p>这有个术语，叫哈希消息认证码（HMAC）。</p>
+<blockquote>
+<p>MD5（Message-Digest 5）、SHA-1（Secure Hash Algorithm 1）  不够安全，在 TLS 里已经被禁止使用了。</p>
+</blockquote>
+<h2 id="数字签名">数字签名</h2>
+<p>实现完整性的手段主要是<strong>摘要算法</strong>（Digest Algorithm），也就是常说的散列函数、哈希函数（Hash Function）</p>
+<p>这个东西就是非对称加密里的“<strong>私钥</strong>”，使用私钥再加上摘要算法，就能够实现“<strong>数字签名</strong>”，同时实现“身份认证”和“不可否认”。</p>
+<p>数字签名的原理其实很简单，就是把公钥私钥的用法反过来，之前是公钥加密、私钥解密，现在是私钥加密、公钥解密。</p>
+<p>但又因为非对称加密效率太低，所以私钥只加密原文的摘要，这样运算量就小的多，而且得到的数字签名也很小，方便保管和传输。</p>
+<p>签名和公钥一样完全公开，任何人都可以获取。但这个签名只有用私钥对应的公钥才能解开，拿到摘要后，再比对原文验证完整性，就可以像签署文件一样证明消息确实是</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e6%95%b0%e5%ad%97%e7%ad%be%e5%90%8d.jpg"
+        data-srcset="%e6%95%b0%e5%ad%97%e7%ad%be%e5%90%8d.jpg, %e6%95%b0%e5%ad%97%e7%ad%be%e5%90%8d.jpg 1.5x, %e6%95%b0%e5%ad%97%e7%ad%be%e5%90%8d.jpg 2x"
+        data-sizes="auto"
+        alt="数字签名.jpg"
+        title="数字签名" />你发的。</p>
+<p>刚才的这两个行为也有专用术语，叫做“<strong>签名</strong>”和“<strong>验签</strong>”</p>
+<h2 id="数字证书ca">数字证书CA</h2>
+<p>这里还有一个“<strong>公钥的信任</strong>”问题。因为谁都可以发布公钥，我们还缺少防止黑客伪造公钥的手段，也就是说，怎么来判断这个公钥就是你或者某宝的公钥呢？</p>
+<p>这个“第三方”就是我们常说的<strong>CA</strong>（Certificate Authority，证书认证机构）。它就像网络世界里的公安局、教育部、公证中心，具有极高的可信度，由它来给各个公钥签名，用自身的信誉来保证公钥无法伪造，是可信的。</p>
+<p>CA 对公钥的签名认证也是有格式的，不是简单地把公钥绑定在持有者身份上就完事了，还要包含序列号、用途、颁发者、有效时间等等，把这些打成一个包再签名，完整地证明公钥关联的各种信息，形成“<strong>数字证书</strong>”（Certificate）。</p>
+<p>知名的 CA 全世界就那么几家，比如 DigiCert、VeriSign、Entrust、Let’s Encrypt 等，它们签发的证书分 DV、OV、EV 三种，区别在于可信程度。</p>
+<p>DV 是最低的，只是域名级别的可信，背后是谁不知道。EV 是最高的，经过了法律和审计的严格核查，可以证明网站拥有者的身份（在浏览器地址栏会显示出公司的名字，例如 Apple、GitHub 的网站）。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="%e8%af%81%e4%b9%a6%e9%93%be.jpg"
+        data-srcset="%e8%af%81%e4%b9%a6%e9%93%be.jpg, %e8%af%81%e4%b9%a6%e9%93%be.jpg 1.5x, %e8%af%81%e4%b9%a6%e9%93%be.jpg 2x"
+        data-sizes="auto"
+        alt="证书链.jpg"
+        title="证书链" /></p>
+<h2 id="tls协议组成">TLS协议组成</h2>
+<p>TLS 包含几个子协议，你也可以理解为它是由几个不同职责的模块组成，比较常用的有记录协议、警报协议、握手协议、变更密码规范协议等。</p>
+<p><strong>记录协议</strong>（Record Protocol）规定了 TLS 收发数据的基本单位：记录（record）。它有点像是 TCP 里的 segment，所有的其他子协议都需要通过记录协议发出。但多个记录数据可以在一个 TCP 包里一次性发出，也并不需要像 TCP 那样返回 ACK。</p>
+<p><strong>警报协议</strong>（Alert Protocol）的职责是向对方发出警报信息，有点像是 HTTP 协议里的状态码。比如，protocol_version 就是不支持旧版本，bad_certificate 就是证书有问题，收到警报后另一方可以选择继续，也可以立即终止连接。</p>
+<p><strong>握手协议</strong>（Handshake Protocol）是 TLS 里最复杂的子协议，要比 TCP 的 SYN/ACK 复杂的多，浏览器和服务器会在握手过程中协商 TLS 版本号、随机数、密码套件等信息，然后交换证书和密钥参数，最终双方协商得到会话密钥，用于后续的混合加密系统。</p>
+<p>最后一个是<strong>变更密码规范协议</strong>（Change Cipher Spec Protocol），它非常简单，就是一个“通知”，告诉对方，后续的数据都将使用加密保护。那么反过来，在它之前，数据都是明文的。</p>
+<p>下面的这张图简要地描述了 TLS 的握手过程，其中每一个“框”都是一个记录，多个记录组合成一个 TCP 包发送。所以，最多经过两次消息往返（4 个消息）就可以完成握手，然后就可以在安全的通信环境里发送 HTTP 报文，实现 HTTPS 协议。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="tls%e6%8f%a1%e6%89%8b.jpg"
+        data-srcset="tls%e6%8f%a1%e6%89%8b.jpg, tls%e6%8f%a1%e6%89%8b.jpg 1.5x, tls%e6%8f%a1%e6%89%8b.jpg 2x"
+        data-sizes="auto"
+        alt="tls握手.jpg"
+        title="tls握手" /></p>
+<h2 id="ecdhe-握手过程">ECDHE 握手过程</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="TLS%e6%8f%a1%e6%89%8b%e8%af%a6%e8%a7%a31.jpg"
+        data-srcset="TLS%e6%8f%a1%e6%89%8b%e8%af%a6%e8%a7%a31.jpg, TLS%e6%8f%a1%e6%89%8b%e8%af%a6%e8%a7%a31.jpg 1.5x, TLS%e6%8f%a1%e6%89%8b%e8%af%a6%e8%a7%a31.jpg 2x"
+        data-sizes="auto"
+        alt="TLS握手详解1.jpg"
+        title="TLS握手详解1" /></p>
+<p>在 TCP 建立连接之后，浏览器会首先发一个“<strong>Client Hello</strong>”消息，也就是跟服务器“打招呼”。里面有客户端的版本号、支持的密码套件，还有一个<strong>随机数（Client Random）</strong>，用于后续生成会话密钥。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Handshake Protocol: Client Hello
+</span></span><span class="line"><span class="cl">    Version: TLS 1.2 (0x0303)
+</span></span><span class="line"><span class="cl">    Random: 1cbf803321fd2623408dfe…
+</span></span><span class="line"><span class="cl">    Cipher Suites (17 suites)
+</span></span><span class="line"><span class="cl">        Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xc02f)
+</span></span><span class="line"><span class="cl">        Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (0xc030)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>作为“礼尚往来”，服务器收到“Client Hello”后，会返回一个“Server Hello”消息。把版本号对一下，也给出一个<strong>随机数（Server Random）</strong>，然后从客户端的列表里选一个作为本次通信使用的密码套件，在这里它选择了“TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384”。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Handshake Protocol: Server Hello
+</span></span><span class="line"><span class="cl">    Version: TLS 1.2 (0x0303)
+</span></span><span class="line"><span class="cl">    Random: 0e6320f21bae50842e96…
+</span></span><span class="line"><span class="cl">    Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (0xc030)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来是一个关键的操作，因为服务器选择了 ECDHE 算法，所以它会在证书后发送“<strong>Server Key Exchange</strong>”消息，里面是<strong>椭圆曲线的公钥（Server Params）</strong>，用来实现密钥交换算法，再加上自己的私钥签名认证。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Handshake Protocol: Server Key Exchange
+</span></span><span class="line"><span class="cl">    EC Diffie-Hellman Server Params
+</span></span><span class="line"><span class="cl">        Curve Type: named_curve (0x03)
+</span></span><span class="line"><span class="cl">        Named Curve: x25519 (0x001d)
+</span></span><span class="line"><span class="cl">        Pubkey: 3b39deaf00217894e...
+</span></span><span class="line"><span class="cl">        Signature Algorithm: rsa_pkcs1_sha512 (0x0601)
+</span></span><span class="line"><span class="cl">        Signature: 37141adac38ea4...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后是“<strong>Server Hello Done</strong>”消息，服务器说：“我的信息就是这些，打招呼完毕。”</p>
+<p>这样第一个消息往返就结束了（两个 TCP 包），结果是客户端和服务器通过明文共享了三个信息：<strong>Client Random、Server Random 和 Server Params</strong>。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="TLS%e8%af%a6%e8%a7%a32.jpg"
+        data-srcset="TLS%e8%af%a6%e8%a7%a32.jpg, TLS%e8%af%a6%e8%a7%a32.jpg 1.5x, TLS%e8%af%a6%e8%a7%a32.jpg 2x"
+        data-sizes="auto"
+        alt="TLS详解2.jpg"
+        title="TLS详解2" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="TLS%e8%af%a6%e8%a7%a33.jpg"
+        data-srcset="TLS%e8%af%a6%e8%a7%a33.jpg, TLS%e8%af%a6%e8%a7%a33.jpg 1.5x, TLS%e8%af%a6%e8%a7%a33.jpg 2x"
+        data-sizes="auto"
+        alt="TLS详解3.jpg"
+        title="TLS详解3" /></p>
+<p>客户端按照密码套件的要求，也生成一个<strong>椭圆曲线的公钥（Client Params）</strong>，用“<strong>Client Key Exchange</strong>”消息发给服务器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Handshake Protocol: Client Key Exchange
+</span></span><span class="line"><span class="cl">    EC Diffie-Hellman Client Params
+</span></span><span class="line"><span class="cl">        Pubkey: 8c674d0e08dc27b5eaa…
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在客户端和服务器手里都拿到了密钥交换算法的两个参数（Client Params、Server Params），就用 ECDHE 算法一阵算，算出了一个新的东西，叫“<strong>Pre-Master</strong>”，其实也是一个随机数。</p>
+<p>现在客户端和服务器手里有了三个随机数：<strong>Client Random、Server Random 和 Pre-Master</strong>。用这三个作为原始材料，就可以生成用于加密会 话的主密钥，叫“<strong>Master Secret</strong>”。而黑客因为拿不到“Pre-Master”，所以也就得不到主密钥。</p>
+<h3 id="小结">小结</h3>
+<blockquote>
+<ol>
+<li>HTTPS 协议会先与服务器执行 TCP 握手，然后执行 TLS 握手，才能建立安全连接；</li>
+<li>握手的目标是安全地交换对称密钥，需要三个随机数，第三个随机数“Pre-Master”必须加密传输，绝对不能让黑客破解；</li>
+<li>“Hello”消息交换随机数，“Key Exchange”消息交换“Pre-Master”；</li>
+<li>“Change Cipher Spec”之前传输的都是明文，之后都是对称密钥加密的密文。</li>
+</ol>
+</blockquote>
+<h2 id="总结">总结</h2>
+<blockquote>
+<ol>
+<li>网络传输提出了四个安全的概念：机密性、完整性，身份认证和不可否认。</li>
+<li>https是http+ssl/tls的组成</li>
+<li>TLS 由<strong>记录协议、握手协议、警告协议、变更密码规范协议</strong>、扩展协议等几个子协议组成，综合使用了 <strong>对称加密、非对称加密、身份认证</strong>等许多密码学前沿技术。</li>
+<li>加密算法是指用秘钥加密和解密的过程；主要方式为<strong>对称加密</strong>和<strong>非对称加密</strong></li>
+<li>对称加密：主要使用AES ，加密解密使用相同的秘钥，在tls中由三个随机数生成秘钥</li>
+<li>非对称加密：主要使用RSA，有公钥私钥两把钥匙，公钥加密只能私钥解密，私钥加密只能公钥解密</li>
+<li>混合加密：因为非对称加密的性能较差，在tls中 第一次时候非对称加密，之后都时候对称加密</li>
+<li>数字签名：由非对称加密+摘要算法生成。将body数据进行摘要，再将摘要使用私钥加密，加密后的密文就叫数字签名</li>
+</ol>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/http/%E5%9B%9B%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%AE%89%E5%85%A8%E7%AF%87/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/javascript/vue/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/http/%E4%BA%8C%E9%80%8F%E6%9E%90http%E5%8D%8F%E8%AE%AE--%E5%9F%BA%E7%A1%80%E7%AF%87/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

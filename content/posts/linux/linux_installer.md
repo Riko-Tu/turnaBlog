@@ -1,14 +1,13 @@
 ---
-title: "linux 各种软件安装"
+title: "linux - 软件安装"
 date: 2023-08-01T15:06:34+08:00
 draft: false
 description: "有[featuredImagePreview]图片时，鼠标聚焦图片展示该文字"
 author: "Turan"
-tags: [软件安装]
+tags: [linux]
 categories: [linux]
 
 hiddenFromHomePage: false
-summary: "这是摘要"
 toc:
     auto: ture
 ---
