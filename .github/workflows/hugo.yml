@@ -26,4 +26,4 @@ jobs:
           git config user.email "lisiai797@gmail.com"
           git add .
           git commit -m "自动更新来自turnaBlog的内容"
-          git push https://Riko-Tu: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@github.com/Riko-Tu/riko-tu.github.io.git
+          git push https://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@github.com/Riko-Tu/riko-tu.github.io.git
