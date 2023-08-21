@@ -39,17 +39,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: '14'
 
 
 
-      - name : 安装依赖
+      - name : 环境配置
         run: |
-          npm install algoliasearch 
+          ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_SEARCH_KEY=${{ secrets.ALGOLIA_SEARCH_KEY }}
+
 
 
       - name: 更新 ALGOLIA index.json
         run: |
-          ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
-          ALGOLIA_SEARCH_KEY=${{ secrets.ALGOLIA_SEARCH_KEY }}
-          node upLoad_algolia.js
+          npm install algoliasearch 
+          node ./upLoad_algolia.js
