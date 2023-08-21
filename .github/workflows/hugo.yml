@@ -6,7 +6,8 @@ on:
       - master # 更改为你使用的主分支名
 
 jobs:
-  build:
+  # 推送网页内容
+  push:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,15 +30,18 @@ jobs:
           git push https://${{ secrets.SuperSecret }}:x-oauth-basic@github.com/Riko-Tu/riko-tu.github.io.git
 
 
-## 更新 index 文件
 
+  # 更新 index 文件
+  upload:
+    runs-on: ubuntu-latest
 
+    steps:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
 
-      - name: Run JavaScript code
+      - name: 更新 ALGOLIA index.json
         run: |
           ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_SEARCH_KEY=${{ secrets.ALGOLIA_SEARCH_KEY }}
