@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>database - Category - Turan</title>
+        <link>http://example.org/categories/database/</link>
+        <description>database - Category - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/database/" rel="self" type="application/rss+xml" /><item>
+    <title>mongoDB - 基础介绍</title>
+    <link>http://example.org/posts/database/mongodb/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/database/mongodb/</guid>
+    <description><![CDATA[《一》mongoDB&mdash;初始与安装 1、什么是mongdb 1.1 介绍 MongoDB是一个文档数据库(以]SON 为数模型)，由C++语言编]]></description>
+</item>
+<item>
+    <title>mongoDB -《二》 基础命令篇</title>
+    <link>http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/database/%E4%BA%8Cmongodb---%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E7%AF%87/</guid>
+    <description><![CDATA[1、 管理角色介绍 权限名 描述 read 允许用户读取指定数据库 readWrite 允许用户读写指定数据库 dbAdmin 允许用户在指定数据库中执行管理函数，如素引创建、删除，查看统计或]]></description>
+</item>
+<item>
+    <title>mysql - 索引全攻略</title>
+    <link>http://example.org/posts/database/mysqlindex/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/database/mysqlindex/</guid>
+    <description><![CDATA[mysql 索引全攻略 目录 目录结构 1 2 3 4 5 6 7 8 9 . ├── 分类&amp;特点 ├── 存储结构 ├── 查找过程 ├── 索引设计 ├── 索引失效 ├── 查询优化 ├]]></description>
+</item>
+</channel>
+</rss>

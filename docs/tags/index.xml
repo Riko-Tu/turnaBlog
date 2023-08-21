@@ -4,12 +4,76 @@
         <link>http://example.org/tags/</link>
         <description>Tags - Tag - Turan</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
-            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Wed, 16 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>database</title>
+    <link>http://example.org/tags/database/</link>
+    <pubDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/database/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>go</title>
+    <link>http://example.org/tags/go/</link>
+    <pubDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>golang</title>
     <link>http://example.org/tags/golang/</link>
-    <pubDate>Wed, 16 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <pubDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
     <guid>http://example.org/tags/golang/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>cron</title>
+    <link>http://example.org/tags/cron/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/cron/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>docker</title>
+    <link>http://example.org/tags/docker/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/docker/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>git</title>
+    <link>http://example.org/tags/git/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/git/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>http</title>
+    <link>http://example.org/tags/http/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/http/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>mongoDB</title>
+    <link>http://example.org/tags/mongodb/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/mongodb/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>mysql</title>
+    <link>http://example.org/tags/mysql/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/mysql/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -18,38 +82,6 @@
     <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
     <guid>http://example.org/tags/css3/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>javascript</title>
-    <link>http://example.org/tags/javascript/</link>
-    <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
-    <author>Turan</author>
-    <guid>http://example.org/tags/javascript/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>linux</title>
-    <link>http://example.org/tags/linux/</link>
-    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
-    <author>Turan</author>
-    <guid>http://example.org/tags/linux/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Markdown</title>
-    <link>http://example.org/tags/markdown/</link>
-    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
-    <author>Turan</author>
-    <guid>http://example.org/tags/markdown/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>MQ</title>
-    <link>http://example.org/tags/mq/</link>
-    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
-    <author>Turan</author>
-    <guid>http://example.org/tags/mq/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -5,12 +5,20 @@
         <description>linux - Tag - Turan</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
             <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>linux - yum rpm包制作与发布</title>
+    <link>http://example.org/posts/linux/linuxubuntu/</link>
+    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/linux/linuxubuntu/</guid>
+    <description><![CDATA[0. 流程 1 2 3 4 1. 下载rpm包制作工具 2. 把可执行制文件成压缩包 3. 把压缩包制成rpm 4. 将rpm上传的yum源；采取自制yum源方式 1. 下载rpm包]]></description>
+</item>
+<item>
     <title>linux - 基础命令</title>
     <link>http://example.org/posts/linux/linux/</link>
     <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
     <guid>http://example.org/posts/linux/linux/</guid>
-    <description><![CDATA[linux 一、 虚拟机 1. 概念 虚拟机概念 二、 目录结构 1. 根目录 1 * linux采用单根目录结构（不同于windos使用多根目录） 2. 二级目录 linux二级目录]]></description>
+    <description><![CDATA[一、 虚拟机 1. 概念 虚拟机概念 二、 目录结构 1. 根目录 1 * linux采用单根目录结构（不同于windos使用多根目录） 2. 二级目录 linux二级目录 3.]]></description>
 </item>
 <item>
     <title>linux - 软件安装</title>

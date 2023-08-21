@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>git - Tag - Turan</title>
+        <link>http://example.org/tags/git/</link>
+        <description>git - Tag - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/git/" rel="self" type="application/rss+xml" /><item>
+    <title>git - 基础命令</title>
+    <link>http://example.org/posts/git/git/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/git/git/</guid>
+    <description><![CDATA[git .gitignore 文件 有时一些文件最好不要用 Git 去查。这通常是在不知名.gitignore的特殊文件中完成。你可以在github.com/github/gi]]></description>
+</item>
+</channel>
+</rss>

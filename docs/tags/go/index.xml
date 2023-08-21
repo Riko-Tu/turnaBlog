@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>go - Tag - Turan</title>
+        <link>http://example.org/tags/go/</link>
+        <description>go - Tag - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>golang - go 程序管理</title>
+    <link>http://example.org/posts/golang/golang-go-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%A8%8B%E5%BA%8F/</link>
+    <pubDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/golang/golang-go-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%A8%8B%E5%BA%8F/</guid>
+    <description><![CDATA[1 程序介绍 Go程序管理是指在开发和部署Go语言应用程序时，如何管理项目结构、依赖管理和构建过程。以下是关于Go程序管理的几个重要方面： 项目结]]></description>
+</item>
+</channel>
+</rss>

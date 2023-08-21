@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>docker - Category - Turan</title>
+        <link>http://example.org/categories/docker/</link>
+        <description>docker - Category - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/docker/" rel="self" type="application/rss+xml" /><item>
+    <title>docker - 基础命令</title>
+    <link>http://example.org/posts/docker/docker/</link>
+    <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/docker/docker/</guid>
+    <description><![CDATA[docker+微服务+jekins+gitlab+ci/cd 仓库：存储镜像的仓库 镜像：容器的模板，可通过镜像生成多个容器 容器：通过镜像实例化]]></description>
+</item>
+</channel>
+</rss>

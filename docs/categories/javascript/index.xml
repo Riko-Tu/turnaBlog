@@ -5,7 +5,15 @@
         <description>javascript - Category - Turan</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
             <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/javascript/" rel="self" type="application/rss+xml" /><item>
-    <title>javascript 数据结构</title>
+    <title>js - window对象详解</title>
+    <link>http://example.org/posts/javascript/js_window/</link>
+    <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/javascript/js_window/</guid>
+    <description><![CDATA[js window 对象 详解]]></description>
+</item>
+<item>
+    <title>js - 基本数据结构</title>
     <link>http://example.org/posts/javascript/js/</link>
     <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
@@ -13,12 +21,12 @@
     <description><![CDATA[记录js的基本常用语法]]></description>
 </item>
 <item>
-    <title>window对象详解</title>
-    <link>http://example.org/posts/javascript/js_window/</link>
-    <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
+    <title>js - vue 基础语法</title>
+    <link>http://example.org/posts/javascript/vue/</link>
+    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
-    <guid>http://example.org/posts/javascript/js_window/</guid>
-    <description><![CDATA[js window 对象 详解]]></description>
+    <guid>http://example.org/posts/javascript/vue/</guid>
+    <description><![CDATA[vue 插值&amp;指令 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 &lt;div id=&#34;root&#34;&gt; &lt;!-- 可执行js表达式 插值语法： 文本 指令语法： 标签 --&gt; &lt;h1&gt;hello,{{name}},{{Date.now()}}&lt;/h1&gt; &lt;a v-bind:href=&#34;url&#34; &gt; qeqwe&lt;/a&gt; &lt;a :href=&#34;url&#34; &gt; qeqwe&lt;/a&gt; &lt;!-- v-bind]]></description>
 </item>
 </channel>
 </rss>
