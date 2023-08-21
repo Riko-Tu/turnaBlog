@@ -45,7 +45,6 @@ jobs:
 
       - name : 安装依赖
         run: |
-          npm init -f
           npm install algoliasearch 
 
 
