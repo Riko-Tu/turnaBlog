@@ -47,7 +47,8 @@ jobs:
           ALGOLIA_SEARCH_KEY=${{ secrets.ALGOLIA_SEARCH_KEY }}
 
       - name: 更新 ALGOLIA index.json
-        working-directory: /home/runner/work/turnaBlog/
+
         run: |
+          cd $GITHUB_WORKSPACE
           npm ci
           node ./upload.js
