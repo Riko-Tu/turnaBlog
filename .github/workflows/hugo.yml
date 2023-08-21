@@ -45,5 +45,6 @@ jobs:
         run: |
           ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_SEARCH_KEY=${{ secrets.ALGOLIA_SEARCH_KEY }}
+          npm init -f
           npm install algoliasearch 
           node ./upLoad_algolia.js
