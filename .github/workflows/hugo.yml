@@ -41,10 +41,16 @@ jobs:
         with:
           node-version: 14
 
+
+
+      - name : 安装依赖
+        run: |
+          npm init -f
+          npm install algoliasearch 
+
+
       - name: 更新 ALGOLIA index.json
         run: |
           ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_SEARCH_KEY=${{ secrets.ALGOLIA_SEARCH_KEY }}
-          npm init -f
-          npm install algoliasearch 
           node ./upLoad_algolia.js
