@@ -30,13 +30,7 @@ jobs:
 
 
 ## 更新 index 文件
-jobs2:
-  overwrite-index:
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -47,5 +41,5 @@ jobs2:
         run: |
           ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_SEARCH_KEY=${{ secrets.ALGOLIA_SEARCH_KEY }}
-           npm install algoliasearch
+          npm install algoliasearch
           node upLoad_algolia.js
