@@ -25,6 +25,7 @@ jobs:
       - name: 更新 ALGOLIA index.json
 
         run: |
+          ls -l
           node upload.js
 
   # 推送网页内容
