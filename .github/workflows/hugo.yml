@@ -26,7 +26,7 @@ jobs:
 
         run: |
           ls -l
-          node upload.js
+          node static/script/upload.js
 
   # 推送网页内容
   push:
