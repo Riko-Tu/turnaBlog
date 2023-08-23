@@ -180,8 +180,8 @@ hasCJKLanguage = true
     # whether to enable the fontawesome extended syntax
     # 是否使用 fontawesome 扩展语法
     fontawesome = true
-    # whether to show link to Raw Markdown content of the content
-    # 是否显示原始 Markdown 文档内容的链接
+    # whether to show link to Raw markdown content of the content
+    # 是否显示原始 markdown 文档内容的链接
     linkToMarkdown = true
     # whether to show the full text content in RSS
     # 是否在 RSS 中显示全文内容
