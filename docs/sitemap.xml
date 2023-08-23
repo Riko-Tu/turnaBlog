@@ -17,15 +17,17 @@
             <loc>http://example.org/posts/javascript/js_window/</loc><lastmod>2023-08-03T15:19:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/javascript/js/</loc><lastmod>2023-08-03T15:19:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/categories/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/database/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/database/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/go/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/golang/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/categories/golang/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/golang/golang-go%E7%A8%8B%E5%BA%8F%E7%AE%A1%E7%90%86/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/golang/golang-go-redis-%E5%BA%93/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/</loc><lastmod>2023-08-17T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/cron/</loc><lastmod>2023-08-16T15:19:34&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/categories/database/</loc><lastmod>2023-08-16T15:19:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/docker/</loc><lastmod>2023-08-16T15:19:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/categories/docker/</loc><lastmod>2023-08-16T15:19:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/git/</loc><lastmod>2023-08-16T15:19:34&#43;08:00</lastmod></url><url>
@@ -53,6 +55,5 @@
             <loc>http://example.org/posts/mq/%E4%B8%80%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97--%E5%9F%BA%E7%A1%80%E7%AF%87/</loc><lastmod>2023-08-01T15:06:34&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc></url><url>
             <loc>http://example.org/posts/database/mysql-%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</loc></url><url>
-            <loc>http://example.org/posts/golang/golang-go-redis-%E5%BA%93/</loc></url><url>
             <loc>http://example.org/posts/golang/go%E5%9F%BA%E7%A1%80%E8%BE%83%E8%AF%A6%E7%BB%86/</loc></url><url>
             <loc>http://example.org/posts/golang/go%E5%BE%AE%E6%9C%8D%E5%8A%A11/</loc></url></urlset>

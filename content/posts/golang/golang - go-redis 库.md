@@ -1,11 +1,11 @@
-
+--- 
 title: "golang - go-redis 基本使用"
 date: 2023-08-17T15:06:34+08:00
 draft: false
 description: "有[featuredImagePreview]图片时，鼠标聚焦图片展示该文字"
 author: "Turan"
 tags: [golang,database]
-categories: [golang]
+categories: [golang,database]
 hiddenFromHomePage: false
 toc:
     auto: false

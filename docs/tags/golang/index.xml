@@ -29,6 +29,14 @@
     <description><![CDATA[1 程序介绍 Go程序管理是指在开发和部署Go语言应用程序时，如何管理项目结构、依赖管理和构建过程。以下是关于Go程序管理的几个重要方面： 项目结]]></description>
 </item>
 <item>
+    <title>golang - go-redis 基本使用</title>
+    <link>http://example.org/posts/golang/golang-go-redis-%E5%BA%93/</link>
+    <pubDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/golang/golang-go-redis-%E5%BA%93/</guid>
+    <description><![CDATA[1 介绍 1. 初始化 1 go get github.com/redis/go-redis/v9 以简洁的方式初始化客户端 1 2 3 4 5 6 7 8 9 import ( &#34;github.com/redis/go-redis/v9&#34; ) var db = redis.NewClient(&amp;redis.Options{ Addr: &#34;localhost:6379&#34;, Password: &#34;&#34;, // 没有密码，默认值 //db: 0, // 默认db 0 }) 2 本数据类型 2.0 公]]></description>
+</item>
+<item>
     <title>go语言设计与实现</title>
     <link>http://example.org/posts/golang/gl%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
     <pubDate>Wed, 16 Aug 2023 15:06:34 &#43;0800</pubDate>
