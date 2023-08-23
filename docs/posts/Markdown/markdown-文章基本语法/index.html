@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Markdown - 文章基本语法 - Turan</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Markdown - 文章基本语法" />
+<meta property="og:description" content="介绍文章编写规则" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/markdown/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-01T15:06:34+08:00" />
+<meta property="article:modified_time" content="2023-08-01T15:06:34+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Markdown - 文章基本语法"/>
+<meta name="twitter:description" content="介绍文章编写规则"/>
+<meta name="application-name" content="2">
+<meta name="apple-mobile-web-app-title" content="2"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/markdown/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" /><link rel="prev" href="http://example.org/posts/mq/%E4%B8%80%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97--%E5%9F%BA%E7%A1%80%E7%AF%87/" /><link rel="next" href="http://example.org/posts/linux/linux_installer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Markdown - 文章基本语法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/markdown\/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/"
+        },"genre": "posts","keywords": "Markdown","wordcount":  1133 ,
+        "url": "http:\/\/example.org\/posts\/markdown\/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/","datePublished": "2023-08-01T15:06:34+08:00","dateModified": "2023-08-01T15:06:34+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Turan"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Turan">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Turan">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Markdown - 文章基本语法</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Turan</a></span>&nbsp;<span class="post-category">included in <a href="/categories/markdown/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Markdown</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-01">2023-08-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1133 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-前置参数">1 前置参数</a></li>
+    <li><a href="#2-内容样式语法">2 内容样式语法</a>
+      <ul>
+        <li><a href="#21-标题">2.1 标题</a></li>
+        <li><a href="#22-段落">2.2 段落</a></li>
+        <li><a href="#23-样式字体">2.3 样式字体</a></li>
+        <li><a href="#24-文本块">2.4 文本块</a></li>
+        <li><a href="#25-引文">2.5 引文</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-多媒体">3 多媒体</a>
+      <ul>
+        <li><a href="#31-图片">3.1 图片</a>
+          <ul>
+            <li><a href="#311-md-语法">3.1.1 md 语法</a></li>
+            <li><a href="#312-image-短码">3.1.2 <code>image</code> 短码</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#image">3 image</a>
+      <ul>
+        <li><a href="#32-图">3.2 图</a>
+          <ul>
+            <li><a href="#321-思维导图">3.2.1 思维导图</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#4-表格">4 表格</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1-前置参数">1 前置参数</h2>
+<p>以下字段为必填项：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;文章名称&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="ld">2023-08-01T15:06:34</span><span class="m">+08</span><span class="p">:</span><span class="m">00</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;有[featuredImagePreview]图片时，鼠标聚焦图片展示该文字&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Turan&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 标签</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 分类</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">categories</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">文章编写]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 进入文章详情后的置顶图</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">featuredImage</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;/images/2.jpg&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 文章外侧预览图</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">featuredImagePreview</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;images/1.jpg&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 是否展示在首页</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">hiddenFromHomePage</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 预览界面展示文字</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;这是摘要&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 展开所有标题</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">toc</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">auto</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-内容样式语法">2 内容样式语法</h2>
+<h3 id="21-标题">2.1 标题</h3>
+<ul>
+<li>文章主题（即<strong>tittle</strong>）:  不需要明确写在文章内，在前置参数内的title表明即可；为 <code>#</code> ；</li>
+<li>二级标题：比文章主题小一级的标题，语法使用 <code>##</code> ;</li>
+<li>其他表示：语法以此类推；三级 <code>###</code> ,四级 <code>####</code> ;</li>
+</ul>
+<h3 id="22-段落">2.2 段落</h3>
+<p>段落文章不需要加任何语法，直接编写；</p>
+<h3 id="23-样式字体">2.3 样式字体</h3>
+<ul>
+<li>加粗： <strong>加粗字体</strong>
+<ul>
+<li><code>**加粗字体** </code></li>
+</ul>
+</li>
+<li>关键字： <code>关键字</code>、
+<ul>
+<li><code>`关键字`</code></li>
+</ul>
+</li>
+<li>超链接： <a href="https://www.baidu.com/" target="_blank" rel="noopener noreffer ">百度一下</a>
+<ul>
+<li><code> [百度一下](https://www.baidu.com/)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="24-文本块">2.4 文本块</h3>
+<ul>
+<li>
+<p>代码块：<code>```yaml ```</code></p>
+<ul>
+<li>关键字：<code>go</code>,<code>toml</code>,<code>bash</code>&hellip;</li>
+</ul>
+</li>
+<li>
+<p>短码文本块：</p>
+<ul>
+<li>type: <code>abstract</code>,<code>info</code>,<code>tip</code>,<code>success</code>,<code>question</code>,<code>warning</code>,<code>failure</code>,<code>danger</code>,<code>bug</code>,<code>example</code>,<code>quote</code></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">{{<span class="p">&lt;</span> <span class="nt">admonition</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;note&#34;</span> <span class="na">title</span><span class="o">=</span><span class="s">&#34;This is a note&#34;</span> <span class="p">&gt;</span>}}
+</span></span><span class="line"><span class="cl">This is the content of the note.
+</span></span><span class="line"><span class="cl">{{<span class="p">&lt;</span> <span class="p">/</span><span class="nt">admonition</span> <span class="p">&gt;</span>}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>注意</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition abstract open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-list-ul fa-fw" aria-hidden="true"></i>Abstract<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>摘要</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>信息</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>技巧</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition success open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>成功</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>问题</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>警告</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition failure open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-times-circle fa-fw" aria-hidden="true"></i>Failure<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>失败</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition danger open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-skull-crossbones fa-fw" aria-hidden="true"></i>Danger<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>危险</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition bug open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-bug fa-fw" aria-hidden="true"></i>Bug<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>Bug</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition example open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-list-ol fa-fw" aria-hidden="true"></i>Example<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>示例</strong> 横幅</div>
+        </div>
+    </div>
+<div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw" aria-hidden="true"></i>Quote<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">一个 <strong>引用</strong> 横幅</div>
+        </div>
+    </div>
+<h3 id="25-引文">2.5 引文</h3>
+<ul>
+<li>语法: <code>&gt;</code> 这是一个多行引文</li>
+</ul>
+<blockquote>
+<p>这是一个多行引文</p>
+</blockquote>
+<h2 id="3-多媒体">3 多媒体</h2>
+<h3 id="31-图片">3.1 图片</h3>
+<h4 id="311-md-语法">3.1.1 md 语法</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://octodex.github.com/images/minion.png"
+        data-srcset="https://octodex.github.com/images/minion.png, https://octodex.github.com/images/minion.png 1.5x, https://octodex.github.com/images/minion.png 2x"
+        data-sizes="auto"
+        alt="https://octodex.github.com/images/minion.png"
+        title="Minion" /></p>
+<ul>
+<li>语法:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">![<span class="nt">Minion</span>](<span class="na">https://octodex.github.com/images/minion.png</span>)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 站内
+</span></span><span class="line"><span class="cl">images 为content的子文件夹
+</span></span><span class="line"><span class="cl">![<span class="nt">navigator</span>](<span class="na">/images/javascript/navigator.png</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="312-image-短码">3.1.2 <code>image</code> 短码</h4>
+<h2 id="image">3 image</h2>
+<a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.0" rel="noopener noreffer" target="_blank"><img
+        class="lazyload version"
+        src="/svg/loading.min.svg"
+        data-src="/svg/version/0.2.0-changed.min.svg"
+        data-srcset="/svg/version/0.2.0-changed.min.svg, /svg/version/0.2.0-changed.min.svg 1.5x, /svg/version/0.2.0-changed.min.svg 2x"
+        data-sizes="auto"
+        alt="LoveIt CHANGED | 0.2.0"
+        title="LoveIt CHANGED | 0.2.0" /></a>
+<p><code>image</code> shortcode 是 <a href="../theme-documentation-built-in-shortcodes#figure" rel=""><code>figure</code> shortcode</a> 的替代. <code>image</code> shortcode 可以充分利用 <a href="https://github.com/aFarkas/lazysizes" target="_blank" rel="noopener noreffer ">lazysizes</a> 和 <a href="https://github.com/sachinchoolur/lightgallery" target="_blank" rel="noopener noreffer ">lightGallery</a> 两个依赖库.</p>
+<p><a href="https://github.com/dillonzq/LoveIt/releases/tag/v0.2.10" rel="noopener noreffer" target="_blank"><img
+        class="lazyload version"
+        src="/svg/loading.min.svg"
+        data-src="/svg/version/0.2.10-new.min.svg"
+        data-srcset="/svg/version/0.2.10-new.min.svg, /svg/version/0.2.10-new.min.svg 1.5x, /svg/version/0.2.10-new.min.svg 2x"
+        data-sizes="auto"
+        alt="LoveIt NEW | 0.2.10"
+        title="LoveIt NEW | 0.2.10" /></a> 支持<a href="../theme-documentation-content#contents-organization" rel="">本地资源引用</a>的完整用法.</p>
+<p><code>image</code> shortcode 有以下命名参数:</p>
+<ul>
+<li>
+<p><strong>src</strong> <em>[必需]</em> (<strong>第一个</strong>位置参数)</p>
+<p>图片的 URL.</p>
+</li>
+<li>
+<p><strong>alt</strong> <em>[可选]</em> (<strong>第二个</strong>位置参数)</p>
+<p>图片无法显示时的替代文本, 默认值是 <strong>src</strong> 参数的值.</p>
+<p><em>支持 Markdown 或者 HTML 格式.</em></p>
+</li>
+<li>
+<p><strong>caption</strong> <em>[可选]</em> (<strong>第三个</strong>位置参数)</p>
+<p>图片标题.</p>
+<p><em>支持 Markdown 或者 HTML 格式.</em></p>
+</li>
+<li>
+<p><strong>title</strong> <em>[可选]</em></p>
+<p>当悬停在图片上会显示的提示.</p>
+</li>
+<li>
+<p><strong>class</strong> <em>[可选]</em></p>
+<p>HTML <code>figure</code> 标签的 <code>class</code> 属性.</p>
+</li>
+<li>
+<p><strong>src_s</strong> <em>[可选]</em></p>
+<p>图片缩略图的 URL, 用在画廊模式中, 默认值是 <strong>src</strong> 参数的值.</p>
+</li>
+<li>
+<p><strong>src_l</strong> <em>[可选]</em></p>
+<p>高清图片的 URL, 用在画廊模式中, 默认值是 <strong>src</strong> 参数的值.</p>
+</li>
+<li>
+<p><strong>height</strong> <em>[可选]</em></p>
+<p>图片的 <code>height</code> 属性.</p>
+</li>
+<li>
+<p><strong>width</strong> <em>[可选]</em></p>
+<p>图片的 <code>width</code> 属性.</p>
+</li>
+<li>
+<p><strong>linked</strong> <em>[可选]</em></p>
+<p>图片是否需要被链接, 默认值是 <code>true</code>.</p>
+</li>
+<li>
+<p><strong>rel</strong> <em>[可选]</em></p>
+<p>HTML <code>a</code> 标签 的 <code>rel</code> 补充属性, 仅在 <strong>linked</strong> 属性设置成 <code>true</code> 时有效.</p>
+</li>
+</ul>
+<p>一个 <code>image</code> 示例:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">{{<span class="p">&lt;</span> <span class="nt">image</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/images/Markdown/tn.png&#34;</span> <span class="na">caption</span><span class="o">=</span><span class="s">&#34;Lighthouse (`image`)&#34;</span> <span class="p">&gt;</span>}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>呈现的输出效果如下:</p>
+<figure><a class="lightgallery" href="/images/Markdown/tn.png" title="/images/Markdown/tn.png" data-thumbnail="/images/Markdown/tn.png" data-sub-html="<h2>Lighthouse (image)</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/tn.png"
+            data-srcset="/images/Markdown/tn.png, /images/Markdown/tn.png 1.5x, /images/Markdown/tn.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/tn.png" />
+    </a><figcaption class="image-caption">Lighthouse (<code>image</code>)</figcaption>
+    </figure>
+<h3 id="32-图">3.2 图</h3>
+<h4 id="321-思维导图">3.2.1 思维导图</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">{{<span class="p">&lt;</span> <span class="nt">mermaid</span> <span class="p">&gt;</span>}}
+</span></span><span class="line"><span class="cl">graph LR;
+</span></span><span class="line"><span class="cl">A[Hard edge] --&gt;|Link text| B(Round edge)
+</span></span><span class="line"><span class="cl">B --&gt; C{Decision}
+</span></span><span class="line"><span class="cl">C --&gt;|One| D[Result one]
+</span></span><span class="line"><span class="cl">C --&gt;|Two| E[Result two]
+</span></span><span class="line"><span class="cl">{{<span class="p">&lt;</span> <span class="p">/</span><span class="nt">mermaid</span> <span class="p">&gt;</span>}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="mermaid" id="id-1"></div>
+<h2 id="4-表格">4 表格</h2>
+<ul>
+<li>语法：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">在任何标题下方的破折号右侧添加冒号将使该列的文本右对齐.
+</span></span><span class="line"><span class="cl">在任何标题下方的破折号两边添加冒号将使该列的对齐文本居中.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">| Option | Description |
+</span></span><span class="line"><span class="cl">| :------: | :----------- |
+</span></span><span class="line"><span class="cl">| data   | path to data files to supply the data that will be passed into templates. |
+</span></span><span class="line"><span class="cl">| engine | engine to be used for processing templates. Handlebars is the default. |
+</span></span><span class="line"><span class="cl">| ext    | extension to be used for dest files. |
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:center">Option</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">data</td>
+<td style="text-align:left">path to data files to supply the data that will be passed into templates.</td>
+</tr>
+<tr>
+<td style="text-align:center">engine</td>
+<td style="text-align:left">engine to be used for processing templates. Handlebars is the default.</td>
+</tr>
+<tr>
+<td style="text-align:center">ext</td>
+<td style="text-align:left">extension to be used for dest files.</td>
+</tr>
+</tbody>
+</table>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/markdown/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="Markdown - 文章基本语法" data-hashtags="Markdown"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/markdown/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-hashtag="Markdown"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/markdown/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="Markdown - 文章基本语法"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/markdown/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="Markdown - 文章基本语法"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/markdown/markdown-%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="Markdown - 文章基本语法"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/markdown/">Markdown</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/mq/%E4%B8%80%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97--%E5%9F%BA%E7%A1%80%E7%AF%87/" class="prev" rel="prev" title="MQ - 《一》消息队列--基础篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>MQ - 《一》消息队列--基础篇</a>
+            <a href="/posts/linux/linux_installer/" class="next" rel="next" title="linux - 软件安装">linux - 软件安装<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.116.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Turan</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"\r\ngraph LR;\r\nA[Hard edge] --\u003e|Link text| B(Round edge)\r\nB --\u003e C{Decision}\r\nC --\u003e|One| D[Result one]\r\nC --\u003e|Two| E[Result two]\r"},"search":{"algoliaAppID":"S9BJDLOREO","algoliaIndex":"riko-tu.github.io","algoliaSearchKey":"eb7ea9d496b4aa6b5f3945c36bde5f16","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
