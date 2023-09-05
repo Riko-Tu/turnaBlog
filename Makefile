@@ -1,6 +1,4 @@
 
-
-// 清除网站缓存
-hugo --cleanDestinationDir
-
-//
+run :
+	hugo --cleanDestinationDir
+	hugo server

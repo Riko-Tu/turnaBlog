@@ -5,7 +5,7 @@ draft: false
 tags: [Markdown]
 categories: [Markdown]
 summary: "介绍文章编写规则"
-featuredImagePreview: "/posts/Markdown/makrdown.png"
+featuredImagePreview: "/images/Markdown/makrdown.png"
 
 toc:
   auto: false

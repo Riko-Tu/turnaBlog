@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>vue - Tag - Turan</title>
+        <link>http://example.org/tags/vue/</link>
+        <description>vue - Tag - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Mon, 28 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/vue/" rel="self" type="application/rss+xml" /><item>
+    <title>vue - pinia 使用</title>
+    <link>http://example.org/posts/vue/vue-pinia-%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Mon, 28 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/vue/vue-pinia-%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[1 介绍 Pinia 是一个用于 Vue.js 的状态管理库。它提供了一个简单、可扩展且高效的方式来管理应用程序的状态。下面是对 Pinia 的介绍： 1.1 前身 Pinia 是基于 Vue 2.x 版本中的 Vuex 库]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>typescript - Tag - Turan</title>
+        <link>http://example.org/tags/typescript/</link>
+        <description>typescript - Tag - Turan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><atom:link href="http://example.org/tags/typescript/" rel="self" type="application/rss+xml" /><item>
+    <title>js - typescript</title>
+    <link>http://example.org/posts/javascript/js-typescript-/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/javascript/js-typescript-/</guid>
+    <description><![CDATA[1 环境搭建 1 npm i -g typesrcipt 测试安装成功 1 tsc -v 会展示版本号，则安装成功 2 语法 Lighthouse (type) 2.1 变量 1 2 3 4 5 6 7 8 9 10 // 声明类型 let a: number; let b: string; let c: boolean; // 类型声明并赋]]></description>
+</item>
+</channel>
+</rss>

@@ -4,7 +4,15 @@
         <link>http://example.org/tags/</link>
         <description>Tags - Tag - Turan</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
-            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Mon, 28 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>vue</title>
+    <link>http://example.org/tags/vue/</link>
+    <pubDate>Mon, 28 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/tags/vue/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>database</title>
     <link>http://example.org/tags/database/</link>
     <pubDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
     <author>Turan</author>
     <guid>http://example.org/tags/mysql/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>css3</title>
-    <link>http://example.org/tags/css3/</link>
-    <pubDate>Thu, 03 Aug 2023 15:19:34 &#43;0800</pubDate>
-    <author>Turan</author>
-    <guid>http://example.org/tags/css3/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -28,5 +28,13 @@
     <guid>http://example.org/posts/javascript/vue/</guid>
     <description><![CDATA[vue 插值&amp;指令 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 &lt;div id=&#34;root&#34;&gt; &lt;!-- 可执行js表达式 插值语法： 文本 指令语法： 标签 --&gt; &lt;h1&gt;hello,{{name}},{{Date.now()}}&lt;/h1&gt; &lt;a v-bind:href=&#34;url&#34; &gt; qeqwe&lt;/a&gt; &lt;a :href=&#34;url&#34; &gt; qeqwe&lt;/a&gt; &lt;!-- v-bind]]></description>
 </item>
+<item>
+    <title>js - typescript</title>
+    <link>http://example.org/posts/javascript/js-typescript-/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/posts/javascript/js-typescript-/</guid>
+    <description><![CDATA[1 环境搭建 1 npm i -g typesrcipt 测试安装成功 1 tsc -v 会展示版本号，则安装成功 2 语法 Lighthouse (type) 2.1 变量 1 2 3 4 5 6 7 8 9 10 // 声明类型 let a: number; let b: string; let c: boolean; // 类型声明并赋]]></description>
+</item>
 </channel>
 </rss>

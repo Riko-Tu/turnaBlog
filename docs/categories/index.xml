@@ -4,7 +4,15 @@
         <link>http://example.org/categories/</link>
         <description>Categories - Category - Turan</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
-            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Mon, 28 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>vue</title>
+    <link>http://example.org/categories/vue/</link>
+    <pubDate>Mon, 28 Aug 2023 15:06:34 &#43;0800</pubDate>
+    <author>Turan</author>
+    <guid>http://example.org/categories/vue/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>database</title>
     <link>http://example.org/categories/database/</link>
     <pubDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
     <author>Turan</author>
     <guid>http://example.org/categories/markdown/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>MQ</title>
-    <link>http://example.org/categories/mq/</link>
-    <pubDate>Tue, 01 Aug 2023 15:06:34 &#43;0800</pubDate>
-    <author>Turan</author>
-    <guid>http://example.org/categories/mq/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

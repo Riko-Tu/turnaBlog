@@ -4,7 +4,7 @@
         <link>http://example.org/posts/</link>
         <description>All Posts | Turan</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>lisiai797@gmail.com (Turan)</managingEditor>
-            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Thu, 17 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>lisiai797@gmail.com (Turan)</webMaster><lastBuildDate>Mon, 28 Aug 2023 15:06:34 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
     <title>docker - 基础命令</title>
     <link>http://example.org/posts/docker/docker/</link>
     <pubDate>Wed, 16 Aug 2023 15:19:34 &#43;0800</pubDate>
